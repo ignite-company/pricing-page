@@ -1,0 +1,2806 @@
+<!-- IGNITE CLIENT PLANS V7 - GHL CUSTOM JS/HTML -->
+
+<style>
+#ignite-offers-v7{
+  --bg:#060709;
+  --panel:#0d1014;
+  --panel2:#11151a;
+  --text:#f7f8fa;
+  --muted:#939ca8;
+  --line:#242a31;
+  --red:#ff2848;
+  --red2:#ff4f6a;
+  --green:#36df91;
+  --cyan:#20d7ff;
+  --violet:#8e5cff;
+  --gold:#ffbb3d;
+  --shadow:0 30px 100px rgba(0,0,0,.45);
+
+  position:relative;
+  isolation:isolate;
+  width:100vw;
+  left:50%;
+  margin-left:-50vw;
+  min-height:100vh;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 14% 8%,rgba(255,40,72,.16),transparent 26%),
+    radial-gradient(circle at 86% 17%,rgba(142,92,255,.12),transparent 25%),
+    linear-gradient(180deg,#090b0e 0%,#060709 55%,#050607 100%);
+
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+#ignite-offers-v7 *{
+  box-sizing:border-box;
+}
+
+#ignite-offers-v7:before{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  pointer-events:none;
+  opacity:.42;
+
+  background:
+    conic-gradient(
+      from 180deg at 50% 50%,
+      rgba(255,40,72,.10),
+      rgba(32,215,255,.06),
+      rgba(142,92,255,.08),
+      rgba(255,187,61,.05),
+      rgba(255,40,72,.10)
+    );
+
+  filter:blur(95px);
+  animation:igniteDrift 18s linear infinite;
+  z-index:-2;
+}
+
+#ignite-offers-v7 .noise{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.03;
+  z-index:-1;
+
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+@keyframes igniteDrift{
+  to{transform:rotate(360deg)}
+}
+
+@keyframes igniteRgb{
+  to{transform:rotate(360deg)}
+}
+
+#ignite-offers-v7 button{
+  font:inherit;
+}
+
+#ignite-offers-v7 .shell{
+  width:min(1440px,calc(100% - 42px));
+  margin:0 auto;
+  padding:26px 0 64px;
+}
+
+#ignite-offers-v7 header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:54px;
+}
+
+#ignite-offers-v7 .logo img{
+  height:40px;
+  width:auto;
+  display:block;
+}
+
+#ignite-offers-v7 .topnote{
+  color:var(--muted);
+  font-size:13px;
+  border:1px solid var(--line);
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(10px);
+}
+
+
+/* HERO */
+
+#ignite-offers-v7 .hero{
+  display:grid;
+  grid-template-columns:minmax(0,1.14fr) minmax(340px,.86fr);
+  gap:58px;
+  align-items:end;
+  margin-bottom:34px;
+}
+
+#ignite-offers-v7 .eyebrow{
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#ignite-offers-v7 .eyebrow:before{
+  content:"";
+  width:25px;
+  height:2px;
+  background:currentColor;
+  display:inline-block;
+}
+
+#ignite-offers-v7 h1{
+  font-size:clamp(50px,6vw,86px);
+  line-height:.94;
+  letter-spacing:-.065em;
+  margin:14px 0 18px;
+  max-width:930px;
+}
+
+#ignite-offers-v7 .hero p{
+  max-width:790px;
+  font-size:clamp(17px,1.45vw,21px);
+  line-height:1.55;
+  color:#aab2bc;
+  margin:0;
+}
+
+#ignite-offers-v7 .hero-side{
+  border-left:1px solid var(--line);
+  padding-left:26px;
+}
+
+#ignite-offers-v7 .hero-side strong{
+  font-size:17px;
+  display:block;
+  margin-bottom:10px;
+}
+
+#ignite-offers-v7 .hero-side p{
+  font-size:14px;
+  line-height:1.65;
+  color:var(--muted);
+}
+
+#ignite-offers-v7 .hero-side .mini{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin-top:18px;
+}
+
+#ignite-offers-v7 .mini span{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px 10px;
+  background:#ffffff04;
+  font-size:11px;
+  color:#b6bdc6;
+  text-align:center;
+}
+
+
+/* JOURNEY */
+
+#ignite-offers-v7 .journey{
+  margin:0 0 34px;
+  border:1px solid var(--line);
+  border-radius:24px;
+
+  background:
+    linear-gradient(180deg,rgba(15,19,23,.96),rgba(8,11,14,.98));
+
+  padding:26px;
+  box-shadow:0 24px 80px rgba(0,0,0,.28);
+  position:relative;
+  overflow:hidden;
+}
+
+#ignite-offers-v7 .journey:before{
+  content:"";
+  position:absolute;
+  left:-100px;
+  top:-150px;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,40,72,.11),transparent 68%);
+  pointer-events:none;
+}
+
+#ignite-offers-v7 .journey-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:28px;
+  margin-bottom:22px;
+  position:relative;
+  z-index:1;
+}
+
+#ignite-offers-v7 .journey-head h3{
+  margin:8px 0 0;
+  font-size:27px;
+  letter-spacing:-.04em;
+}
+
+#ignite-offers-v7 .journey-head p{
+  margin:0;
+  max-width:560px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  text-align:right;
+}
+
+#ignite-offers-v7 .stage-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  position:relative;
+  z-index:1;
+}
+
+#ignite-offers-v7 .stage-card{
+  position:relative;
+  min-height:178px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.032),
+      rgba(255,255,255,.012)
+    );
+
+  overflow:hidden;
+}
+
+#ignite-offers-v7 .stage-card:after{
+  content:"";
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--red),transparent);
+  opacity:.65;
+}
+
+#ignite-offers-v7 .stage-card.acquire{
+  border-color:rgba(255,40,72,.24);
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255,40,72,.11),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.04),
+      rgba(255,255,255,.014)
+    );
+}
+
+#ignite-offers-v7 .stage-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:28px;
+}
+
+#ignite-offers-v7 .stage-num{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  border:1px solid rgba(255,40,72,.26);
+  background:rgba(255,40,72,.08);
+  color:var(--red);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+
+#ignite-offers-v7 .stage-status{
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#7f8994;
+}
+
+#ignite-offers-v7 .acquire .stage-status{
+  color:#ff8799;
+}
+
+#ignite-offers-v7 .stage-card h4{
+  margin:0 0 8px;
+  font-size:20px;
+  letter-spacing:-.025em;
+}
+
+#ignite-offers-v7 .stage-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.58;
+  max-width:360px;
+}
+
+
+/* PAYMENT OPTIONS */
+
+#ignite-offers-v7 .billing-wrap{
+  margin:0 0 26px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:linear-gradient(180deg,#0f1317,#0a0d10);
+  padding:18px 20px;
+
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:22px;
+  align-items:center;
+}
+
+#ignite-offers-v7 .billing-copy h3{
+  margin:0 0 5px;
+  font-size:18px;
+  letter-spacing:-.02em;
+}
+
+#ignite-offers-v7 .billing-copy p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+#ignite-offers-v7 .billing-toggle{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+#ignite-offers-v7 .bill-btn{
+  position:relative;
+  border:1px solid var(--line);
+  background:#101419;
+  color:#cfd5dc;
+  border-radius:11px;
+  padding:11px 14px;
+  font-weight:850;
+  cursor:pointer;
+  transition:.18s;
+  min-width:128px;
+  text-align:center;
+}
+
+#ignite-offers-v7 .bill-btn:hover{
+  border-color:#3b434d;
+}
+
+#ignite-offers-v7 .bill-btn.active{
+  border-color:var(--red);
+  background:rgba(255,40,72,.14);
+  color:#fff;
+  box-shadow:0 0 0 3px rgba(255,40,72,.06);
+}
+
+#ignite-offers-v7 .bill-btn .save{
+  display:block;
+  color:var(--green);
+  font-size:9px;
+  letter-spacing:.06em;
+  margin-top:3px;
+}
+
+
+/* MAIN PLANS */
+
+#ignite-offers-v7 .primary-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  align-items:stretch;
+  width:min(1080px,100%);
+  margin:0 auto;
+}
+
+#ignite-offers-v7 .plan{
+  position:relative;
+  border-radius:24px;
+  padding:1px;
+
+  background:
+    linear-gradient(135deg,#2d333b,#15191f);
+
+  overflow:hidden;
+  isolation:isolate;
+  box-shadow:var(--shadow);
+}
+
+#ignite-offers-v7 .plan:before{
+  content:"";
+  position:absolute;
+  inset:-45%;
+
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 12%,
+      var(--red) 18%,
+      var(--violet) 31%,
+      var(--cyan) 44%,
+      transparent 58%,
+      var(--red) 78%,
+      transparent 92%
+    );
+
+  opacity:0;
+  filter:blur(18px);
+  animation:igniteRgb 8s linear infinite;
+  transition:opacity .25s;
+  z-index:-2;
+}
+
+#ignite-offers-v7 .plan:hover:before{
+  opacity:.85;
+}
+
+#ignite-offers-v7 .plan.featured{
+  transform:translateY(-8px);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,40,72,.34),
+    0 0 54px rgba(255,40,72,.15);
+}
+
+#ignite-offers-v7 .plan.featured:before{
+  opacity:.92;
+}
+
+#ignite-offers-v7 .plan-inner{
+  height:100%;
+  border-radius:23px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(16,20,25,.98),
+      rgba(9,12,15,.985)
+    );
+
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+
+#ignite-offers-v7 .featured .plan-inner{
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255,40,72,.15),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(22,20,24,.995),
+      rgba(10,12,15,.99)
+    );
+}
+
+#ignite-offers-v7 .plan-inner:after{
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  right:-100px;
+  top:-120px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,40,72,.16),
+      transparent 65%
+    );
+
+  pointer-events:none;
+}
+
+#ignite-offers-v7 .featured .plan-inner:after{
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,40,72,.22),
+      transparent 66%
+    );
+}
+
+#ignite-offers-v7 .featured-banner{
+  align-self:center;
+  margin:-8px 0 18px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--red),var(--red2));
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  box-shadow:0 10px 28px rgba(255,40,72,.24);
+}
+
+#ignite-offers-v7 .badge{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#aeb7c2;
+  margin-bottom:18px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+
+#ignite-offers-v7 .badge .tag{
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#ffffff04;
+  color:#dbe0e6;
+  letter-spacing:.08em;
+}
+
+#ignite-offers-v7 .badge .best{
+  color:#09120d;
+  background:var(--green);
+  border-color:transparent;
+}
+
+
+/* PRICE */
+
+#ignite-offers-v7 .price{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+
+#ignite-offers-v7 .price strong{
+  font-size:56px;
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+#ignite-offers-v7 .price span{
+  font-size:14px;
+  color:var(--muted);
+  padding-bottom:6px;
+}
+
+#ignite-offers-v7 .subprice{
+  min-height:21px;
+  font-size:11px;
+  color:#88929e;
+  margin-bottom:2px;
+}
+
+#ignite-offers-v7 .price-meta{
+  min-height:46px;
+  margin:7px 0 0;
+  font-size:11px;
+  line-height:1.55;
+  color:#98a2ad;
+}
+
+#ignite-offers-v7 .price-meta .saving{
+  color:var(--green);
+  font-weight:850;
+}
+
+#ignite-offers-v7 .price-meta .effective{
+  color:#d7dde4;
+}
+
+#ignite-offers-v7 .price-meta .original{
+  color:#69737e;
+  text-decoration:line-through;
+}
+
+#ignite-offers-v7 .deal-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:7px;
+  padding:7px 9px;
+  border-radius:999px;
+  border:1px solid rgba(54,223,145,.2);
+  background:rgba(54,223,145,.065);
+  color:#bdf3d7;
+  font-size:10px;
+  font-weight:850;
+}
+
+#ignite-offers-v7 .plan h2{
+  font-size:24px;
+  letter-spacing:-.03em;
+  margin:18px 0 10px;
+}
+
+#ignite-offers-v7 .plan-desc{
+  color:var(--muted);
+  line-height:1.55;
+  min-height:88px;
+  font-size:14px;
+  margin:0;
+}
+
+#ignite-offers-v7 .divider{
+  height:1px;
+  background:var(--line);
+  margin:21px 0;
+}
+
+#ignite-offers-v7 .includes-title{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:#77818d;
+  font-weight:850;
+  margin-bottom:11px;
+}
+
+#ignite-offers-v7 .features{
+  display:grid;
+  gap:0;
+  margin-bottom:22px;
+}
+
+#ignite-offers-v7 .feature{
+  display:grid;
+  grid-template-columns:24px 1fr;
+  gap:10px;
+  align-items:start;
+  padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+
+#ignite-offers-v7 .feature:last-child{
+  border:0;
+}
+
+#ignite-offers-v7 .check{
+  width:21px;
+  height:21px;
+  border-radius:7px;
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  background:rgba(255,40,72,.11);
+  color:var(--red);
+  border:1px solid rgba(255,40,72,.22);
+  margin-top:1px;
+}
+
+#ignite-offers-v7 .feature b{
+  display:block;
+  font-size:13px;
+  margin-bottom:3px;
+  color:#f0f2f5;
+}
+
+#ignite-offers-v7 .feature p{
+  font-size:12px;
+  line-height:1.5;
+  color:#87919c;
+  margin:0;
+}
+
+#ignite-offers-v7 .positioning{
+  margin-top:auto;
+  padding:14px 15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#ffffff03;
+  color:#adb5bf;
+  font-size:12px;
+  line-height:1.5;
+}
+
+#ignite-offers-v7 .positioning b{
+  color:#fff;
+}
+
+
+/* OWNERSHIP */
+
+#ignite-offers-v7 .ownership{
+  width:min(1080px,100%);
+  margin:22px auto 0;
+  border:1px solid rgba(54,223,145,.20);
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(54,223,145,.07),
+      rgba(255,255,255,.018)
+    );
+
+  padding:19px 21px;
+
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:16px;
+  align-items:center;
+}
+
+#ignite-offers-v7 .ownership-icon{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:rgba(54,223,145,.10);
+  border:1px solid rgba(54,223,145,.22);
+  color:var(--green);
+  font-size:18px;
+  font-weight:900;
+}
+
+#ignite-offers-v7 .ownership strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:14px;
+}
+
+#ignite-offers-v7 .ownership p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+}
+
+
+/* SYSTEMS CARE */
+
+#ignite-offers-v7 .care{
+  margin-top:22px;
+  border:1px solid var(--line);
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(32,215,255,.055),
+      rgba(255,255,255,.018)
+    );
+
+  padding:24px;
+
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr) auto;
+  gap:24px;
+  align-items:center;
+}
+
+#ignite-offers-v7 .care .price strong{
+  font-size:42px;
+}
+
+#ignite-offers-v7 .care h3{
+  margin:6px 0 8px;
+  font-size:23px;
+  letter-spacing:-.03em;
+}
+
+#ignite-offers-v7 .care p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.55;
+}
+
+#ignite-offers-v7 .care-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+#ignite-offers-v7 .care-item{
+  border:1px solid rgba(255,255,255,.055);
+  border-radius:11px;
+  background:#ffffff03;
+  padding:10px 12px;
+  font-size:11px;
+  color:#bdc4cc;
+}
+
+#ignite-offers-v7 .care-note{
+  padding:13px 14px;
+  border:1px solid rgba(255,187,61,.18);
+  background:rgba(255,187,61,.055);
+  border-radius:12px;
+  color:#d8c49a;
+  font-size:11px;
+  line-height:1.5;
+  max-width:230px;
+}
+
+
+/* COMPARISON */
+
+#ignite-offers-v7 .compare{
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:linear-gradient(180deg,#0f1317,#0b0e11);
+  overflow:hidden;
+  margin-top:28px;
+}
+
+#ignite-offers-v7 .compare-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  padding:22px 24px;
+  border-bottom:1px solid var(--line);
+}
+
+#ignite-offers-v7 .compare-head h3{
+  margin:0;
+  font-size:20px;
+}
+
+#ignite-offers-v7 .compare-head p{
+  font-size:12px;
+  color:var(--muted);
+  margin:4px 0 0;
+}
+
+#ignite-offers-v7 .rows{
+  display:grid;
+}
+
+#ignite-offers-v7 .r{
+  display:grid;
+  grid-template-columns:1.3fr repeat(2,.75fr);
+  border-bottom:1px solid rgba(255,255,255,.055);
+  min-height:54px;
+  align-items:center;
+}
+
+#ignite-offers-v7 .r:last-child{
+  border-bottom:0;
+}
+
+#ignite-offers-v7 .r>div{
+  padding:14px 18px;
+  font-size:12px;
+}
+
+#ignite-offers-v7 .r>div:not(:first-child){
+  text-align:center;
+  border-left:1px solid rgba(255,255,255,.055);
+}
+
+#ignite-offers-v7 .r.head{
+  background:#ffffff025;
+  color:#d8dde4;
+  font-weight:800;
+}
+
+#ignite-offers-v7 .yes{
+  color:var(--green);
+  font-size:15px;
+}
+
+#ignite-offers-v7 .no{
+  color:#5e6670;
+}
+
+#ignite-offers-v7 .note{
+  color:#d9dde3;
+}
+
+
+/* SALES CALL RECOMMENDATION */
+
+#ignite-offers-v7 .sales-card{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+  align-items:center;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:22px 24px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,40,72,.08),
+      rgba(255,255,255,.018)
+    );
+}
+
+#ignite-offers-v7 .sales-card h3{
+  margin:0 0 5px;
+  font-size:21px;
+}
+
+#ignite-offers-v7 .sales-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+#ignite-offers-v7 .selector{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+#ignite-offers-v7 .sel{
+  border:1px solid var(--line);
+  background:#101419;
+  color:#cfd5dc;
+  border-radius:10px;
+  padding:11px 14px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.18s;
+}
+
+#ignite-offers-v7 .sel:hover{
+  border-color:#3b434d;
+}
+
+#ignite-offers-v7 .sel.active{
+  border-color:var(--red);
+  background:rgba(255,40,72,.14);
+  color:#fff;
+  box-shadow:0 0 0 3px rgba(255,40,72,.06);
+}
+
+#ignite-offers-v7 .selected-banner{
+  display:none;
+  margin-top:16px;
+  border:1px solid rgba(54,223,145,.25);
+  background:rgba(54,223,145,.07);
+  border-radius:14px;
+  padding:13px 15px;
+  color:#c8f7df;
+  font-size:12px;
+  line-height:1.55;
+}
+
+#ignite-offers-v7 .selected-banner.show{
+  display:block;
+}
+
+#ignite-offers-v7 .fineprint{
+  margin-top:18px;
+  color:#65707b;
+  font-size:10px;
+  line-height:1.55;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  #ignite-offers-v7 .hero{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  #ignite-offers-v7 .hero-side{
+    border-left:0;
+    border-top:1px solid var(--line);
+    padding:20px 0 0;
+  }
+
+  #ignite-offers-v7 .primary-grid{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .plan.featured{
+    transform:none;
+  }
+
+  #ignite-offers-v7 .plan-desc{
+    min-height:auto;
+  }
+
+  #ignite-offers-v7 .care{
+    grid-template-columns:1fr 1.3fr;
+  }
+
+  #ignite-offers-v7 .care-note{
+    max-width:none;
+    grid-column:1/-1;
+  }
+
+  #ignite-offers-v7 .journey-head{
+    align-items:flex-start;
+  }
+
+  #ignite-offers-v7 .journey-head p{
+    text-align:left;
+  }
+
+  #ignite-offers-v7 .stage-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+@media(max-width:760px){
+
+  #ignite-offers-v7 .shell{
+    width:min(100% - 28px,1440px);
+    padding-top:18px;
+  }
+
+  #ignite-offers-v7 header{
+    margin-bottom:34px;
+  }
+
+  #ignite-offers-v7 .logo img{
+    height:32px;
+  }
+
+  #ignite-offers-v7 .topnote{
+    display:none;
+  }
+
+  #ignite-offers-v7 h1{
+    font-size:48px;
+  }
+
+  #ignite-offers-v7 .hero p{
+    font-size:16px;
+  }
+
+  #ignite-offers-v7 .hero-side .mini{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .journey{
+    padding:18px;
+  }
+
+  #ignite-offers-v7 .journey-head{
+    display:block;
+  }
+
+  #ignite-offers-v7 .journey-head p{
+    margin-top:10px;
+    text-align:left;
+  }
+
+  #ignite-offers-v7 .stage-grid{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .stage-card{
+    min-height:auto;
+  }
+
+  #ignite-offers-v7 .plan-inner{
+    padding:20px;
+  }
+
+  #ignite-offers-v7 .price strong{
+    font-size:50px;
+  }
+
+  #ignite-offers-v7 .care{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  #ignite-offers-v7 .care-list{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .compare{
+    overflow-x:auto;
+  }
+
+  #ignite-offers-v7 .rows{
+    min-width:650px;
+  }
+
+  #ignite-offers-v7 .sales-card{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .selector{
+    justify-content:flex-start;
+  }
+
+  #ignite-offers-v7 .billing-wrap{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .billing-toggle{
+    justify-content:flex-start;
+  }
+
+  #ignite-offers-v7 .bill-btn{
+    flex:1 1 100%;
+    min-width:0;
+  }
+
+  #ignite-offers-v7 .ownership{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+
+
+
+<div id="ignite-offers-v7">
+
+  <div class="noise"></div>
+
+  <div class="shell">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+      <div class="logo">
+
+        <img
+          src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a03b7c8f90b5bc73b099791.png"
+          alt="Ignite"
+        >
+
+      </div>
+
+      <div class="topnote">
+        Junk Removal Growth Infrastructure
+      </div>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div>
+
+        <div class="eyebrow">
+          Build it. Run it. Keep it.
+        </div>
+
+        <h1>
+          Stop renting growth. Build the system behind it.
+        </h1>
+
+        <p>
+          Ignite builds the infrastructure your junk removal business needs
+          to generate opportunities, follow up faster, track what turns into
+          revenue, and create a repeatable customer acquisition process.
+        </p>
+
+      </div>
+
+
+      <aside class="hero-side">
+
+        <strong>
+          This is not another endless agency retainer.
+        </strong>
+
+        <p>
+          We build what your company is missing, work inside the business
+          for a defined period of time, optimize the acquisition process,
+          and leave you with the systems we created.
+        </p>
+
+        <div class="mini">
+          <span>Defined engagement</span>
+          <span>Built for your business</span>
+          <span>You keep the system</span>
+        </div>
+
+      </aside>
+
+    </section>
+
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="journey">
+
+      <div class="journey-head">
+
+        <div>
+
+          <div class="eyebrow">
+            How Ignite works
+          </div>
+
+          <h3>
+            Fix the constraint. Build the machine. Hand over the keys.
+          </h3>
+
+        </div>
+
+        <p>
+          Every company starts somewhere different. We do not rebuild things
+          that already work. We identify what is holding back customer
+          acquisition, improve it, and spend our time where it creates
+          the most leverage for the business.
+        </p>
+
+      </div>
+
+
+      <div class="stage-grid">
+
+
+        <div class="stage-card">
+
+          <div class="stage-top">
+
+            <span class="stage-num">
+              01
+            </span>
+
+            <span class="stage-status">
+              Foundation
+            </span>
+
+          </div>
+
+          <h4>
+            Build
+          </h4>
+
+          <p>
+            Install the core systems the business needs to capture,
+            organize, follow up with, and convert opportunities.
+          </p>
+
+        </div>
+
+
+        <div class="stage-card acquire">
+
+          <div class="stage-top">
+
+            <span class="stage-num">
+              02
+            </span>
+
+            <span class="stage-status">
+              Primary offer
+            </span>
+
+          </div>
+
+          <h4>
+            Acquire
+          </h4>
+
+          <p>
+            Spend 90 days generating demand, improving the acquisition
+            process, testing what works, and optimizing around real results.
+          </p>
+
+        </div>
+
+
+        <div class="stage-card">
+
+          <div class="stage-top">
+
+            <span class="stage-num">
+              03
+            </span>
+
+            <span class="stage-status">
+              After 90 days
+            </span>
+
+          </div>
+
+          <h4>
+            Keep It
+          </h4>
+
+          <p>
+            Take over the system yourself or keep Ignite involved for
+            maintenance, monitoring, and continued support.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- PAYMENT OPTIONS -->
+
+    <section class="billing-wrap">
+
+      <div class="billing-copy">
+
+        <h3>
+          Choose how you want to invest.
+        </h3>
+
+        <p>
+          Paying in full gives you the largest discount.
+          Payment plans are available if you prefer to spread out the investment.
+          Advertising spend is separate.
+        </p>
+
+      </div>
+
+
+      <div class="billing-toggle">
+
+        <button class="bill-btn active" data-term="upfront">
+          Pay in Full
+          <span class="save">Save the Most</span>
+        </button>
+
+        <button class="bill-btn" data-term="2pay">
+          2 Payments
+          <span class="save">Split the Investment</span>
+        </button>
+
+        <button class="bill-btn" data-term="3pay">
+          3 Payments
+          <span class="save">Lowest Upfront Cost</span>
+        </button>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- MAIN OFFERS -->
+
+    <section class="primary-grid">
+
+
+      <!-- FOUNDATION BUILD -->
+
+      <article class="plan">
+
+        <div class="plan-inner">
+
+          <div class="badge">
+
+            <span>
+              Offer 01
+            </span>
+
+            <span class="tag">
+              Foundation
+            </span>
+
+          </div>
+
+
+          <div class="price">
+
+            <strong id="foundation-price">
+              $1,500
+            </strong>
+
+            <span id="foundation-period">
+              paid in full
+            </span>
+
+          </div>
+
+
+          <div class="subprice">
+            One-time implementation project.
+          </div>
+
+
+          <div
+            class="price-meta"
+            id="foundation-meta"
+          >
+            <span class="original">$1,950 standard payment-plan total</span>
+            ·
+            <span class="saving">Save $450 when paid in full</span>
+          </div>
+
+
+          <div
+            class="deal-badge"
+            id="foundation-badge"
+          >
+            Pay in full and save $450
+          </div>
+
+
+          <h2>
+            Foundation Build
+          </h2>
+
+
+          <p class="plan-desc">
+            For junk removal companies that need the core customer acquisition
+            infrastructure built correctly before aggressively spending money
+            to generate more opportunities.
+          </p>
+
+
+          <div class="divider"></div>
+
+
+          <div class="includes-title">
+            What Ignite can build
+          </div>
+
+
+          <div class="features">
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Conversion-focused website
+                </b>
+
+                <p>
+                  A mobile-first website built around local trust,
+                  calls, quote requests, and conversion.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  CRM + lead pipeline
+                </b>
+
+                <p>
+                  Organize new opportunities, follow-up, appointments,
+                  sold jobs, and lost opportunities in one system.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Lead follow-up systems
+                </b>
+
+                <p>
+                  Build the follow-up infrastructure needed to stop leads
+                  from disappearing after one unanswered call or message.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Lead capture + routing
+                </b>
+
+                <p>
+                  Connect forms, notifications, lead assignments,
+                  and customer information into one usable process.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Tracking infrastructure
+                </b>
+
+                <p>
+                  Build visibility into where opportunities come from
+                  and what happens once they enter the business.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Review generation process
+                </b>
+
+                <p>
+                  Create a repeatable process for turning completed jobs
+                  into stronger local proof.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Launch + handoff
+                </b>
+
+                <p>
+                  Ignite tests the core infrastructure, launches it,
+                  and shows your team how to use what was built.
+                </p>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="positioning">
+
+            <b>
+              Best for:
+            </b>
+
+            companies with weak infrastructure, no organized CRM,
+            inconsistent follow-up, a weak website, or no clear process
+            for turning leads into booked jobs.
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- 90 DAY ACQUISITION SYSTEM -->
+
+      <article class="plan featured">
+
+        <div class="plan-inner">
+
+
+          <div class="featured-banner">
+            Flagship Offer
+          </div>
+
+
+          <div class="badge">
+
+            <span>
+              Offer 02
+            </span>
+
+            <span class="tag best">
+              90 Days
+            </span>
+
+          </div>
+
+
+          <div class="price">
+
+            <strong id="growth-price">
+              $3,500
+            </strong>
+
+            <span id="growth-period">
+              paid in full
+            </span>
+
+          </div>
+
+
+          <div class="subprice">
+            Advertising spend is separate.
+          </div>
+
+
+          <div
+            class="price-meta"
+            id="growth-meta"
+          >
+            <span class="original">$4,500 standard payment-plan total</span>
+            ·
+            <span class="saving">Save $1,000 when paid in full</span>
+          </div>
+
+
+          <div
+            class="deal-badge"
+            id="growth-badge"
+          >
+            Pay in full and save $1,000
+          </div>
+
+
+          <h2>
+            90-Day Acquisition System
+          </h2>
+
+
+          <p class="plan-desc">
+            Ignite spends 90 days building, running, and optimizing
+            the customer acquisition engine behind your junk removal business.
+            We improve what needs improving, generate demand, and build
+            systems the company can continue using after the engagement.
+          </p>
+
+
+          <div class="divider"></div>
+
+
+          <div class="includes-title">
+            90 days of implementation + execution
+          </div>
+
+
+          <div class="features">
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Paid lead generation
+                </b>
+
+                <p>
+                  Meta advertising campaigns built to generate qualified
+                  local opportunities for the services you want to grow.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Creative + offer development
+                </b>
+
+                <p>
+                  Hooks, scripts, offers, messaging, and creative direction
+                  built around what your local market actually responds to.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Campaign management
+                </b>
+
+                <p>
+                  Campaign structure, targeting, budgets, tracking,
+                  testing, and ongoing optimization throughout the engagement.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  CRM + lead flow optimization
+                </b>
+
+                <p>
+                  We work with what you already have when it works
+                  and improve the pieces that are costing the business opportunities.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Speed-to-lead systems
+                </b>
+
+                <p>
+                  Improve what happens immediately after a new lead enters
+                  the business so opportunities are contacted quickly.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Follow-up optimization
+                </b>
+
+                <p>
+                  Strengthen what happens after the first call,
+                  unanswered lead, quote, or estimate.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Booking + sales process optimization
+                </b>
+
+                <p>
+                  Identify friction between the initial lead,
+                  conversation, estimate, appointment, and closed job.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Tracking + attribution
+                </b>
+
+                <p>
+                  Connect marketing activity to actual opportunities,
+                  appointments, jobs, and revenue.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  Database reactivation
+                </b>
+
+                <p>
+                  Where applicable, use old leads and customer data
+                  to create additional opportunities from the existing database.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  90-day optimization period
+                </b>
+
+                <p>
+                  Use real campaign, lead, appointment, and customer data
+                  to improve the system throughout the entire engagement.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="feature">
+
+              <span class="check">
+                ✓
+              </span>
+
+              <div>
+
+                <b>
+                  System handoff
+                </b>
+
+                <p>
+                  At the end of the 90 days, the systems Ignite built
+                  for your business stay with your business.
+                </p>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="positioning">
+
+            <b>
+              Best for:
+            </b>
+
+            companies that want more than somebody managing ads.
+            Ignite identifies the biggest constraints in the acquisition
+            process, improves them, and builds a stronger revenue system
+            around the business.
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+
+
+    <!-- OWNERSHIP MESSAGE -->
+
+    <section class="ownership">
+
+      <div class="ownership-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <strong>
+          You keep what we build.
+        </strong>
+
+        <p>
+          The engagement is designed to create infrastructure inside
+          your company, not make your company permanently dependent on Ignite.
+          When the project ends, the systems built for your business remain
+          with your business.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- OPTIONAL CARE -->
+
+    <section class="care">
+
+      <div>
+
+        <div class="eyebrow">
+          Optional after 90 days
+        </div>
+
+        <h3>
+          Ignite Systems Care
+        </h3>
+
+        <div class="price">
+
+          <strong>
+            $497
+          </strong>
+
+          <span>
+            / month
+          </span>
+
+        </div>
+
+        <p>
+          If you want Ignite to stay involved after the initial engagement,
+          we can continue monitoring and maintaining the system for you.
+        </p>
+
+      </div>
+
+
+      <div class="care-list">
+
+        <div class="care-item">
+          Campaign monitoring
+        </div>
+
+        <div class="care-item">
+          System maintenance
+        </div>
+
+        <div class="care-item">
+          Automation monitoring
+        </div>
+
+        <div class="care-item">
+          Minor funnel adjustments
+        </div>
+
+        <div class="care-item">
+          Tracking checks
+        </div>
+
+        <div class="care-item">
+          Performance reporting
+        </div>
+
+      </div>
+
+
+      <div class="care-note">
+
+        <b style="color:#fff">
+          Completely optional:
+        </b>
+
+        You can take over the system and owe Ignite nothing further.
+        Larger rebuilds, expanded markets, heavy creative production,
+        or substantial new implementation are quoted separately.
+
+      </div>
+
+    </section>
+
+
+
+    <!-- COMPARISON -->
+
+    <section class="compare">
+
+      <div class="compare-head">
+
+        <div>
+
+          <h3>
+            Quick comparison
+          </h3>
+
+          <p>
+            Two different starting points. One goal: build a stronger
+            customer acquisition operation.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="rows">
+
+
+        <div class="r head">
+
+          <div>
+            Included
+          </div>
+
+          <div>
+            Foundation
+          </div>
+
+          <div>
+            90-Day System
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Website / funnel infrastructure
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+          <div class="note">
+            As needed
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            CRM + lead pipeline
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+          <div class="note">
+            Build or optimize
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Follow-up systems
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Paid lead generation
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Creative + offer testing
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Campaign optimization
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Booking + sales process optimization
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Tracking + attribution
+          </div>
+
+          <div class="note">
+            Core setup
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Database reactivation
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="note">
+            When applicable
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            90 days of active optimization
+          </div>
+
+          <div class="no">
+            —
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+        <div class="r">
+
+          <div>
+            Client keeps the systems
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+          <div class="yes">
+            ✓
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- SALES CALL RECOMMENDATION -->
+
+    <section class="sales-card">
+
+      <div>
+
+        <h3>
+          What does this business actually need?
+        </h3>
+
+        <p>
+          Choose your recommendation during the sales call.
+          The payment option selected above will automatically
+          be included in the recommendation.
+        </p>
+
+
+        <div
+          id="ignite-selected-v7"
+          class="selected-banner"
+        ></div>
+
+      </div>
+
+
+      <div class="selector">
+
+
+        <button
+          class="sel"
+          data-plan="Foundation Build"
+          data-pricing="foundation"
+          data-note="Build the core acquisition infrastructure before aggressively pushing more demand into the business."
+        >
+          Foundation
+        </button>
+
+
+        <button
+          class="sel"
+          data-plan="90-Day Acquisition System"
+          data-pricing="growth"
+          data-note="Ignite spends 90 days building, running, and optimizing the customer acquisition system. Advertising spend is separate."
+        >
+          90-Day System
+        </button>
+
+
+        <button
+          class="sel"
+          data-plan="Ignite Systems Care"
+          data-price="$497/month"
+          data-note="Optional after the initial engagement for companies that want Ignite to continue monitoring and maintaining the system."
+        >
+          Systems Care
+        </button>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- FINE PRINT -->
+
+    <div class="fineprint">
+
+      Foundation Build is $1,500 when paid in full.
+      The two-payment option is $850 per payment for a total investment of $1,700.
+      The three-payment option is $650 per payment for a total investment of $1,950.
+
+      The 90-Day Acquisition System is $3,500 when paid in full.
+      The two-payment option is $2,000 per payment for a total investment of $4,000.
+      The three-payment option is $1,500 per payment for a total investment of $4,500.
+
+      Advertising spend is separate and paid toward the advertising platform.
+      Payment plans begin at the start of the engagement, with remaining
+      installments due according to the signed agreement.
+
+      Ignite Systems Care is optional after the initial engagement.
+      Expanded scope, additional locations, substantial custom development,
+      major creative production, and other work outside the listed scope
+      may be quoted separately.
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+<script>
+(function(){
+
+  var root = document.getElementById('ignite-offers-v7');
+
+  if(!root) return;
+
+
+  var pricing = {
+
+
+    foundation: {
+
+
+      upfront: {
+
+        price:'$1,500',
+
+        period:'paid in full',
+
+        total:1500,
+
+        label:'$1,500 paid in full',
+
+        meta:
+          '<span class="original">$1,950 standard payment-plan total</span>' +
+          ' · ' +
+          '<span class="saving">Save $450 when paid in full</span>',
+
+        badge:
+          'Pay in full and save $450'
+
+      },
+
+
+      '2pay': {
+
+        price:'$850',
+
+        period:'× 2 payments',
+
+        total:1700,
+
+        label:'2 payments of $850 ($1,700 total)',
+
+        meta:
+          '<span class="effective">$1,700 total investment</span>' +
+          ' · ' +
+          '$850 to begin + one additional $850 payment',
+
+        badge:
+          '2 payments · $1,700 total'
+
+      },
+
+
+      '3pay': {
+
+        price:'$650',
+
+        period:'× 3 payments',
+
+        total:1950,
+
+        label:'3 payments of $650 ($1,950 total)',
+
+        meta:
+          '<span class="effective">$1,950 total investment</span>' +
+          ' · ' +
+          '$650 per payment',
+
+        badge:
+          '3 payments · $1,950 total'
+
+      }
+
+    },
+
+
+
+    growth: {
+
+
+      upfront: {
+
+        price:'$3,500',
+
+        period:'paid in full',
+
+        total:3500,
+
+        label:'$3,500 paid in full + ad spend',
+
+        meta:
+          '<span class="original">$4,500 standard payment-plan total</span>' +
+          ' · ' +
+          '<span class="saving">Save $1,000 when paid in full</span>',
+
+        badge:
+          'Pay in full and save $1,000'
+
+      },
+
+
+      '2pay': {
+
+        price:'$2,000',
+
+        period:'× 2 payments',
+
+        total:4000,
+
+        label:'2 payments of $2,000 ($4,000 total) + ad spend',
+
+        meta:
+          '<span class="effective">$4,000 total Ignite investment</span>' +
+          ' · ' +
+          'two payments of $2,000',
+
+        badge:
+          '2 payments · $4,000 total'
+
+      },
+
+
+      '3pay': {
+
+        price:'$1,500',
+
+        period:'× 3 payments',
+
+        total:4500,
+
+        label:'3 payments of $1,500 ($4,500 total) + ad spend',
+
+        meta:
+          '<span class="effective">$4,500 total Ignite investment</span>' +
+          ' · ' +
+          '$1,500 per month across the 90-day engagement',
+
+        badge:
+          '3 payments · $4,500 total'
+
+      }
+
+    }
+
+  };
+
+
+
+  var currentTerm = 'upfront';
+
+
+  var billButtons = [].slice.call(
+    root.querySelectorAll('.bill-btn')
+  );
+
+
+  var planButtons = [].slice.call(
+    root.querySelectorAll('.sel')
+  );
+
+
+  var banner = document.getElementById(
+    'ignite-selected-v7'
+  );
+
+
+  var activePlan = null;
+
+
+
+  function setText(id,value){
+
+    var el = document.getElementById(id);
+
+    if(el){
+      el.textContent = value;
+    }
+
+  }
+
+
+
+  function setHtml(id,value){
+
+    var el = document.getElementById(id);
+
+    if(el){
+      el.innerHTML = value;
+    }
+
+  }
+
+
+
+  function updatePrices(){
+
+    var foundation = pricing.foundation[currentTerm];
+
+    var growth = pricing.growth[currentTerm];
+
+
+    setText(
+      'foundation-price',
+      foundation.price
+    );
+
+
+    setText(
+      'foundation-period',
+      foundation.period
+    );
+
+
+    setHtml(
+      'foundation-meta',
+      foundation.meta
+    );
+
+
+    setText(
+      'foundation-badge',
+      foundation.badge
+    );
+
+
+
+    setText(
+      'growth-price',
+      growth.price
+    );
+
+
+    setText(
+      'growth-period',
+      growth.period
+    );
+
+
+    setHtml(
+      'growth-meta',
+      growth.meta
+    );
+
+
+    setText(
+      'growth-badge',
+      growth.badge
+    );
+
+
+    if(activePlan){
+      renderRecommendation(activePlan);
+    }
+
+  }
+
+
+
+  function renderRecommendation(btn){
+
+    var pricingKey = btn.getAttribute(
+      'data-pricing'
+    );
+
+
+    var price = btn.getAttribute(
+      'data-price'
+    );
+
+
+    if(pricingKey){
+
+      price =
+        pricing[pricingKey][currentTerm].label;
+
+    }
+
+
+    banner.innerHTML =
+      '<b>Recommended:</b> ' +
+      btn.getAttribute('data-plan') +
+      ' · <b>' +
+      price +
+      '</b><br>' +
+      btn.getAttribute('data-note');
+
+
+    banner.classList.add('show');
+
+  }
+
+
+
+  billButtons.forEach(function(btn){
+
+    btn.addEventListener(
+      'click',
+      function(){
+
+        currentTerm =
+          btn.getAttribute('data-term') ||
+          'upfront';
+
+
+        billButtons.forEach(function(b){
+          b.classList.remove('active');
+        });
+
+
+        btn.classList.add('active');
+
+
+        updatePrices();
+
+      }
+    );
+
+  });
+
+
+
+  planButtons.forEach(function(btn){
+
+    btn.addEventListener(
+      'click',
+      function(){
+
+        planButtons.forEach(function(b){
+          b.classList.remove('active');
+        });
+
+
+        btn.classList.add('active');
+
+
+        activePlan = btn;
+
+
+        renderRecommendation(btn);
+
+      }
+    );
+
+  });
+
+
+
+  updatePrices();
+
+})();
+</script>
