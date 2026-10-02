@@ -1,0 +1,43 @@
+name: Apply mobile overflow fix
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-mobile-overflow-fix.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply mobile overflow containment
+        run: python .patch/mobile_overflow_fix.py
+
+      - name: Verify mobile overflow containment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s = Path('index.html').read_text()
+          assert 'MOBILE OVERFLOW CONTAINMENT V3' in s
+          assert '#ignite-offers-v7 .calc-workspace' in s
+          assert 'display:block!important' in s
+          assert 'grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important' in s
+          print('mobile overflow containment verified')
+          PY
+
+      - name: Commit mobile overflow fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Fix mobile horizontal clipping" || exit 0
+          git pull --rebase origin main
+          git push origin main
