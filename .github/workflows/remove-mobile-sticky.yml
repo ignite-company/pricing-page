@@ -1,0 +1,41 @@
+name: Remove mobile sticky investment button
+
+on:
+  push:
+    paths:
+      - .github/workflows/remove-mobile-sticky.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Remove sticky investment button
+        run: python .patch/remove_mobile_sticky.py
+
+      - name: Verify removal
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'REMOVE MOBILE INVESTMENT STICKY BUTTON' in s
+          assert '#ignite-mobile-invest-jump{display:none!important}' in s
+          print('sticky button removal verified')
+          PY
+
+      - name: Commit removal
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Remove mobile investment sticky button" || exit 0
+          git pull --rebase origin main
+          git push origin main
