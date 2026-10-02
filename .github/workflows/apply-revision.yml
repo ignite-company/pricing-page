@@ -1,4 +1,4 @@
-name: Apply calculator revision
+name: Update campaign proof stats
 
 on:
   push:
@@ -18,23 +18,36 @@ jobs:
         with:
           ref: main
 
-      - name: Apply revision
-        run: python .patch/apply.py
+      - name: Update proof statistics
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          replacements = {
+            'The current paid acquisition baseline includes 1,090 leads generated from $17,744.54 in tracked ad spend, producing a weighted historical cost per lead of $16.28.': "Across Ignite's documented campaign history, we've tracked 2,000+ leads and $25,000+ in ad spend. For projections, this calculator uses a conservative $16.28 weighted historical CPL baseline from the campaign data analyzed here.",
+            '<div class="evidence-chip"><strong>1,090</strong><span>Tracked leads in current model</span></div>': '<div class="evidence-chip"><strong>2,000+</strong><span>Tracked leads</span></div>',
+            '<div class="evidence-chip"><strong>$17,744.54</strong><span>Documented ad spend</span></div>': '<div class="evidence-chip"><strong>$25,000+</strong><span>Documented ad spend</span></div>',
+            'Projection model, not a guarantee. Paid acquisition uses a $16.28 weighted CPL calculated from 1,090 documented leads and $17,744.54 in tracked spend supplied to Ignite.': "Projection model, not a guarantee. Paid acquisition uses a $16.28 weighted CPL baseline from the campaign dataset analyzed for this calculator. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history."
+          }
+          for old, new in replacements.items():
+            if old not in s:
+              raise SystemExit(f'Missing expected text: {old[:80]}')
+            s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
 
-      - name: Verify calculator revision
+      - name: Verify proof statistics
         run: |
           python - <<'PY'
           from pathlib import Path
           s = Path('index.html').read_text()
-          calc = s[s.index('<!-- ROI CALCULATOR -->'):s.index('<!-- PAYMENT OPTIONS -->')]
-          assert 'Foundation recovery calculator' in calc
-          assert 'What happens as the system keeps working' not in calc
-          assert '$3,500 Scale investment' not in calc
-          assert '$3,500 Ignite investment' not in calc
-          assert '$1,500 Foundation Build' not in calc
-          assert 'to recover $1,500' not in calc
-          assert 'Longer-term system economics' in calc
-          print('calculator revision verified')
+          assert '2,000+' in s
+          assert '$25,000+' in s
+          assert 'Tracked leads in current model' not in s
+          assert '1,090 leads generated from $17,744.54' not in s
+          assert '$16.28' in s
+          print('proof statistics verified')
           PY
 
       - name: Commit pricing page
@@ -42,5 +55,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Revise calculator presentation" || exit 0
+          git commit -m "Update campaign proof statistics" || exit 0
           git push origin main
