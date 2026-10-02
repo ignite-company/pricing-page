@@ -1,0 +1,45 @@
+name: Apply compact mobile experience
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-compact-mobile.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply compact mobile experience
+        run: python .patch/compact_mobile.py
+
+      - name: Verify compact mobile experience
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'MOBILE COMPACT SALES EXPERIENCE V2' in s
+          assert 'See full 90-day breakdown' in s
+          assert 'Calculate Foundation recovery' in s
+          assert 'See everything included' in s
+          assert 'Compare the plans' in s
+          assert 'ignite-mobile-invest-jump' in s
+          print('compact mobile experience verified')
+          PY
+
+      - name: Commit compact mobile experience
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add index.html
+          git commit -m "Compact mobile pricing experience" || exit 0
+          git push origin main
