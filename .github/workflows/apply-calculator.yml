@@ -1,0 +1,58 @@
+name: Apply pricing calculator
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Insert calculator into pricing page
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          page = Path('index.html')
+          text = page.read_text()
+
+          if 'id="ignite-roi-calculator"' in text:
+              print('Calculator is already installed.')
+              raise SystemExit(0)
+
+          css = Path('.deploy/calculator.css').read_text().rstrip()
+          html = Path('.deploy/calculator.html').read_text().rstrip()
+          js = Path('.deploy/calculator.js').read_text().rstrip()
+
+          css_marker = '/* PAYMENT OPTIONS */'
+          html_marker = '    <!-- PAYMENT OPTIONS -->'
+
+          if css_marker not in text or html_marker not in text:
+              raise SystemExit('Required insertion marker was not found.')
+
+          text = text.replace(css_marker, css + '\n\n' + css_marker, 1)
+          text = text.replace(html_marker, html + '\n\n' + html_marker, 1)
+          text = text.rstrip() + '\n\n' + js + '\n'
+          page.write_text(text)
+          PY
+
+      - name: Commit calculator
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No page changes needed."
+          else
+            git commit -m "Add ROI calculator to pricing page"
+            git push
+          fi
