@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- IGNITE CLIENT PLANS V7 - GHL CUSTOM JS/HTML -->
 
 <style>
@@ -1972,6 +1973,744 @@ body{
   #ignite-offers-v7 .foundation-result.primary{grid-column:auto}
   #ignite-offers-v7 .calc-label{align-items:flex-start;flex-direction:column;gap:3px}
   #ignite-offers-v7 .calc-label span{text-align:left}
+}
+
+
+/* MOBILE OPTIMIZATION V1 — desktop styles are intentionally untouched */
+@media (max-width:760px){
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    -webkit-text-size-adjust:100%;
+  }
+
+  #ignite-offers-v7{
+    width:100%;
+    left:auto;
+    margin-left:0;
+    min-height:100svh;
+    overflow-x:hidden;
+  }
+
+  #ignite-offers-v7 .shell{
+    width:100%;
+    max-width:none;
+    padding:16px max(12px,env(safe-area-inset-right)) max(42px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  }
+
+  #ignite-offers-v7 header{
+    margin-bottom:28px;
+  }
+
+  #ignite-offers-v7 .logo img{
+    height:34px;
+  }
+
+  #ignite-offers-v7 .hero{
+    gap:22px;
+    margin-bottom:26px;
+  }
+
+  #ignite-offers-v7 h1{
+    font-size:clamp(40px,12vw,50px);
+    line-height:.98;
+    letter-spacing:-.055em;
+    margin:12px 0 16px;
+    overflow-wrap:anywhere;
+  }
+
+  #ignite-offers-v7 .hero p{
+    font-size:17px;
+    line-height:1.58;
+  }
+
+  #ignite-offers-v7 .hero-side{
+    padding-top:18px;
+  }
+
+  #ignite-offers-v7 .hero-side strong{
+    font-size:18px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .hero-side p{
+    font-size:15px;
+    line-height:1.62;
+  }
+
+  #ignite-offers-v7 .hero-side .mini{
+    gap:8px;
+    margin-top:14px;
+  }
+
+  #ignite-offers-v7 .mini span{
+    font-size:14px;
+    padding:12px 13px;
+    text-align:left;
+  }
+
+  #ignite-offers-v7 .eyebrow{
+    font-size:12px;
+    letter-spacing:.14em;
+  }
+
+  #ignite-offers-v7 .journey{
+    padding:17px;
+    border-radius:19px;
+    margin-bottom:24px;
+  }
+
+  #ignite-offers-v7 .journey-head{
+    margin-bottom:17px;
+  }
+
+  #ignite-offers-v7 .journey-head h3{
+    font-size:26px;
+    line-height:1.08;
+  }
+
+  #ignite-offers-v7 .journey-head p{
+    font-size:15px;
+    line-height:1.58;
+    margin-top:12px;
+  }
+
+  #ignite-offers-v7 .stage-grid{
+    gap:10px;
+  }
+
+  #ignite-offers-v7 .stage-card{
+    padding:18px;
+    border-radius:15px;
+  }
+
+  #ignite-offers-v7 .stage-top{
+    margin-bottom:18px;
+  }
+
+  #ignite-offers-v7 .stage-card h4{
+    font-size:22px;
+  }
+
+  #ignite-offers-v7 .stage-card p{
+    font-size:15px;
+    line-height:1.58;
+    max-width:none;
+  }
+
+  #ignite-offers-v7 .stage-status{
+    font-size:11px;
+  }
+
+  /* Calculator */
+  #ignite-offers-v7 .roi-calc{
+    padding:16px;
+    border-radius:20px;
+    margin-bottom:24px;
+  }
+
+  #ignite-offers-v7 .calc-head{
+    gap:14px;
+    margin-bottom:18px;
+  }
+
+  #ignite-offers-v7 .calc-head h3{
+    font-size:clamp(29px,8.5vw,38px);
+    line-height:1.04;
+    margin-top:9px;
+  }
+
+  #ignite-offers-v7 .calc-head p{
+    font-size:15px;
+    line-height:1.58;
+  }
+
+  #ignite-offers-v7 .calc-data-note{
+    padding:14px;
+    border-radius:14px;
+  }
+
+  #ignite-offers-v7 .calc-data-note strong{
+    font-size:16px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .calc-proof-window{
+    margin:0 -16px 18px;
+    padding:2px 0 5px;
+  }
+
+  #ignite-offers-v7 .calc-proof-card{
+    width:min(82vw,315px);
+    height:178px;
+    border-radius:13px;
+  }
+
+  #ignite-offers-v7 .calc-proof-track{
+    gap:10px;
+    animation-duration:84s;
+  }
+
+  #ignite-offers-v7 .calc-evidence{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:16px;
+  }
+
+  #ignite-offers-v7 .evidence-chip{
+    padding:13px;
+  }
+
+  #ignite-offers-v7 .evidence-chip:last-child{
+    grid-column:1/-1;
+  }
+
+  #ignite-offers-v7 .evidence-chip strong{
+    font-size:22px;
+  }
+
+  #ignite-offers-v7 .evidence-chip span{
+    font-size:11px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .calc-workspace{
+    gap:12px;
+  }
+
+  #ignite-offers-v7 .calc-inputs,
+  #ignite-offers-v7 .calc-output-panel{
+    border-radius:16px;
+  }
+
+  #ignite-offers-v7 .calc-inputs,
+  #ignite-offers-v7 .calc-output-panel{
+    padding:15px;
+  }
+
+  #ignite-offers-v7 .calc-inputs h4,
+  #ignite-offers-v7 .calc-output-panel h4{
+    font-size:20px;
+  }
+
+  #ignite-offers-v7 .calc-inputs .input-intro{
+    font-size:14px;
+    line-height:1.55;
+    margin-bottom:16px;
+  }
+
+  #ignite-offers-v7 .calc-field{
+    margin-top:16px;
+  }
+
+  #ignite-offers-v7 .calc-label{
+    gap:4px;
+    margin-bottom:7px;
+  }
+
+  #ignite-offers-v7 .calc-label label{
+    font-size:15px;
+  }
+
+  #ignite-offers-v7 .calc-label span{
+    font-size:12px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .calc-input{
+    min-height:54px;
+    font-size:18px;
+    border-radius:12px;
+  }
+
+  #ignite-offers-v7 .calc-prefix,
+  #ignite-offers-v7 .calc-suffix{
+    font-size:16px;
+  }
+
+  #ignite-offers-v7 .calc-input-hint{
+    font-size:12px;
+    line-height:1.5;
+  }
+
+  #ignite-offers-v7 .calc-output-top{
+    align-items:flex-start;
+    margin-bottom:12px;
+  }
+
+  #ignite-offers-v7 .calc-model-pill{
+    flex:0 0 auto;
+    font-size:10px;
+    padding:7px 9px;
+  }
+
+  #ignite-offers-v7 .calc-hero-results{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .calc-hero-card.primary{
+    grid-column:1/-1;
+  }
+
+  #ignite-offers-v7 .calc-hero-card{
+    min-height:132px;
+    padding:14px;
+  }
+
+  #ignite-offers-v7 .calc-kicker{
+    font-size:10px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .calc-big-number{
+    font-size:clamp(30px,9vw,42px);
+  }
+
+  #ignite-offers-v7 .calc-hero-card.primary .calc-big-number{
+    font-size:clamp(40px,13vw,56px);
+  }
+
+  #ignite-offers-v7 .calc-small-copy{
+    font-size:12px;
+    line-height:1.48;
+  }
+
+  #ignite-offers-v7 .calc-metrics{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .calc-metric{
+    padding:12px;
+  }
+
+  #ignite-offers-v7 .calc-metric b{
+    font-size:20px;
+  }
+
+  #ignite-offers-v7 .calc-metric span{
+    font-size:12px;
+    line-height:1.35;
+  }
+
+  #ignite-offers-v7 .calc-recovery{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  #ignite-offers-v7 .recovery-card{
+    padding:15px;
+  }
+
+  #ignite-offers-v7 .recovery-card h5{
+    font-size:16px;
+    line-height:1.3;
+  }
+
+  #ignite-offers-v7 .recovery-card .recovery-value{
+    font-size:31px;
+  }
+
+  #ignite-offers-v7 .recovery-card p{
+    font-size:13px;
+    line-height:1.52;
+  }
+
+  #ignite-offers-v7 .calc-section-title{
+    display:block;
+    margin-top:20px;
+  }
+
+  #ignite-offers-v7 .calc-section-title h4{
+    font-size:21px;
+    line-height:1.25;
+  }
+
+  #ignite-offers-v7 .calc-section-title span{
+    display:block;
+    font-size:12px;
+    line-height:1.4;
+    margin-top:4px;
+  }
+
+  #ignite-offers-v7 .calc-projections{
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  #ignite-offers-v7 .projection-card{
+    padding:15px;
+  }
+
+  #ignite-offers-v7 .projection-card .period{
+    font-size:11px;
+  }
+
+  #ignite-offers-v7 .projection-revenue{
+    font-size:30px;
+  }
+
+  #ignite-offers-v7 .projection-row{
+    font-size:13px;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .projection-row b{
+    font-size:14px;
+    text-align:right;
+  }
+
+  #ignite-offers-v7 .calc-disclaimer{
+    font-size:12px;
+    line-height:1.55;
+    padding:13px 2px 0;
+  }
+
+  /* Foundation mini calculator */
+  #ignite-offers-v7 .foundation-mini{
+    margin-top:14px;
+    padding:15px;
+    border-radius:16px;
+  }
+
+  #ignite-offers-v7 .foundation-mini-head{
+    gap:12px;
+    margin-bottom:14px;
+  }
+
+  #ignite-offers-v7 .foundation-mini-head h4{
+    font-size:25px;
+    line-height:1.08;
+  }
+
+  #ignite-offers-v7 .foundation-mini-head p{
+    font-size:14px;
+    line-height:1.55;
+  }
+
+  #ignite-offers-v7 .foundation-proof-note{
+    padding:13px;
+  }
+
+  #ignite-offers-v7 .foundation-proof-note strong{
+    font-size:15px;
+  }
+
+  #ignite-offers-v7 .foundation-proof-note p{
+    font-size:13px;
+    line-height:1.52;
+  }
+
+  #ignite-offers-v7 .foundation-mini-grid{
+    gap:10px;
+  }
+
+  #ignite-offers-v7 .foundation-mini-inputs{
+    padding:14px;
+  }
+
+  #ignite-offers-v7 .foundation-mini-results{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .foundation-result.primary{
+    grid-column:auto;
+  }
+
+  #ignite-offers-v7 .foundation-result{
+    min-height:128px;
+    padding:14px;
+  }
+
+  #ignite-offers-v7 .foundation-result>span,
+  #ignite-offers-v7 .foundation-result small{
+    font-size:13px;
+  }
+
+  #ignite-offers-v7 .foundation-result strong{
+    font-size:32px;
+  }
+
+  #ignite-offers-v7 .foundation-stats{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .foundation-stats>div{
+    padding:12px;
+  }
+
+  #ignite-offers-v7 .foundation-stats strong{
+    font-size:22px;
+  }
+
+  #ignite-offers-v7 .foundation-stats span{
+    font-size:12px;
+  }
+
+  #ignite-offers-v7 .foundation-sources{
+    font-size:11px;
+    line-height:1.5;
+  }
+
+  /* Investment section */
+  #ignite-offers-v7 .billing-wrap{
+    padding:16px;
+    gap:14px;
+    border-radius:17px;
+  }
+
+  #ignite-offers-v7 .billing-copy h3{
+    font-size:20px;
+  }
+
+  #ignite-offers-v7 .billing-copy p{
+    font-size:14px;
+    line-height:1.55;
+  }
+
+  #ignite-offers-v7 .billing-toggle{
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .bill-btn{
+    width:100%;
+    min-height:54px;
+    font-size:16px;
+    padding:10px 12px;
+  }
+
+  #ignite-offers-v7 .bill-btn .save{
+    font-size:11px;
+  }
+
+  #ignite-offers-v7 .primary-grid{
+    gap:14px;
+  }
+
+  #ignite-offers-v7 .plan{
+    border-radius:20px;
+  }
+
+  #ignite-offers-v7 .plan-inner{
+    padding:18px;
+    border-radius:19px;
+  }
+
+  #ignite-offers-v7 .featured-banner{
+    margin:-4px 0 15px;
+    font-size:10px;
+  }
+
+  #ignite-offers-v7 .badge{
+    font-size:11px;
+    margin-bottom:16px;
+  }
+
+  #ignite-offers-v7 .badge .tag{
+    font-size:10px;
+  }
+
+  #ignite-offers-v7 .price strong{
+    font-size:48px;
+  }
+
+  #ignite-offers-v7 .price span{
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .subprice,
+  #ignite-offers-v7 .price-meta{
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  #ignite-offers-v7 .plan h2{
+    font-size:25px;
+    line-height:1.12;
+  }
+
+  #ignite-offers-v7 .plan-desc{
+    font-size:15px;
+    line-height:1.55;
+  }
+
+  #ignite-offers-v7 .includes-title{
+    font-size:12px;
+  }
+
+  #ignite-offers-v7 .feature{
+    grid-template-columns:25px 1fr;
+    padding:12px 0;
+  }
+
+  #ignite-offers-v7 .feature b{
+    font-size:15px;
+  }
+
+  #ignite-offers-v7 .feature p{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  #ignite-offers-v7 .positioning{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  #ignite-offers-v7 .ownership{
+    padding:16px;
+    gap:12px;
+  }
+
+  #ignite-offers-v7 .ownership strong{
+    font-size:15px;
+  }
+
+  #ignite-offers-v7 .ownership p{
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .care{
+    padding:17px;
+    gap:14px;
+    border-radius:17px;
+  }
+
+  #ignite-offers-v7 .care h3{
+    font-size:24px;
+  }
+
+  #ignite-offers-v7 .care p,
+  #ignite-offers-v7 .care-item,
+  #ignite-offers-v7 .care-note{
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .care-note{
+    max-width:none;
+  }
+
+  /* Comparison stays readable with intentional horizontal swipe */
+  #ignite-offers-v7 .compare{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+    border-radius:17px;
+  }
+
+  #ignite-offers-v7 .compare-head{
+    position:sticky;
+    left:0;
+    min-width:min(100%,560px);
+    padding:17px;
+  }
+
+  #ignite-offers-v7 .compare-head h3{
+    font-size:21px;
+  }
+
+  #ignite-offers-v7 .compare-head p{
+    font-size:13px;
+  }
+
+  #ignite-offers-v7 .rows{
+    min-width:540px;
+  }
+
+  #ignite-offers-v7 .r{
+    grid-template-columns:minmax(220px,1.3fr) repeat(2,minmax(145px,.8fr));
+  }
+
+  #ignite-offers-v7 .r>div{
+    font-size:13px;
+    padding:13px 14px;
+  }
+
+  #ignite-offers-v7 .sales-card{
+    padding:17px;
+    gap:14px;
+    border-radius:17px;
+  }
+
+  #ignite-offers-v7 .sales-card h3{
+    font-size:22px;
+  }
+
+  #ignite-offers-v7 .sales-card p{
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .selector{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width:100%;
+    gap:8px;
+  }
+
+  #ignite-offers-v7 .sel{
+    min-height:50px;
+    padding:10px;
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .selected-banner{
+    font-size:14px;
+  }
+
+  #ignite-offers-v7 .fineprint{
+    font-size:12px;
+    line-height:1.55;
+  }
+}
+
+@media (max-width:420px){
+  #ignite-offers-v7 .shell{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  #ignite-offers-v7 h1{
+    font-size:40px;
+  }
+
+  #ignite-offers-v7 .calc-hero-results{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .calc-hero-card.primary{
+    grid-column:auto;
+  }
+
+  #ignite-offers-v7 .calc-metrics,
+  #ignite-offers-v7 .foundation-stats,
+  #ignite-offers-v7 .selector{
+    grid-template-columns:1fr;
+  }
+
+  #ignite-offers-v7 .calc-output-top{
+    display:block;
+  }
+
+  #ignite-offers-v7 .calc-model-pill{
+    margin-top:9px;
+    width:max-content;
+  }
+
+  #ignite-offers-v7 .projection-row{
+    align-items:flex-start;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #ignite-offers-v7:before,
+  #ignite-offers-v7 .calc-proof-track,
+  #ignite-offers-v7 .plan:before{
+    animation:none !important;
+  }
 }
 
 </style>
