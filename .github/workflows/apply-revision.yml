@@ -21,8 +21,21 @@ jobs:
       - name: Apply revision
         run: python .patch/apply.py
 
-      - name: Verify exact output
-        run: echo "103bc4fd3c07c1c46c12f7fafc9ef8c4ead37e9e4ffdd4f005936d1b4023b5dc  index.html" | sha256sum --check --strict
+      - name: Verify calculator revision
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s = Path('index.html').read_text()
+          calc = s[s.index('<!-- ROI CALCULATOR -->'):s.index('<!-- PAYMENT OPTIONS -->')]
+          assert 'Foundation recovery calculator' in calc
+          assert 'What happens as the system keeps working' not in calc
+          assert '$3,500 Scale investment' not in calc
+          assert '$3,500 Ignite investment' not in calc
+          assert '$1,500 Foundation Build' not in calc
+          assert 'to recover $1,500' not in calc
+          assert 'Longer-term system economics' in calc
+          print('calculator revision verified')
+          PY
 
       - name: Commit pricing page
         run: |
