@@ -1,0 +1,35 @@
+name: Assemble exact pricing page
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reconstruct exact index.html
+        shell: bash
+        run: |
+          cat .source/part_*.b64 | base64 --decode > index.html
+          echo "c6feb1c94d85644666938e2f6197bee8e6b37e198036962434073407f8afb99f  index.html" | sha256sum --check --strict
+
+      - name: Commit exact page if needed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "index.html already matches the exact source."
+          else
+            git commit -m "Launch exact pricing page"
+            git push
+          fi
