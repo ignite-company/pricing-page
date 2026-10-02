@@ -1,0 +1,33 @@
+name: Apply calculator revision
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-revision.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply revision
+        run: python .patch/apply.py
+
+      - name: Verify exact output
+        run: echo "103bc4fd3c07c1c46c12f7fafc9ef8c4ead37e9e4ffdd4f005936d1b4023b5dc  index.html" | sha256sum --check --strict
+
+      - name: Commit pricing page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Revise calculator presentation" || exit 0
+          git push origin main
