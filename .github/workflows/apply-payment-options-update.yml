@@ -1,0 +1,47 @@
+name: Apply payment options update
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-payment-options-update.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply payment options update
+        run: python .patch/payment_options_update.py
+
+      - name: Verify payment options update
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert '<!-- PAYMENT OPTIONS UPDATE V1 -->' in s
+          assert '$1,250' in s
+          assert '$497' not in s
+          assert 'data-term="3pay"' not in s
+          assert "'3pay':" not in s
+          assert 'three-payment option' not in s
+          assert 'Save $200 when paid in full' in s
+          assert 'Save $500 when paid in full' in s
+          print('payment options update verified')
+          PY
+
+      - name: Commit payment options update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update payment options and Systems Care price" || exit 0
+          git pull --rebase origin main
+          git push origin main
