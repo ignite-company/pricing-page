@@ -2792,7 +2792,7 @@ body{
   #ignite-offers-v7 .billing-wrap{padding:15px;gap:12px}
   #ignite-offers-v7 .billing-toggle{
     display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:6px;
     width:100%;
   }
@@ -3423,13 +3423,7 @@ body{
           2 Payments
           <span class="save">Split the Investment</span>
         </button>
-
-        <button class="bill-btn" data-term="3pay">
-          3 Payments
-          <span class="save">Lowest Upfront Cost</span>
-        </button>
-
-      </div>
+</div>
 
     </section>
 
@@ -3481,9 +3475,9 @@ body{
             class="price-meta"
             id="foundation-meta"
           >
-            <span class="original">$1,950 standard payment-plan total</span>
+            <span class="original">$1,700 payment-plan total</span>
             ·
-            <span class="saving">Save $450 when paid in full</span>
+            <span class="saving">Save $200 when paid in full</span>
           </div>
 
 
@@ -3491,7 +3485,7 @@ body{
             class="deal-badge"
             id="foundation-badge"
           >
-            Pay in full and save $450
+            Pay in full and save $200
           </div>
 
 
@@ -3740,9 +3734,9 @@ body{
             class="price-meta"
             id="growth-meta"
           >
-            <span class="original">$4,500 standard payment-plan total</span>
+            <span class="original">$4,000 payment-plan total</span>
             ·
-            <span class="saving">Save $1,000 when paid in full</span>
+            <span class="saving">Save $500 when paid in full</span>
           </div>
 
 
@@ -3750,7 +3744,7 @@ body{
             class="deal-badge"
             id="growth-badge"
           >
-            Pay in full and save $1,000
+            Pay in full and save $500
           </div>
 
 
@@ -4089,7 +4083,7 @@ body{
         <div class="price">
 
           <strong>
-            $497
+            $1,250
           </strong>
 
           <span>
@@ -4437,7 +4431,7 @@ body{
         <button
           class="sel"
           data-plan="Ignite Systems Care"
-          data-price="$497/month"
+          data-price="$1,250/month"
           data-note="Optional after the initial engagement for companies that want Ignite to continue monitoring and maintaining the system."
         >
           Systems Care
@@ -4456,11 +4450,9 @@ body{
 
       Foundation Build is $1,500 when paid in full.
       The two-payment option is $850 per payment for a total investment of $1,700.
-      The three-payment option is $650 per payment for a total investment of $1,950.
 
       The 90-Day Acquisition System is $3,500 when paid in full.
       The two-payment option is $2,000 per payment for a total investment of $4,000.
-      The three-payment option is $1,500 per payment for a total investment of $4,500.
 
       Advertising spend is separate and paid toward the advertising platform.
       Payment plans begin at the start of the engagement, with remaining
@@ -4505,12 +4497,12 @@ body{
         label:'$1,500 paid in full',
 
         meta:
-          '<span class="original">$1,950 standard payment-plan total</span>' +
+          '<span class="original">$1,700 payment-plan total</span>' +
           ' · ' +
-          '<span class="saving">Save $450 when paid in full</span>',
+          '<span class="saving">Save $200 when paid in full</span>',
 
         badge:
-          'Pay in full and save $450'
+          'Pay in full and save $200'
 
       },
 
@@ -4534,29 +4526,7 @@ body{
           '2 payments · $1,700 total'
 
       },
-
-
-      '3pay': {
-
-        price:'$650',
-
-        period:'× 3 payments',
-
-        total:1950,
-
-        label:'3 payments of $650 ($1,950 total)',
-
-        meta:
-          '<span class="effective">$1,950 total investment</span>' +
-          ' · ' +
-          '$650 per payment',
-
-        badge:
-          '3 payments · $1,950 total'
-
-      }
-
-    },
+},
 
 
 
@@ -4574,12 +4544,12 @@ body{
         label:'$3,500 paid in full + ad spend',
 
         meta:
-          '<span class="original">$4,500 standard payment-plan total</span>' +
+          '<span class="original">$4,000 payment-plan total</span>' +
           ' · ' +
-          '<span class="saving">Save $1,000 when paid in full</span>',
+          '<span class="saving">Save $500 when paid in full</span>',
 
         badge:
-          'Pay in full and save $1,000'
+          'Pay in full and save $500'
 
       },
 
@@ -4603,29 +4573,7 @@ body{
           '2 payments · $4,000 total'
 
       },
-
-
-      '3pay': {
-
-        price:'$1,500',
-
-        period:'× 3 payments',
-
-        total:4500,
-
-        label:'3 payments of $1,500 ($4,500 total) + ad spend',
-
-        meta:
-          '<span class="effective">$4,500 total Ignite investment</span>' +
-          ' · ' +
-          '$1,500 per month across the 90-day engagement',
-
-        badge:
-          '3 payments · $4,500 total'
-
-      }
-
-    }
+}
 
   };
 
@@ -5109,3 +5057,5 @@ body{
   }
 })();
 </script>
+
+<!-- PAYMENT OPTIONS UPDATE V1 -->
