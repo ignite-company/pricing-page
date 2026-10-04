@@ -3211,7 +3211,7 @@ body{
 
         <div class="calc-data-note">
           <strong>Built from documented campaign performance.</strong>
-          <p>Across Ignite's documented campaign history, we've tracked 2,000+ leads and $25,000+ in ad spend. The forecast below is intentionally more conservative: it is calibrated to Wranglin Wranglers' real campaign of 44 website leads from $1,463.54 in ad spend, 9 closed/completed jobs, and approximately $6,000 collected over 29.27 days.</p>
+          <p>Across Ignite's documented campaign history, we've tracked 2,000+ leads and $25,000+ in ad spend. The forecast below starts with Wranglin Wranglers' real campaign of 44 website leads from $1,463.54 in ad spend, then applies a modeled 20% optimization uplift to lead volume. That uplift is a planning assumption, not a historical guarantee.</p>
         </div>
       </div>
 
@@ -3287,7 +3287,7 @@ body{
             <div class="calc-hero-card primary">
               <span class="calc-kicker">Projected 90-day revenue</span>
               <strong class="calc-big-number" id="calc-revenue90">$0</strong>
-              <span class="calc-small-copy">Revenue from projected paid-lead jobs plus modeled follow-up and reactivation recoveries. Recovery matures conservatively from 5% of initially unclosed leads by 90 days, to 8% by 6 months and 10% by 12 months.</span>
+              <span class="calc-small-copy">Revenue from projected paid-lead jobs plus modeled follow-up and reactivation recoveries. The model includes a 20% optimization uplift to lead volume and assumes 10% of initially unclosed leads are recovered by 90 days, 13% by 6 months, and 15% by 12 months.</span>
             </div>
             <div class="calc-hero-card">
               <span class="calc-kicker">All-in break-even</span>
@@ -3295,9 +3295,9 @@ body{
               <span class="calc-small-copy">When projected gross profit has covered advertising and the total growth investment.</span>
             </div>
             <div class="calc-hero-card">
-              <span class="calc-kicker">90-day net impact</span>
+              <span class="calc-kicker">Profit after ad spend</span>
               <strong class="calc-big-number" id="calc-net90">$0</strong>
-              <span class="calc-small-copy">Projected gross profit after advertising and the total implementation investment.</span>
+              <span class="calc-small-copy">Projected gross profit remaining after advertising spend.</span>
             </div>
           </div>
 
@@ -3321,11 +3321,11 @@ body{
             <div class="recovery-card highlight">
               <h5>Additional follow-up + reactivation upside</h5>
               <div class="recovery-value" id="calc-recovered-revenue">+$0</div>
-              <p>Modeled from the leads that do not close initially: 5% recovered by 90 days, 8% cumulatively by 6 months, and 10% cumulatively by 12 months. This is a planning assumption, not guaranteed revenue.</p>
+              <p>Modeled from the leads that do not close initially: 10% recovered by 90 days, 13% cumulatively by 6 months, and 15% cumulatively by 12 months. This is a planning assumption, not guaranteed revenue.</p>
             </div>
           </div>
 
-          <div class="calc-section-title"><h4>Longer-term system economics</h4><span>Same budget + performance, with recovery maturing from 5% to 8% to 10%</span></div>
+          <div class="calc-section-title"><h4>Longer-term system economics</h4><span>Same budget + performance, with recovery maturing from 10% to 13% to 15%</span></div>
           <div class="calc-projections" id="calc-projections"></div>
         </div>
       </div>
@@ -3387,7 +3387,7 @@ body{
       </section>
 
       <div class="calc-disclaimer">
-        Projection model, not a guarantee. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. Forecast math is calibrated to the Wranglin Wranglers case for lead cost: $1,463.54 ad spend produced 44 tracked website leads at $33.26 per lead, with 9 closed/completed jobs and approximately $6,000 collected over 29.27 days. The model uses that real $33.26 CPL to estimate lead volume, then applies the lead-to-job close rate entered above. Follow-up and reactivation are modeled separately as a planning assumption on initially unclosed leads: 5% cumulative recovery by 90 days, 8% by 6 months, and 10% by 12 months. Those recovery percentages are not presented as observed Wranglin results or guaranteed performance. Profit uses the margin entered above, and net impact subtracts both advertising spend and the initial Scale implementation investment. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
+        Projection model, not a guarantee. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. The forecast starts from Wranglin Wranglers' measured $33.26 CPL and applies a 20% modeled optimization uplift to lead volume, equivalent to roughly a $27.72 modeled CPL. That uplift is a planning assumption, not historical performance. The lead-to-job close rate entered above then controls initial job volume. Follow-up and reactivation are modeled only on leads that do not close initially: 10% recovered by 90 days, 13% cumulatively by 6 months, and 15% cumulatively by 12 months. Those recovery rates are also planning assumptions, not guaranteed outcomes. Profit uses the margin entered above. Profit after ad spend subtracts advertising spend but does not subtract the Ignite implementation fee; the longer-term net rows subtract both advertising spend and the initial Scale implementation investment. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
       </div>
 
     </section>
@@ -4801,6 +4801,7 @@ body{
 
   var SCALE_FEE = 3500;
   var FOUNDATION_FEE = 1500;
+  var SYSTEM_UPLIFT = 1.20;
 
   var ticket = document.getElementById('calc-ticket');
   var closeRate = document.getElementById('calc-close');
@@ -4833,18 +4834,18 @@ body{
 
   function recoveryRateForDays(days){
     // Cumulative recovery assumption for leads that did not close initially.
-    // 5% by 90 days, 8% by 6 months, 10% by 12 months.
+    // 10% by 90 days, 13% by 6 months, 15% by 12 months.
     if(days <= 0) return 0;
-    if(days <= 90) return .05 * (days / 90);
-    if(days <= 180) return .05 + (.03 * ((days - 90) / 90));
-    if(days <= 365) return .08 + (.02 * ((days - 180) / 185));
-    return .10;
+    if(days <= 90) return .10 * (days / 90);
+    if(days <= 180) return .10 + (.03 * ((days - 90) / 90));
+    if(days <= 365) return .13 + (.02 * ((days - 180) / 185));
+    return .15;
   }
 
   function project(days, avgTicket, enteredCloseRate, profitMargin, dailyBudget){
     var modeledClose = enteredCloseRate;
     var adSpend = dailyBudget * days;
-    var leads = adSpend / BASE_CPL;
+    var leads = (adSpend / BASE_CPL) * SYSTEM_UPLIFT;
     var immediateJobs = leads * modeledClose;
     var unclosedLeads = Math.max(0, leads - immediateJobs);
     var recoveryRate = recoveryRateForDays(days);
@@ -4854,7 +4855,8 @@ body{
     var recoveredRevenue = recoveredJobs * avgTicket;
     var revenue = immediateRevenue + recoveredRevenue;
     var grossProfit = revenue * profitMargin;
-    var net = grossProfit - adSpend - SCALE_FEE;
+    var profitAfterAds = grossProfit - adSpend;
+    var net = profitAfterAds - SCALE_FEE;
     var cac = jobs > 0 ? adSpend / jobs : 0;
     var totalConversion = leads > 0 ? jobs / leads : 0;
 
@@ -4870,6 +4872,7 @@ body{
       immediateRevenue:immediateRevenue,
       recoveredRevenue:recoveredRevenue,
       grossProfit:grossProfit,
+      profitAfterAds:profitAfterAds,
       adSpend:adSpend,
       net:net,
       cac:cac,
@@ -4913,7 +4916,7 @@ body{
 
     setText('calc-revenue90',money(r90.revenue));
     setText('calc-breakeven',r365.breakEvenDay && r365.breakEvenDay <= 365 ? r365.breakEvenDay + ' days' : '365+ days');
-    setText('calc-net90',money(r90.net));
+    setText('calc-net90',money(r90.profitAfterAds));
     setText('calc-leads90',number(r90.leads));
     setText('calc-immediate-jobs',number(r90.immediateJobs));
     setText('calc-recovered-jobs','+'+number(r90.recoveredJobs));
@@ -4954,6 +4957,7 @@ body{
           '<div class="projection-row"><span>Follow-up / reactivation</span><b>+'+money(c.data.recoveredRevenue)+'</b></div>' +
           '<div class="projection-row"><span>Gross profit</span><b>'+money(c.data.grossProfit)+'</b></div>' +
           '<div class="projection-row"><span>Ad spend</span><b>'+money(c.data.adSpend)+'</b></div>' +
+          '<div class="projection-row"><span>Profit after ad spend</span><b>'+money(c.data.profitAfterAds)+'</b></div>' +
           '<div class="projection-row"><span>Net after ads + implementation</span><b>'+money(c.data.net)+'</b></div>' +
         '</div>';
       }).join('');
