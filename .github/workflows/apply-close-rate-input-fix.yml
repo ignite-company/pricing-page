@@ -1,0 +1,46 @@
+name: Apply close rate input fix
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-close-rate-input-fix.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply close rate input fix
+        run: python .patch/close_rate_input_fix.py
+
+      - name: Verify calculator behavior
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'var modeledClose = enteredCloseRate;' in s
+          assert 'Math.min(enteredCloseRate, BASE_CLOSE)' not in s
+          assert 'will not assume a paid-lead close rate above' not in s
+          close_pos=s.index('id="calc-close"')
+          next_field=s.find('<div class="calc-field">', close_pos+1)
+          seg=s[close_pos:next_field]
+          assert 'calc-input-hint' not in seg
+          print('calculator close rate fix verified')
+          PY
+
+      - name: Commit calculator fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Make close rate input drive calculator projections" || exit 0
+          git pull --rebase origin main
+          git push origin main
