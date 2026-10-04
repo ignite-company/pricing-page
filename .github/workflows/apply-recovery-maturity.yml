@@ -1,0 +1,47 @@
+name: Apply follow-up recovery maturity model
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-recovery-maturity.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply recovery maturity model
+        run: python .patch/recovery_maturity.py
+
+      - name: Verify calculator behavior
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert '5% recovered by 90 days, 8% cumulatively by 6 months, and 10% cumulatively by 12 months' in s
+          assert 'function recoveryRateForDays(days)' in s
+          assert "setText('calc-recovered-jobs','+'+number(r90.recoveredJobs));" in s
+          assert "setText('calc-recovered-revenue','+'+money(r90.recoveredRevenue));" in s
+          assert 'No extra nurture or reactivation revenue is automatically added.' not in s
+          assert '<strong>2,000+</strong><span>Tracked leads</span>' in s
+          assert '<strong>$25,000+</strong><span>Documented ad spend</span>' in s
+          assert '<strong>$16.28</strong><span>Weighted historical CPL</span>' in s
+          print('recovery maturity model verified')
+          PY
+
+      - name: Commit calculator update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add follow-up and reactivation maturity model" || exit 0
+          git pull --rebase origin main
+          git push origin main
