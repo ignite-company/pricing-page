@@ -1,0 +1,35 @@
+name: Apply proof carousel lightbox fix
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-proof-lightbox-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply proof carousel fix
+        run: python .patch/proof-lightbox-v2.py
+      - name: Verify proof carousel fix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'PROOF LIGHTBOX + RELIABLE LOADING V1' in s
+          assert 'ignite-proof-lightbox' in s
+          block=s[s.index('<div class="calc-proof-window"'):s.index('<div class="calc-evidence">')]
+          assert 'loading="lazy"' not in block
+          assert 'loading="eager" decoding="async"' in block
+          assert 'calc-proof-window:hover .calc-proof-track{animation-play-state:running;}' in s
+          PY
+      - name: Commit proof carousel fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add clickable proof lightbox and stabilize carousel loading'
+          git push
