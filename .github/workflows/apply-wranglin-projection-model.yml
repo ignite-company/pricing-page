@@ -1,0 +1,46 @@
+name: Apply grounded Wranglin projection model
+
+on:
+  push:
+    paths:
+      - .github/workflows/apply-wranglin-projection-model.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Apply grounded projection model
+        run: python .patch/wranglin_projection_model.py
+
+      - name: Verify grounded model
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'WRANGLIN_SPEND = 1463.54' in s
+          assert 'WRANGLIN_LEADS = 44' in s
+          assert 'WRANGLIN_REVENUE = 6000' in s
+          assert 'WRANGLIN_JOBS = 9' in s
+          assert 'Math.min(enteredCloseRate, BASE_CLOSE)' in s
+          assert 'RECOVERY_LIFT' not in s
+          assert '2,000+' in s and '$25,000+' in s and '$16.28' in s
+          print('grounded calculator model verified')
+          PY
+
+      - name: Commit grounded calculator model
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Ground calculator projections in Wranglin campaign data" || exit 0
+          git pull --rebase origin main
+          git push origin main
