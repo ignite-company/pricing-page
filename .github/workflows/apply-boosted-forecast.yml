@@ -1,0 +1,55 @@
+name: Apply boosted forecast model
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-boosted-forecast.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply boosted forecast model
+        run: python .patch/boost-forecast.py
+
+      - name: Verify calculator behavior
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          required=[
+            'Profit after ad spend',
+            'var SYSTEM_UPLIFT = 1.20;',
+            '10% recovered by 90 days',
+            '13% cumulatively by 6 months',
+            '15% cumulatively by 12 months',
+            "setText('calc-net90',money(r90.profitAfterAds));",
+            'equivalent to roughly a $27.72 modeled CPL'
+          ]
+          for x in required:
+            assert x in s, x
+          assert '90-day net impact' not in s
+          print('verification passed')
+          PY
+
+      - name: Commit calculator update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Increase modeled recovery and add optimization uplift'
+            git push origin main
+          fi
