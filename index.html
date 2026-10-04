@@ -3206,12 +3206,12 @@ body{
         <div>
           <div class="eyebrow">Ignite performance calculator</div>
           <h3>With the help of AI, we've compiled four years of company history and results into one simple calculator.</h3>
-          <p>Enter the economics of your junk removal business below. The model combines your numbers with Ignite's documented paid acquisition performance and a 90-day follow-up and reactivation model.</p>
+          <p>Enter the economics of your junk removal business below. The broader Ignite database stays visible as proof, while the forecast itself is calibrated to a real completed-jobs campaign so the outputs stay grounded.</p>
         </div>
 
         <div class="calc-data-note">
           <strong>Built from documented campaign performance.</strong>
-          <p>Across Ignite's documented campaign history, we've tracked 2,000+ leads and $25,000+ in ad spend. For projections, this calculator uses a conservative $16.28 weighted historical CPL baseline from the campaign data analyzed here.</p>
+          <p>Across Ignite's documented campaign history, we've tracked 2,000+ leads and $25,000+ in ad spend. The forecast below is intentionally more conservative: it is calibrated to Wranglin Wranglers' real campaign of 44 website leads from $1,463.54 in ad spend, 9 closed/completed jobs, and approximately $6,000 collected over 29.27 days.</p>
         </div>
       </div>
 
@@ -3257,13 +3257,13 @@ body{
 
           <div class="calc-field">
             <div class="calc-label"><label for="calc-ticket">Average job size</label><span>Average revenue collected per job</span></div>
-            <div class="calc-input-wrap"><span class="calc-prefix">$</span><input class="calc-input" id="calc-ticket" type="number" inputmode="decimal" min="50" step="25" value="500"></div>
+            <div class="calc-input-wrap"><span class="calc-prefix">$</span><input class="calc-input" id="calc-ticket" type="number" inputmode="decimal" min="50" step="25" value="667"></div>
           </div>
 
           <div class="calc-field">
             <div class="calc-label"><label for="calc-close">Current lead-to-job close rate</label><span>Jobs won from legitimate new inquiries</span></div>
-            <div class="calc-input-wrap"><input class="calc-input no-prefix" id="calc-close" type="number" inputmode="decimal" min="1" max="90" step="1" value="18"><span class="calc-suffix">%</span></div>
-            <div class="calc-input-hint">The recovery model then estimates additional delayed, reactivated, and repeat opportunities from the same lead pool.</div>
+            <div class="calc-input-wrap"><input class="calc-input no-prefix" id="calc-close" type="number" inputmode="decimal" min="1" max="90" step="0.5" value="20.5"><span class="calc-suffix">%</span></div>
+            <div class="calc-input-hint">Wranglin Wranglers converted 9 of 44 tracked website leads into closed/completed jobs, or 20.5%. To keep the forecast conservative, the model uses the lower of your entered close rate and that measured 20.5% benchmark. No extra follow-up lift is automatically added.</div>
           </div>
 
           <div class="calc-field">
@@ -3288,7 +3288,7 @@ body{
             <div class="calc-hero-card primary">
               <span class="calc-kicker">Projected 90-day revenue</span>
               <strong class="calc-big-number" id="calc-revenue90">$0</strong>
-              <span class="calc-small-copy">Revenue from immediate jobs plus estimated follow-up recoveries that land inside the engagement.</span>
+              <span class="calc-small-copy">Revenue from projected paid-lead jobs using the grounded Wranglin campaign baseline. No extra nurture or reactivation revenue is automatically added.</span>
             </div>
             <div class="calc-hero-card">
               <span class="calc-kicker">All-in break-even</span>
@@ -3304,25 +3304,25 @@ body{
 
           <div class="calc-metrics">
             <div class="calc-metric"><b id="calc-leads90">0</b><span>Projected leads</span></div>
-            <div class="calc-metric"><b id="calc-immediate-jobs">0</b><span>Immediate jobs</span></div>
-            <div class="calc-metric"><b id="calc-recovered-jobs">0</b><span>Follow-up / reactivation jobs</span></div>
+            <div class="calc-metric"><b id="calc-immediate-jobs">0</b><span>Projected paid-lead jobs</span></div>
+            <div class="calc-metric"><b id="calc-recovered-jobs">0</b><span>Extra jobs assumed</span></div>
             <div class="calc-metric"><b id="calc-total-jobs">0</b><span>Total jobs inside 90 days</span></div>
             <div class="calc-metric"><b id="calc-adspend90">$0</b><span>90-day ad spend</span></div>
             <div class="calc-metric"><b id="calc-grossprofit90">$0</b><span>Projected gross profit</span></div>
             <div class="calc-metric"><b id="calc-cac90">$0</b><span>Effective ad CAC</span></div>
-            <div class="calc-metric"><b id="calc-eventual-rate">0%</b><span>Modeled cohort conversion</span></div>
+            <div class="calc-metric"><b id="calc-eventual-rate">0%</b><span>Modeled lead-to-job conversion</span></div>
           </div>
 
           <div class="calc-recovery">
             <div class="recovery-card">
-              <h5>Revenue from customers who buy quickly</h5>
+              <h5>Revenue from modeled paid-lead jobs</h5>
               <div class="recovery-value" id="calc-immediate-revenue">$0</div>
-              <p>This is the revenue most owners see first when judging whether the ads worked.</p>
+              <p>This is the base-case revenue generated from the modeled lead volume, close rate, and average job size.</p>
             </div>
             <div class="recovery-card highlight">
-              <h5>Additional revenue recovered through follow-up + reactivation</h5>
+              <h5>Additional follow-up + reactivation upside</h5>
               <div class="recovery-value" id="calc-recovered-revenue">+$0</div>
-              <p>Same lead pool. More time, trust, reminders, proof, repeat need, and continued contact before the next purchase happens.</p>
+              <p>Not included in the base-case forecast. Any later jobs recovered through nurture, reactivation, repeat need, or referrals are treated as upside rather than promised revenue.</p>
             </div>
           </div>
 
@@ -3388,7 +3388,7 @@ body{
       </section>
 
       <div class="calc-disclaimer">
-        Projection model, not a guarantee. Paid acquisition uses a $16.28 weighted CPL baseline from the campaign dataset analyzed for this calculator. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. Lead recovery uses the lifecycle model discussed on this page: a base 18% immediate conversion rate expanding to approximately 30% over the life of a cohort, scaled to the close rate entered above. The recovery lift represents delayed, reactivated, or repeat opportunity from the acquired cohort. Existing pre-Ignite database revenue is not added automatically. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
+        Projection model, not a guarantee. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. Forecast math is intentionally calibrated to the Wranglin Wranglers case: $1,463.54 ad spend produced 44 tracked website leads at $33.26 per lead, with 9 closed/completed jobs and approximately $6,000 collected over 29.27 days. The model uses that $33.26 CPL and will not assume a paid-lead close rate above the observed 9-of-44 rate of 20.5%; a lower close rate entered above is respected. No additional follow-up, reactivation, repeat, referral, or database revenue is automatically added. Profit uses the margin entered above, and net impact subtracts both advertising spend and the initial Scale implementation investment. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
       </div>
 
     </section>
@@ -4788,12 +4788,20 @@ body{
   var root = document.getElementById('ignite-roi-calculator');
   if(!root) return;
 
-  var CPL = 16.2793944954;
+  // Grounded projection baseline: Wranglin Wranglers real campaign.
+  var WRANGLIN_SPEND = 1463.54;
+  var WRANGLIN_LEADS = 44;
+  var WRANGLIN_REVENUE = 6000;
+  var WRANGLIN_JOBS = 9;
+  var WRANGLIN_DAILY_BUDGET = 50;
+  var WRANGLIN_DAYS = WRANGLIN_SPEND / WRANGLIN_DAILY_BUDGET;
+  var BASE_CPL = WRANGLIN_SPEND / WRANGLIN_LEADS;
+  var BASE_CLOSE = WRANGLIN_JOBS / WRANGLIN_LEADS;
+  var BASE_TICKET = WRANGLIN_REVENUE / WRANGLIN_JOBS;
+  var BASE_ROAS = WRANGLIN_REVENUE / WRANGLIN_SPEND;
+
   var SCALE_FEE = 3500;
   var FOUNDATION_FEE = 1500;
-  var RECOVERY_LIFT = 2/3;
-  var RECOVERY_OFFSETS = [11,18,26,45,75];
-  var RECOVERY_WEIGHTS = [2/6,1/6,1/6,1/6,1/6];
 
   var ticket = document.getElementById('calc-ticket');
   var closeRate = document.getElementById('calc-close');
@@ -4824,68 +4832,43 @@ body{
     return (n * 100).toFixed(n * 100 < 10 ? 1 : 0) + '%';
   }
 
-  function simulate(days, avgTicket, immediateRate, profitMargin, dailyBudget){
-    var dailyLeads = dailyBudget / CPL;
-    var delayedRate = Math.min(immediateRate * RECOVERY_LIFT, Math.max(0, .95 - immediateRate));
-    var revenue = new Array(days).fill(0);
-    var jobs = new Array(days).fill(0);
-    var immediateJobs = new Array(days).fill(0);
-    var recoveredJobs = new Array(days).fill(0);
+  function simulate(days, avgTicket, enteredCloseRate, profitMargin, dailyBudget){
+    // Never assume better paid-lead conversion than the measured Wranglin baseline.
+    // If the prospect's real close rate is lower, honor the lower number.
+    var modeledClose = Math.min(enteredCloseRate, BASE_CLOSE);
+    var adSpend = dailyBudget * days;
+    var leads = adSpend / BASE_CPL;
+    var jobs = leads * modeledClose;
+    var revenue = jobs * avgTicket;
+    var grossProfit = revenue * profitMargin;
+    var net = grossProfit - adSpend - SCALE_FEE;
+    var cac = jobs > 0 ? adSpend / jobs : 0;
 
-    for(var d=0; d<days; d++){
-      var immediate = dailyLeads * immediateRate;
-      immediateJobs[d] += immediate;
-      jobs[d] += immediate;
-      revenue[d] += immediate * avgTicket;
-
-      for(var i=0;i<RECOVERY_OFFSETS.length;i++){
-        var target = d + RECOVERY_OFFSETS[i];
-        if(target < days){
-          var recovered = dailyLeads * delayedRate * RECOVERY_WEIGHTS[i];
-          recoveredJobs[target] += recovered;
-          jobs[target] += recovered;
-          revenue[target] += recovered * avgTicket;
-        }
-      }
-    }
-
-    var cumRevenue = 0;
-    var cumJobs = 0;
-    var cumImmediate = 0;
-    var cumRecovered = 0;
-    var breakEvenDay = null;
-
-    for(var day=1; day<=days; day++){
-      cumRevenue += revenue[day-1];
-      cumJobs += jobs[day-1];
-      cumImmediate += immediateJobs[day-1];
-      cumRecovered += recoveredJobs[day-1];
-
-      var grossProfit = cumRevenue * profitMargin;
-      var adSpend = dailyBudget * day;
-      var net = grossProfit - adSpend - SCALE_FEE;
-
-      if(breakEvenDay === null && net >= 0){
-        breakEvenDay = day;
-      }
-
-    }
+    var dailyLeads = dailyBudget / BASE_CPL;
+    var dailyContribution = (dailyLeads * modeledClose * avgTicket * profitMargin) - dailyBudget;
+    var breakEvenDay = dailyContribution > 0 ? Math.ceil(SCALE_FEE / dailyContribution) : null;
 
     return {
       days:days,
-      leads:dailyLeads * days,
-      jobs:cumJobs,
-      immediateJobs:cumImmediate,
-      recoveredJobs:cumRecovered,
-      revenue:cumRevenue,
-      immediateRevenue:cumImmediate * avgTicket,
-      recoveredRevenue:cumRecovered * avgTicket,
-      grossProfit:cumRevenue * profitMargin,
-      adSpend:dailyBudget * days,
-      net:cumRevenue * profitMargin - dailyBudget * days - SCALE_FEE,
+      leads:leads,
+      jobs:jobs,
+      immediateJobs:jobs,
+      recoveredJobs:0,
+      revenue:revenue,
+      immediateRevenue:revenue,
+      recoveredRevenue:0,
+      grossProfit:grossProfit,
+      adSpend:adSpend,
+      net:net,
       breakEvenDay:breakEvenDay,
-      cac:cumJobs > 0 ? (dailyBudget * days)/cumJobs : 0,
-      eventualRate:Math.min(.95, immediateRate + delayedRate)
+      cac:cac,
+      eventualRate:modeledClose,
+      enteredRate:enteredCloseRate,
+      baselineCpl:BASE_CPL,
+      baselineClose:BASE_CLOSE,
+      baselineTicket:BASE_TICKET,
+      baselineRoas:BASE_ROAS,
+      baselineDays:WRANGLIN_DAYS
     };
   }
 
@@ -4895,28 +4878,28 @@ body{
   }
 
   function render(){
-    var avgTicket = Math.max(1, val(ticket,500));
-    var immediateRate = clamp(val(closeRate,18)/100, .01, .90);
+    var avgTicket = Math.max(1, val(ticket,BASE_TICKET));
+    var enteredCloseRate = clamp(val(closeRate,BASE_CLOSE*100)/100, .01, .90);
     var profitMargin = clamp(val(margin,50)/100, .01, .95);
     var dailyBudget = Math.max(1, val(budget,50));
 
-    var r90 = simulate(90,avgTicket,immediateRate,profitMargin,dailyBudget);
-    var r180 = simulate(180,avgTicket,immediateRate,profitMargin,dailyBudget);
-    var r365 = simulate(365,avgTicket,immediateRate,profitMargin,dailyBudget);
+    var r90 = simulate(90,avgTicket,enteredCloseRate,profitMargin,dailyBudget);
+    var r180 = simulate(180,avgTicket,enteredCloseRate,profitMargin,dailyBudget);
+    var r365 = simulate(365,avgTicket,enteredCloseRate,profitMargin,dailyBudget);
 
     setText('calc-revenue90',money(r90.revenue));
-    setText('calc-breakeven',r365.breakEvenDay ? r365.breakEvenDay + ' days' : '365+ days');
+    setText('calc-breakeven',r365.breakEvenDay && r365.breakEvenDay <= 365 ? r365.breakEvenDay + ' days' : '365+ days');
     setText('calc-net90',money(r90.net));
     setText('calc-leads90',number(r90.leads));
     setText('calc-immediate-jobs',number(r90.immediateJobs));
-    setText('calc-recovered-jobs','+'+number(r90.recoveredJobs));
+    setText('calc-recovered-jobs','0');
     setText('calc-total-jobs',number(r90.jobs));
     setText('calc-adspend90',money(r90.adSpend));
     setText('calc-grossprofit90',money(r90.grossProfit));
     setText('calc-cac90',money(r90.cac));
     setText('calc-eventual-rate',pct(r90.eventualRate));
     setText('calc-immediate-revenue',money(r90.immediateRevenue));
-    setText('calc-recovered-revenue','+'+money(r90.recoveredRevenue));
+    setText('calc-recovered-revenue','$0');
 
     var profitPerJob = avgTicket * profitMargin;
     var foundationJobs = profitPerJob > 0 ? Math.ceil(FOUNDATION_FEE / profitPerJob) : 0;
@@ -4931,7 +4914,6 @@ body{
     setText('calc-foundation-jobs-month',organicJobsPerMonth.toFixed(organicJobsPerMonth < 10 ? 1 : 0) + ' / mo');
     setText('calc-foundation-time',foundationDays ? foundationDays + (foundationDays === 1 ? ' day' : ' days') : '-');
     setText('calc-foundation-time-detail',foundationDays ? 'At your current organic lead pace, before assuming any lift from the new systems.' : 'Enter your current monthly organic lead flow.');
-
 
     var projections = document.getElementById('calc-projections');
     if(projections){
