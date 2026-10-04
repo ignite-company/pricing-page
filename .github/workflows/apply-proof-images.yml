@@ -1,0 +1,39 @@
+name: Apply proof images
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-proof-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add proof screenshots
+        run: python .patch/add-proof-images.py
+      - name: Verify proof screenshots
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s = Path('index.html').read_text()
+          urls = [
+            'https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de84c478ac5535cbb5c8.png',
+            'https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de99195f9172ed72732a.png',
+            'https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2dea9bbad531ac8b39f7b.png',
+          ]
+          for u in urls:
+            assert s.count(u) == 2, (u, s.count(u))
+          print('verified all 3 new screenshots in both carousel tracks')
+          PY
+      - name: Commit proof screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add new proof screenshots" || exit 0
+          git push
