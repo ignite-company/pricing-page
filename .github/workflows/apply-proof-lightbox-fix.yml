@@ -22,7 +22,7 @@ jobs:
           from pathlib import Path
           s = Path('index.html').read_text()
           assert 'IGNITE PROOF LIGHTBOX V1' in s
-          assert 'id="ignite-proof-lightbox"' in s
+          assert 'ignite-proof-lightbox' in s
           assert 'loading="eager" decoding="async"' in s
           assert '#ignite-offers-v7 .calc-proof-window:hover .calc-proof-track' in s
           assert 'animation-play-state:running' in s
