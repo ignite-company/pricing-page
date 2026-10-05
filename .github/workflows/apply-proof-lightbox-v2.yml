@@ -20,6 +20,8 @@ jobs:
           s=Path('index.html').read_text()
           assert 'PROOF LIGHTBOX + RELIABLE LOADING V1' in s
           assert 'ignite-proof-lightbox' in s
+          assert 'resumeProofTrack' in s
+          assert "track.getAnimations().forEach" in s
           block=s[s.index('<div class="calc-proof-window"'):s.index('<div class="calc-evidence">')]
           assert 'loading="lazy"' not in block
           assert 'loading="eager" decoding="async"' in block
@@ -31,5 +33,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Add clickable proof lightbox and stabilize carousel loading'
+          git commit -m 'Resume proof carousel after closing lightbox'
           git push
