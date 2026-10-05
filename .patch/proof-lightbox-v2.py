@@ -49,12 +49,26 @@ if marker not in s:
     lb.setAttribute('aria-hidden','false');
     document.documentElement.style.overflow='hidden';
   }
+  function resumeProofTrack(){
+    if(!track) return;
+    track.style.animationPlayState='running';
+    if(track.getAnimations){
+      track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});
+    }
+    requestAnimationFrame(function(){
+      track.style.animationPlayState='running';
+      if(track.getAnimations){
+        track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});
+      }
+    });
+  }
   function closeProof(){
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden','true');
     lbImg.removeAttribute('src');
     document.documentElement.style.overflow='';
     win.classList.remove('proof-paused');
+    resumeProofTrack();
   }
 
   win.addEventListener('click',function(e){
@@ -66,14 +80,20 @@ if marker not in s:
   lb.addEventListener('click',function(e){if(e.target===lb) closeProof();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape' && lb.classList.contains('open')) closeProof();});
   document.addEventListener('visibilitychange',function(){
-    if(!document.hidden && track && !lb.classList.contains('open')){
-      track.style.animationPlayState='running';
-      requestAnimationFrame(function(){track.style.animationPlayState='';});
-    }
+    if(!document.hidden && !lb.classList.contains('open')) resumeProofTrack();
   });
 })();
 </script>
 '''
     s=s.replace('<!-- PAYMENT OPTIONS UPDATE V1 -->', addition+'\n<!-- PAYMENT OPTIONS UPDATE V1 -->')
+else:
+    old="""  function closeProof(){\n    lb.classList.remove('open');\n    lb.setAttribute('aria-hidden','true');\n    lbImg.removeAttribute('src');\n    document.documentElement.style.overflow='';\n    win.classList.remove('proof-paused');\n  }"""
+    new="""  function resumeProofTrack(){\n    if(!track) return;\n    track.style.animationPlayState='running';\n    if(track.getAnimations){\n      track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});\n    }\n    requestAnimationFrame(function(){\n      track.style.animationPlayState='running';\n      if(track.getAnimations){\n        track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});\n      }\n    });\n  }\n  function closeProof(){\n    lb.classList.remove('open');\n    lb.setAttribute('aria-hidden','true');\n    lbImg.removeAttribute('src');\n    document.documentElement.style.overflow='';\n    win.classList.remove('proof-paused');\n    resumeProofTrack();\n  }"""
+    if old in s:
+        s=s.replace(old,new,1)
+    old_vis="""  document.addEventListener('visibilitychange',function(){\n    if(!document.hidden && track && !lb.classList.contains('open')){\n      track.style.animationPlayState='running';\n      requestAnimationFrame(function(){track.style.animationPlayState='';});\n    }\n  });"""
+    new_vis="""  document.addEventListener('visibilitychange',function(){\n    if(!document.hidden && !lb.classList.contains('open')) resumeProofTrack();\n  });"""
+    if old_vis in s:
+        s=s.replace(old_vis,new_vis,1)
 
 p.write_text(s)
