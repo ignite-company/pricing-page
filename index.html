@@ -3164,6 +3164,33 @@ body.ignite-proof-modal-open{
   }
 }
 
+
+/* PROOF THUMBNAIL ZOOM V3 */
+#ignite-offers-v7 .calc-proof-card{
+  overflow:hidden;
+}
+
+#ignite-offers-v7 .calc-proof-card img{
+  object-fit:cover;
+  object-position:center top;
+  transform:scale(1.08);
+  transform-origin:center top;
+  transition:transform .22s ease;
+}
+
+#ignite-offers-v7 .calc-proof-card:hover img{
+  transform:scale(1.13);
+}
+
+@media(max-width:760px){
+  #ignite-offers-v7 .calc-proof-card img{
+    transform:scale(1.06);
+  }
+  #ignite-offers-v7 .calc-proof-card:hover img{
+    transform:scale(1.06);
+  }
+}
+
 /* POST-90-DAY DECISION V2 */
 #ignite-offers-v7 .after90{
   border-color:rgba(54,223,145,.18);
