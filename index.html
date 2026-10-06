@@ -3108,6 +3108,62 @@ body.ignite-proof-modal-open{
 
 
 
+
+/* TWO-ROW PROOF MARQUEE V2 */
+#ignite-offers-v7 .calc-proof-stack{
+  margin:0 0 24px;
+  position:relative;
+  z-index:1;
+}
+
+#ignite-offers-v7 .calc-proof-stack .calc-proof-window{
+  margin:0 -28px;
+  padding:2px 0 6px;
+}
+
+#ignite-offers-v7 .calc-proof-stack .calc-proof-window + .calc-proof-window{
+  margin-top:12px;
+}
+
+#ignite-offers-v7 .proof-sequence{
+  display:flex;
+  gap:12px;
+  flex:0 0 auto;
+}
+
+#ignite-offers-v7 .proof-track-forward{
+  animation:igniteProofScroll 76s linear infinite;
+}
+
+#ignite-offers-v7 .proof-track-reverse{
+  animation:igniteProofScrollReverse 76s linear infinite;
+}
+
+@keyframes igniteProofScrollReverse{
+  from{transform:translateX(calc(-50% - 6px))}
+  to{transform:translateX(0)}
+}
+
+@media(max-width:760px){
+  #ignite-offers-v7 .calc-proof-stack{
+    margin-bottom:18px;
+  }
+  #ignite-offers-v7 .calc-proof-stack .calc-proof-window{
+    margin-left:-18px;
+    margin-right:-18px;
+  }
+  #ignite-offers-v7 .calc-proof-stack .calc-proof-window + .calc-proof-window{
+    margin-top:9px;
+  }
+  #ignite-offers-v7 .proof-sequence{
+    gap:10px;
+  }
+  #ignite-offers-v7 .proof-track-forward,
+  #ignite-offers-v7 .proof-track-reverse{
+    animation-duration:88s;
+  }
+}
+
 /* POST-90-DAY DECISION V2 */
 #ignite-offers-v7 .after90{
   border-color:rgba(54,223,145,.18);
@@ -3517,37 +3573,67 @@ body.ignite-proof-modal-open{
         </div>
       </div>
 
-      <div class="calc-proof-window" aria-label="Ignite result screenshots">
-        <div class="calc-proof-track">
-          <div style="display:flex;gap:12px;">
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6abfe6022c503e697d56e682.jpg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d29d825a8484f2e4fd10.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2b1ff484614db8c2449.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2c130b0f957cccf3e62.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2d1825a8484f2e4ffa8.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2dede8ed1c29fb4f9a0.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2de30b0f957cccf3fd2.jpeg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c788d7614828d36a40550.jpg" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c777be29b3baf97d6ed01.png" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4df8473fa2ae02f142.png" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de84c478ac5535cbb5c8.png" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de99195f9172ed72732a.png" alt="Ignite client result" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2dea9bbad531ac8b39f7b.png" alt="Ignite client result" loading="eager" decoding="async"></div>
+      <div class="calc-proof-stack" aria-label="Ignite client results and reviews">
+
+        <div class="calc-proof-window proof-row proof-row-forward" aria-label="Ignite client results, row one">
+          <div class="calc-proof-track proof-track-forward">
+            <div class="proof-sequence">
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6abfe6022c503e697d56e682.jpg" alt="Ignite client proof 1" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2b1ff484614db8c2449.jpeg" alt="Ignite client proof 2" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2d1825a8484f2e4ffa8.jpeg" alt="Ignite client proof 3" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2de30b0f957cccf3fd2.jpeg" alt="Ignite client proof 4" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c777be29b3baf97d6ed01.png" alt="Ignite client proof 5" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de84c478ac5535cbb5c8.png" alt="Ignite client proof 6" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2dea9bbad531ac8b39f7b.png" alt="Ignite client proof 7" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517a1b95dbb2c2dae2ca.jpg" alt="Ignite client proof 8" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c41.jpg" alt="Ignite client proof 9" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4ddb2129be18384944.png" alt="Ignite client proof 10" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3da1bbe4daecfbb48dc348.jpg" alt="Ignite client proof 11" loading="eager" decoding="async"></div>
+            </div>
+            <div class="proof-sequence" aria-hidden="true">
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6abfe6022c503e697d56e682.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2b1ff484614db8c2449.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2d1825a8484f2e4ffa8.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2de30b0f957cccf3fd2.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c777be29b3baf97d6ed01.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de84c478ac5535cbb5c8.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2dea9bbad531ac8b39f7b.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517a1b95dbb2c2dae2ca.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c41.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4ddb2129be18384944.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3da1bbe4daecfbb48dc348.jpg" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
-          <div style="display:flex;gap:12px;" aria-hidden="true">
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6abfe6022c503e697d56e682.jpg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d29d825a8484f2e4fd10.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2b1ff484614db8c2449.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2c130b0f957cccf3e62.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2d1825a8484f2e4ffa8.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2dede8ed1c29fb4f9a0.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2de30b0f957cccf3fd2.jpeg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c788d7614828d36a40550.jpg" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c777be29b3baf97d6ed01.png" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4df8473fa2ae02f142.png" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de84c478ac5535cbb5c8.png" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de99195f9172ed72732a.png" alt="" loading="eager" decoding="async"></div>
-          <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2dea9bbad531ac8b39f7b.png" alt="" loading="eager" decoding="async"></div>
+        </div>
+
+        <div class="calc-proof-window proof-row proof-row-reverse" aria-label="Ignite client results, row two">
+          <div class="calc-proof-track proof-track-reverse">
+            <div class="proof-sequence">
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d29d825a8484f2e4fd10.jpeg" alt="Ignite client proof 1" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2c130b0f957cccf3e62.jpeg" alt="Ignite client proof 2" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2dede8ed1c29fb4f9a0.jpeg" alt="Ignite client proof 3" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c788d7614828d36a40550.jpg" alt="Ignite client proof 4" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4df8473fa2ae02f142.png" alt="Ignite client proof 5" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de99195f9172ed72732a.png" alt="Ignite client proof 6" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c3d.jpg" alt="Ignite client proof 7" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c37.jpg" alt="Ignite client proof 8" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4d163e40d8623af4d1.png" alt="Ignite client proof 9" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3da1bb355a0e846b4dcd98.jpg" alt="Ignite client proof 10" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c7797e29b3baf97d6ef7c.png" alt="Ignite client proof 11" loading="eager" decoding="async"></div>
+            </div>
+            <div class="proof-sequence" aria-hidden="true">
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d29d825a8484f2e4fd10.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2c130b0f957cccf3e62.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ab1d2dede8ed1c29fb4f9a0.jpeg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c788d7614828d36a40550.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4df8473fa2ae02f142.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6ac2de99195f9172ed72732a.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c3d.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a2f517ab9af5312bc2f2c37.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3d6f4d163e40d8623af4d1.png" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a3da1bb355a0e846b4dcd98.jpg" alt="" loading="eager" decoding="async"></div>
+              <div class="calc-proof-card"><img src="https://assets.cdn.filesafe.space/bF1dT8IAVuvat84LkAVe/media/6a9c7797e29b3baf97d6ef7c.png" alt="" loading="eager" decoding="async"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -4686,172 +4772,92 @@ body.ignite-proof-modal-open{
 </script>
 
 
-<!-- PROOF LIGHTBOX + RELIABLE LOADING V1 -->
-<style>
-#ignite-offers-v7 .calc-proof-card{cursor:zoom-in;}
-#ignite-offers-v7 .calc-proof-window:hover .calc-proof-track{animation-play-state:running;}
-#ignite-offers-v7 .calc-proof-window.proof-paused .calc-proof-track{animation-play-state:paused!important;}
-#ignite-proof-lightbox{position:fixed;inset:0;z-index:2147483000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,4,7,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
-#ignite-proof-lightbox.open{display:flex;}
-#ignite-proof-lightbox .proof-lightbox-inner{position:relative;max-width:min(1180px,94vw);max-height:92vh;display:flex;align-items:center;justify-content:center;}
-#ignite-proof-lightbox img{display:block;max-width:94vw;max-height:88vh;width:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 28px 100px rgba(0,0,0,.65);background:#0a0d10;}
-#ignite-proof-lightbox .proof-lightbox-close{position:absolute;right:-12px;top:-12px;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:#11161c;color:#fff;font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.4);}
-@media(max-width:760px){#ignite-proof-lightbox{padding:14px;}#ignite-proof-lightbox img{max-width:96vw;max-height:84vh;border-radius:10px;}#ignite-proof-lightbox .proof-lightbox-close{right:4px;top:-48px;}}
-</style>
+
+<!-- PROOF LIGHTBOX V2 -->
 <script>
 (function(){
-  var win=document.querySelector('#ignite-offers-v7 .calc-proof-window');
-  if(!win) return;
-  var track=win.querySelector('.calc-proof-track');
-  var imgs=[].slice.call(win.querySelectorAll('.calc-proof-card img'));
-  imgs.forEach(function(img){img.loading='eager';img.decoding='async';});
+  var root=document.getElementById('ignite-offers-v7');
+  if(!root) return;
 
-  var lb=document.createElement('div');
-  lb.id='ignite-proof-lightbox';
-  lb.setAttribute('aria-hidden','true');
-  lb.innerHTML='<div class="proof-lightbox-inner"><img alt="Expanded proof screenshot"><button class="proof-lightbox-close" type="button" aria-label="Close proof image">×</button></div>';
-  document.body.appendChild(lb);
-  var lbImg=lb.querySelector('img');
-  var closeBtn=lb.querySelector('.proof-lightbox-close');
+  var tracks=[].slice.call(root.querySelectorAll('.calc-proof-track'));
+  var cards=[].slice.call(root.querySelectorAll('.calc-proof-card'));
+  var images=[].slice.call(root.querySelectorAll('.calc-proof-card img'));
+  if(!tracks.length || !images.length) return;
 
-  function openProof(src,alt){
-    if(!src) return;
-    win.classList.add('proof-paused');
-    lbImg.src=src;
-    lbImg.alt=alt || 'Expanded proof screenshot';
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden','false');
-    document.documentElement.style.overflow='hidden';
-  }
-  function resumeProofTrack(){
-    if(!track) return;
-    track.style.animationPlayState='running';
-    if(track.getAnimations){
-      track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});
+  var seen={};
+  images.forEach(function(img){
+    img.loading='eager';
+    img.decoding='async';
+    if(!seen[img.src]){
+      seen[img.src]=true;
+      var preload=new Image();
+      preload.decoding='async';
+      preload.src=img.src;
     }
-    requestAnimationFrame(function(){
-      track.style.animationPlayState='running';
-      if(track.getAnimations){
+  });
+
+  var lb=document.getElementById('ignite-proof-lightbox');
+  if(!lb){
+    lb=document.createElement('div');
+    lb.id='ignite-proof-lightbox';
+    lb.setAttribute('aria-hidden','true');
+    lb.innerHTML='<div class="ignite-proof-lightbox-inner"><button class="ignite-proof-lightbox-close" type="button" aria-label="Close image">&times;</button><img alt="Expanded client proof"></div>';
+    document.body.appendChild(lb);
+  }
+
+  var expanded=lb.querySelector('img');
+  var closeBtn=lb.querySelector('.ignite-proof-lightbox-close');
+
+  function setTracks(state){
+    tracks.forEach(function(track){
+      track.style.animationPlayState=state;
+      if(state==='running' && track.getAnimations){
         track.getAnimations().forEach(function(anim){try{anim.play();}catch(e){}});
       }
     });
   }
-  function closeProof(){
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden','true');
-    lbImg.removeAttribute('src');
-    document.documentElement.style.overflow='';
-    win.classList.remove('proof-paused');
-    resumeProofTrack();
-  }
-
-  win.addEventListener('click',function(e){
-    var img=e.target.closest && e.target.closest('.calc-proof-card img');
-    if(!img) return;
-    openProof(img.currentSrc || img.src,img.alt);
-  });
-  closeBtn.addEventListener('click',function(e){e.stopPropagation();closeProof();});
-  lb.addEventListener('click',function(e){if(e.target===lb) closeProof();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape' && lb.classList.contains('open')) closeProof();});
-  document.addEventListener('visibilitychange',function(){
-    if(!document.hidden && !lb.classList.contains('open')) resumeProofTrack();
-  });
-})();
-</script>
-
-<!-- PAYMENT OPTIONS UPDATE V1 -->
-
-
-<script>
-/* IGNITE PROOF LIGHTBOX V1 */
-(function(){
-  var root = document.getElementById('ignite-offers-v7');
-  if(!root) return;
-  var track = root.querySelector('.calc-proof-track');
-  var cards = Array.prototype.slice.call(root.querySelectorAll('.calc-proof-card'));
-  var images = Array.prototype.slice.call(root.querySelectorAll('.calc-proof-card img'));
-  if(!track || !images.length) return;
-
-  // Preload every unique proof image immediately. This prevents blank cards from
-  // reaching the center of the marquee before the browser decides to fetch them.
-  var seen = {};
-  images.forEach(function(img){
-    img.loading = 'eager';
-    img.decoding = 'async';
-    if(!seen[img.src]){
-      seen[img.src] = true;
-      var preload = new Image();
-      preload.decoding = 'async';
-      preload.src = img.src;
-    }
-  });
-
-  var lightbox = document.getElementById('ignite-proof-lightbox');
-  if(!lightbox){
-    lightbox = document.createElement('div');
-    lightbox.id = 'ignite-proof-lightbox';
-    lightbox.setAttribute('aria-hidden','true');
-    lightbox.innerHTML = '<div class="ignite-proof-lightbox-inner"><button class="ignite-proof-lightbox-close" type="button" aria-label="Close image">&times;</button><img alt="Expanded client proof"></div>';
-    document.body.appendChild(lightbox);
-  }
-
-  var expanded = lightbox.querySelector('img');
-  var closeBtn = lightbox.querySelector('.ignite-proof-lightbox-close');
 
   function openProof(img){
-    expanded.src = img.currentSrc || img.src;
-    expanded.alt = img.alt || 'Expanded client proof';
-    track.style.animationPlayState = 'paused';
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden','false');
+    expanded.src=img.currentSrc || img.src;
+    expanded.alt=img.alt || 'Expanded client proof';
+    setTracks('paused');
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
     document.body.classList.add('ignite-proof-modal-open');
   }
 
   function closeProof(){
-    if(!lightbox.classList.contains('open')) return;
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden','true');
+    if(!lb.classList.contains('open')) return;
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
     document.body.classList.remove('ignite-proof-modal-open');
-    track.style.animationPlayState = 'running';
-    setTimeout(function(){ expanded.removeAttribute('src'); }, 200);
+    setTracks('running');
+    setTimeout(function(){expanded.removeAttribute('src');},200);
   }
 
   cards.forEach(function(card){
-    var img = card.querySelector('img');
+    var img=card.querySelector('img');
     if(!img) return;
     card.setAttribute('role','button');
     card.setAttribute('tabindex','0');
     card.setAttribute('aria-label','Expand proof screenshot');
-    card.addEventListener('click',function(){ openProof(img); });
+    card.addEventListener('click',function(){openProof(img);});
     card.addEventListener('keydown',function(e){
-      if(e.key === 'Enter' || e.key === ' '){
+      if(e.key==='Enter' || e.key===' '){
         e.preventDefault();
         openProof(img);
       }
     });
   });
 
-  closeBtn.addEventListener('click',function(e){
-    e.stopPropagation();
-    closeProof();
+  closeBtn.addEventListener('click',function(e){e.stopPropagation();closeProof();});
+  lb.addEventListener('click',function(e){if(e.target===lb) closeProof();});
+  lb.querySelector('.ignite-proof-lightbox-inner').addEventListener('click',function(e){
+    if(e.target!==closeBtn) e.stopPropagation();
   });
-
-  lightbox.addEventListener('click',function(e){
-    if(e.target === lightbox) closeProof();
-  });
-
-  lightbox.querySelector('.ignite-proof-lightbox-inner').addEventListener('click',function(e){
-    if(e.target !== closeBtn) e.stopPropagation();
-  });
-
-  document.addEventListener('keydown',function(e){
-    if(e.key === 'Escape') closeProof();
-  });
-
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') closeProof();});
   document.addEventListener('visibilitychange',function(){
-    if(!document.hidden && !lightbox.classList.contains('open')){
-      track.style.animationPlayState = 'running';
-    }
+    if(!document.hidden && !lb.classList.contains('open')) setTracks('running');
   });
 })();
 </script>
