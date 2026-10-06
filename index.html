@@ -3106,6 +3106,186 @@ body.ignite-proof-modal-open{
   }
 }
 
+
+/* TWO-TIER OFFER VISUALS V8 */
+#ignite-offers-v7 .offer-grid-v8{
+  width:min(1240px,100%);
+  gap:22px;
+}
+
+#ignite-offers-v7 .core-plan{
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,40,72,.36),
+    0 0 58px rgba(255,40,72,.16);
+}
+
+#ignite-offers-v7 .premium-plan{
+  background:linear-gradient(135deg,rgba(142,92,255,.95),rgba(32,215,255,.62),#1c222a);
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.48),
+    0 0 0 1px rgba(142,92,255,.30),
+    0 0 62px rgba(142,92,255,.13);
+}
+
+#ignite-offers-v7 .premium-plan .plan-inner{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(142,92,255,.18),transparent 32%),
+    radial-gradient(circle at 100% 12%,rgba(32,215,255,.08),transparent 26%),
+    linear-gradient(180deg,rgba(18,18,27,.995),rgba(9,12,16,.99));
+}
+
+#ignite-offers-v7 .premium-banner{
+  align-self:center;
+  margin:-8px 0 18px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--violet),var(--cyan));
+  color:#fff;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  box-shadow:0 10px 28px rgba(142,92,255,.22);
+}
+
+#ignite-offers-v7 .premium-tag{
+  color:#e5dcff;
+  border-color:rgba(142,92,255,.34);
+  background:rgba(142,92,255,.10);
+}
+
+#ignite-offers-v7 .premium-price strong{
+  background:linear-gradient(90deg,#ffffff,#d8cbff 52%,#b8f5ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+#ignite-offers-v7 .premium-deal{
+  border-color:rgba(142,92,255,.26);
+  background:rgba(142,92,255,.08);
+  color:#e5dcff;
+}
+
+#ignite-offers-v7 .offer-lane{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;
+  margin:16px 0 2px;
+}
+
+#ignite-offers-v7 .offer-lane span{
+  min-height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:10px;
+  background:rgba(255,255,255,.025);
+  color:#9da8b4;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.09em;
+}
+
+#ignite-offers-v7 .core-lane span{
+  border-color:rgba(255,40,72,.14);
+}
+
+#ignite-offers-v7 .premium-lane span{
+  border-color:rgba(142,92,255,.20);
+  background:rgba(142,92,255,.045);
+  color:#cfc5ef;
+}
+
+#ignite-offers-v7 .premium-includes{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:12px;
+  align-items:start;
+  margin:16px 0 4px;
+  padding:14px 15px;
+  border:1px solid rgba(142,92,255,.24);
+  border-radius:14px;
+  background:linear-gradient(90deg,rgba(142,92,255,.08),rgba(32,215,255,.035));
+}
+
+#ignite-offers-v7 .premium-plus{
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:rgba(142,92,255,.14);
+  color:#ccbfff;
+  border:1px solid rgba(142,92,255,.28);
+  font-weight:900;
+}
+
+#ignite-offers-v7 .premium-includes b{
+  display:block;
+  font-size:13px;
+  margin-bottom:4px;
+}
+
+#ignite-offers-v7 .premium-includes p{
+  margin:0;
+  color:#8f99a6;
+  font-size:11px;
+  line-height:1.5;
+}
+
+#ignite-offers-v7 .premium-check{
+  background:rgba(142,92,255,.12);
+  color:#c9baff;
+  border-color:rgba(142,92,255,.25);
+}
+
+#ignite-offers-v7 .premium-positioning{
+  border-color:rgba(142,92,255,.20);
+  background:rgba(142,92,255,.045);
+}
+
+#ignite-offers-v7 .premium-col{
+  background:linear-gradient(90deg,rgba(142,92,255,.045),rgba(32,215,255,.025));
+}
+
+#ignite-offers-v7 .premium-value{
+  color:#d3c8ff;
+  font-weight:850;
+}
+
+#ignite-offers-v7 .offer-compare-v8 .r.head .premium-col{
+  color:#efeaff;
+}
+
+#ignite-offers-v7 .offer-compare-v8 .r.head strong{
+  display:inline-block;
+  margin-top:4px;
+  font-size:14px;
+  color:#fff;
+}
+
+#ignite-offers-v7 .premium-selector{
+  border-color:rgba(142,92,255,.28)!important;
+}
+
+#ignite-offers-v7 .premium-selector.active{
+  background:linear-gradient(90deg,rgba(142,92,255,.18),rgba(32,215,255,.08))!important;
+  color:#fff!important;
+}
+
+@media(max-width:760px){
+  #ignite-offers-v7 .offer-lane{
+    grid-template-columns:1fr 1fr;
+  }
+  #ignite-offers-v7 .premium-includes{
+    grid-template-columns:30px 1fr;
+  }
+}
+
 </style>
 
 
@@ -3131,7 +3311,7 @@ body.ignite-proof-modal-open{
       </div>
 
       <div class="topnote">
-        Junk Removal Growth Infrastructure
+        Local Service Growth Infrastructure
       </div>
 
     </header>
@@ -3153,9 +3333,9 @@ body.ignite-proof-modal-open{
         </h1>
 
         <p>
-          Ignite builds the infrastructure your junk removal business needs
-          to generate opportunities, follow up faster, track what turns into
-          revenue, and create a repeatable customer acquisition process.
+          Ignite builds the growth infrastructure local service companies need
+          to generate opportunities, follow up faster, use AI where it creates leverage,
+          track what turns into revenue, and build a repeatable customer acquisition process.
         </p>
 
       </div>
@@ -3438,64 +3618,8 @@ body.ignite-proof-modal-open{
         </div>
       </div>
 
-      <section class="foundation-mini" aria-label="Foundation recovery calculator">
-        <div class="foundation-mini-head">
-          <div>
-            <div class="eyebrow">Foundation recovery calculator</div>
-            <h4>How quickly can the foundation pay for itself?</h4>
-            <p>This model uses your average ticket and margin from above, then looks at the organic opportunities you already receive from Google, your website, referrals, and social channels. It does not assume any extra lift from stronger reviews, a better Business Profile, improved website conversion, or stronger social proof.</p>
-          </div>
-          <div class="foundation-proof-note">
-            <strong>Why this matters before adding more ad spend</strong>
-            <p>Google says complete and accurate Business Profile information makes a business more likely to appear in local results, while more reviews and positive ratings can help local ranking. BrightLocal's 2026 consumer survey found 97% of consumers read local-business reviews, and 54% visit a business website after reading positive reviews.</p>
-          </div>
-        </div>
-
-        <div class="foundation-mini-grid">
-          <div class="foundation-mini-inputs">
-            <div class="calc-field">
-              <div class="calc-label"><label for="foundation-organic-leads">Current organic leads per month</label><span>Google, website, referrals, social</span></div>
-              <div class="calc-input-wrap"><input class="calc-input no-prefix" id="foundation-organic-leads" type="number" inputmode="decimal" min="0" step="1" value="12"><span class="calc-suffix">/mo</span></div>
-            </div>
-
-            <div class="calc-field">
-              <div class="calc-label"><label for="foundation-organic-close">Organic lead-to-job close rate</label><span>How many current organic leads become jobs</span></div>
-              <div class="calc-input-wrap"><input class="calc-input no-prefix" id="foundation-organic-close" type="number" inputmode="decimal" min="1" max="95" step="1" value="25"><span class="calc-suffix">%</span></div>
-            </div>
-
-            <p class="foundation-mini-hint">The recovery estimate is intentionally based on your current organic lead flow. Any improvement created by better reviews, stronger Google visibility, a more credible website, or better follow-up is upside that is not baked into the number.</p>
-          </div>
-
-          <div class="foundation-mini-results">
-            <div class="foundation-result primary">
-              <span>Jobs needed to recover the investment</span>
-              <strong id="calc-foundation-jobs">0 jobs</strong>
-              <small>Based on your average ticket and profit margin.</small>
-            </div>
-            <div class="foundation-result">
-              <span>Estimated recovery at your current organic pace</span>
-              <strong id="calc-foundation-time">-</strong>
-              <small id="calc-foundation-time-detail">Enter your current monthly organic lead flow.</small>
-            </div>
-            <div class="foundation-result">
-              <span>Current modeled organic job pace</span>
-              <strong id="calc-foundation-jobs-month">0 / mo</strong>
-              <small>Before assuming any lift from the Foundation systems.</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="foundation-stats">
-          <div><strong>97%</strong><span>of consumers read reviews for local businesses</span></div>
-          <div><strong>54%</strong><span>visit a business website after reading positive reviews</span></div>
-          <div><strong>24%</strong><span>visit a business's social channels after positive reviews</span></div>
-          <div><strong>Google</strong><span>says more reviews and positive ratings can help local ranking</span></div>
-        </div>
-        <p class="foundation-sources">Consumer behavior figures: BrightLocal Local Consumer Review Survey 2026. Google ranking guidance: Google Business Profile Help. These are local-business benchmarks, not junk-removal-specific performance guarantees.</p>
-      </section>
-
       <div class="calc-disclaimer">
-        Projection model, not a guarantee. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. The forecast starts from Wranglin Wranglers' measured $33.26 CPL and applies a 20% modeled optimization uplift to lead volume, equivalent to roughly a $27.72 modeled CPL. That uplift is a planning assumption, not historical performance. The lead-to-job close rate entered above then controls initial job volume. Follow-up and reactivation are modeled only on leads that do not close initially: 10% recovered by 90 days, 13% cumulatively by 6 months, and 15% cumulatively by 12 months. Those recovery rates are also planning assumptions, not guaranteed outcomes. Profit uses the margin entered above. Profit after ad spend subtracts advertising spend but does not subtract the Ignite implementation fee; the longer-term net rows subtract both advertising spend and the initial Scale implementation investment. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
+        Projection model, not a guarantee. The proof summary above reflects 2,000+ tracked leads and $25,000+ in documented ad spend across Ignite's broader campaign history. The forecast starts from Wranglin Wranglers' measured $33.26 CPL and applies a 20% modeled optimization uplift to lead volume, equivalent to roughly a $27.72 modeled CPL. That uplift is a planning assumption, not historical performance. The lead-to-job close rate entered above then controls initial job volume. Follow-up and reactivation are modeled only on leads that do not close initially: 10% recovered by 90 days, 13% cumulatively by 6 months, and 15% cumulatively by 12 months. Those recovery rates are also planning assumptions, not guaranteed outcomes. Profit uses the margin entered above. Profit after ad spend subtracts advertising spend but does not subtract the Ignite implementation fee; the longer-term net rows subtract both advertising spend and the initial Growth System implementation investment. Actual results vary by market, service mix, pricing, lead quality, sales ability, seasonality, response speed, budget, and execution.
       </div>
 
     </section>
@@ -3538,609 +3662,314 @@ body.ignite-proof-modal-open{
 
     <!-- MAIN OFFERS -->
 
-    <section class="primary-grid">
+    <section class="primary-grid offer-grid-v8">
 
+      <!-- IGNITE GROWTH SYSTEM -->
 
-      <!-- FOUNDATION BUILD -->
-
-      <article class="plan">
+      <article class="plan featured core-plan">
 
         <div class="plan-inner">
-
-          <div class="badge">
-
-            <span>
-              Offer 01
-            </span>
-
-            <span class="tag">
-              Foundation
-            </span>
-
-          </div>
-
-
-          <div class="price">
-
-            <strong id="foundation-price">
-              $1,500
-            </strong>
-
-            <span id="foundation-period">
-              paid in full
-            </span>
-
-          </div>
-
-
-          <div class="subprice">
-            One-time implementation project.
-          </div>
-
-
-          <div
-            class="price-meta"
-            id="foundation-meta"
-          >
-            <span class="original">$1,700 payment-plan total</span>
-            ·
-            <span class="saving">Save $200 when paid in full</span>
-          </div>
-
-
-          <div
-            class="deal-badge"
-            id="foundation-badge"
-          >
-            Pay in full and save $200
-          </div>
-
-
-          <h2>
-            Foundation Build
-          </h2>
-
-
-          <p class="plan-desc">
-            For junk removal companies that need the core customer acquisition
-            infrastructure built correctly before aggressively spending money
-            to generate more opportunities.
-          </p>
-
-
-          <div class="divider"></div>
-
-
-          <div class="includes-title">
-            What Ignite can build
-          </div>
-
-
-          <div class="features">
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Conversion-focused website
-                </b>
-
-                <p>
-                  A mobile-first website built around local trust,
-                  calls, quote requests, and conversion.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  CRM + lead pipeline
-                </b>
-
-                <p>
-                  Organize new opportunities, follow-up, appointments,
-                  sold jobs, and lost opportunities in one system.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Lead follow-up systems
-                </b>
-
-                <p>
-                  Build the follow-up infrastructure needed to stop leads
-                  from disappearing after one unanswered call or message.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Lead capture + routing
-                </b>
-
-                <p>
-                  Connect forms, notifications, lead assignments,
-                  and customer information into one usable process.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Tracking infrastructure
-                </b>
-
-                <p>
-                  Build visibility into where opportunities come from
-                  and what happens once they enter the business.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Review generation process
-                </b>
-
-                <p>
-                  Create a repeatable process for turning completed jobs
-                  into stronger local proof.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  Launch + handoff
-                </b>
-
-                <p>
-                  Ignite tests the core infrastructure, launches it,
-                  and shows your team how to use what was built.
-                </p>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-
-          <div class="positioning">
-
-            <b>
-              Best for:
-            </b>
-
-            companies with weak infrastructure, no organized CRM,
-            inconsistent follow-up, a weak website, or no clear process
-            for turning leads into booked jobs.
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- 90 DAY ACQUISITION SYSTEM -->
-
-      <article class="plan featured">
-
-        <div class="plan-inner">
-
 
           <div class="featured-banner">
-            Flagship Offer
+            Most Popular
           </div>
-
 
           <div class="badge">
-
-            <span>
-              Offer 02
-            </span>
-
-            <span class="tag best">
-              90 Days
-            </span>
-
+            <span>Offer 01</span>
+            <span class="tag best">90 Days</span>
           </div>
-
 
           <div class="price">
-
-            <strong id="growth-price">
-              $3,500
-            </strong>
-
-            <span id="growth-period">
-              paid in full
-            </span>
-
+            <strong id="growth-price">$3,500</strong>
+            <span id="growth-period">paid in full</span>
           </div>
-
 
           <div class="subprice">
-            Advertising spend is separate.
+            Core customer acquisition system. Advertising spend is separate.
           </div>
 
-
-          <div
-            class="price-meta"
-            id="growth-meta"
-          >
+          <div class="price-meta" id="growth-meta">
             <span class="original">$4,000 payment-plan total</span>
             ·
             <span class="saving">Save $500 when paid in full</span>
           </div>
 
-
-          <div
-            class="deal-badge"
-            id="growth-badge"
-          >
+          <div class="deal-badge" id="growth-badge">
             Pay in full and save $500
           </div>
 
-
-          <h2>
-            90-Day Acquisition System
-          </h2>
-
+          <h2>Ignite Growth System</h2>
 
           <p class="plan-desc">
-            Ignite spends 90 days building, running, and optimizing
-            the customer acquisition engine behind your junk removal business.
-            We improve what needs improving, generate demand, and build
-            systems the company can continue using after the engagement.
+            For established local service companies that need a stronger system
+            to generate demand, capture opportunities, follow up faster, and turn
+            more of the attention they already create into booked revenue.
           </p>
 
+          <div class="offer-lane core-lane">
+            <span>ACQUIRE</span>
+            <span>CONVERT</span>
+            <span>FOLLOW UP</span>
+            <span>TRACK</span>
+          </div>
 
           <div class="divider"></div>
 
-
           <div class="includes-title">
-            90 days of implementation + execution
+            The core growth engine
           </div>
-
 
           <div class="features">
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Paid lead generation
-                </b>
-
-                <p>
-                  Meta advertising campaigns built to generate qualified
-                  local opportunities for the services you want to grow.
-                </p>
-
+                <b>Growth strategy + bottleneck audit</b>
+                <p>Audit the offer, website, Google presence, ads, lead handling, follow-up, sales process, and tracking to identify the biggest constraints first.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Creative + offer development
-                </b>
-
-                <p>
-                  Hooks, scripts, offers, messaging, and creative direction
-                  built around what your local market actually responds to.
-                </p>
-
+                <b>High-converting funnel + website optimization</b>
+                <p>Build the primary conversion funnel and improve the existing website where friction is costing calls, forms, estimates, or booked jobs.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Campaign management
-                </b>
-
-                <p>
-                  Campaign structure, targeting, budgets, tracking,
-                  testing, and ongoing optimization throughout the engagement.
-                </p>
-
+                <b>Offer, creative + Meta advertising</b>
+                <p>Campaign structure, targeting, hooks, scripts, copy, creative direction, tracking, launch, testing, and optimization.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  CRM + lead flow optimization
-                </b>
-
-                <p>
-                  We work with what you already have when it works
-                  and improve the pieces that are costing the business opportunities.
-                </p>
-
+                <b>CRM + revenue pipeline</b>
+                <p>Organize new leads, conversations, appointments, estimates, won jobs, lost opportunities, and next actions inside one operating system.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Speed-to-lead systems
-                </b>
-
-                <p>
-                  Improve what happens immediately after a new lead enters
-                  the business so opportunities are contacted quickly.
-                </p>
-
+                <b>Speed-to-lead + missed-call systems</b>
+                <p>Route new opportunities immediately, trigger fast follow-up, and recover inbound calls that would otherwise disappear.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Follow-up optimization
-                </b>
-
-                <p>
-                  Strengthen what happens after the first call,
-                  unanswered lead, quote, or estimate.
-                </p>
-
+                <b>AI-assisted qualification + conversation support</b>
+                <p>Use AI to help organize lead intent, service needs, timing, notes, follow-up context, and the next best action for the team.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Booking + sales process optimization
-                </b>
-
-                <p>
-                  Identify friction between the initial lead,
-                  conversation, estimate, appointment, and closed job.
-                </p>
-
+                <b>Estimate follow-up + long-term nurture</b>
+                <p>Automated follow-up for unresponsive leads, open estimates, not-ready-yet prospects, and opportunities that need more time and trust.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Tracking + attribution
-                </b>
-
-                <p>
-                  Connect marketing activity to actual opportunities,
-                  appointments, jobs, and revenue.
-                </p>
-
+                <b>Reviews + lead and customer reactivation</b>
+                <p>Build repeatable review requests and campaigns that create additional opportunity from old leads and past customers.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  Database reactivation
-                </b>
-
-                <p>
-                  Where applicable, use old leads and customer data
-                  to create additional opportunities from the existing database.
-                </p>
-
+                <b>Tracking, CAPI + performance reporting</b>
+                <p>Connect source, campaign, lead, appointment, job, and revenue data so the business can see what is actually producing customers.</p>
               </div>
-
             </div>
 
-
             <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
+              <span class="check">✓</span>
               <div>
-
-                <b>
-                  90-day optimization period
-                </b>
-
-                <p>
-                  Use real campaign, lead, appointment, and customer data
-                  to improve the system throughout the entire engagement.
-                </p>
-
+                <b>90 days of optimization + system handoff</b>
+                <p>Ignite runs and improves the system using real performance data. The infrastructure we build stays with the business.</p>
               </div>
-
             </div>
-
-
-            <div class="feature">
-
-              <span class="check">
-                ✓
-              </span>
-
-              <div>
-
-                <b>
-                  System handoff
-                </b>
-
-                <p>
-                  At the end of the 90 days, the systems Ignite built
-                  for your business stay with your business.
-                </p>
-
-              </div>
-
-            </div>
-
 
           </div>
 
-
           <div class="positioning">
-
-            <b>
-              Best for:
-            </b>
-
-            companies that want more than somebody managing ads.
-            Ignite identifies the biggest constraints in the acquisition
-            process, improves them, and builds a stronger revenue system
-            around the business.
-
+            <b>Best for:</b>
+            owners who want the acquisition and conversion machine fixed without
+            rebuilding every part of the company at once.
           </div>
 
         </div>
 
       </article>
 
+
+      <!-- IGNITE AI GROWTH INFRASTRUCTURE -->
+
+      <article class="plan premium-plan">
+
+        <div class="plan-inner">
+
+          <div class="premium-banner">
+            Full Transformation
+          </div>
+
+          <div class="badge">
+            <span>Offer 02</span>
+            <span class="tag premium-tag">AI + Infrastructure</span>
+          </div>
+
+          <div class="price premium-price">
+            <strong id="premium-price">$7,500</strong>
+            <span id="premium-period">paid in full</span>
+          </div>
+
+          <div class="subprice">
+            Full marketing, sales + AI infrastructure build. Advertising spend is separate.
+          </div>
+
+          <div class="price-meta" id="premium-meta">
+            <span class="original">$8,000 payment-plan total</span>
+            ·
+            <span class="saving">Save $500 when paid in full</span>
+          </div>
+
+          <div class="deal-badge premium-deal" id="premium-badge">
+            Pay in full and save $500
+          </div>
+
+          <h2>Ignite AI Growth Infrastructure</h2>
+
+          <p class="plan-desc">
+            For companies ready to rebuild the way marketing, sales, lead handling,
+            customer communication, and AI work together. This includes everything
+            in the Growth System, then adds the infrastructure needed for a larger operation.
+          </p>
+
+          <div class="offer-lane premium-lane">
+            <span>EVERYTHING IN GROWTH</span>
+            <span>+ AI</span>
+            <span>+ SALES</span>
+            <span>+ FULL WEB</span>
+          </div>
+
+          <div class="premium-includes">
+            <span class="premium-plus">+</span>
+            <div>
+              <b>Everything in the $3,500 Growth System</b>
+              <p>The premium engagement starts with the same acquisition engine, then adds the deeper operating layer below.</p>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="includes-title">
+            Premium infrastructure added on top
+          </div>
+
+          <div class="features premium-features">
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Full website build or major redesign</b>
+                <p>Rebuild the customer-facing site with core service pages, service areas, proof, stronger conversion paths, quote flow, and mobile-first execution.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>AI receptionist + call handling</b>
+                <p>Implement an AI voice layer for supported after-hours, overflow, missed-call, service-question, qualification, information-collection, and appointment workflows.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>AI lead concierge + priority scoring</b>
+                <p>Use service type, urgency, location, timeline, engagement, and intent to help prioritize who the team should contact first and how follow-up should change.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>AI call summaries + opportunity intelligence</b>
+                <p>Turn conversations into organized summaries, objections, requested services, opportunity notes, next steps, and CRM context.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>AI sales coaching</b>
+                <p>Use recorded calls and conversation data to surface missed questions, objections, sales friction, follow-up gaps, and coaching opportunities.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Multi-campaign acquisition + advanced retargeting</b>
+                <p>Build separate acquisition paths for priority services and retarget website visitors, engaged prospects, and existing audiences where appropriate.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Full database reactivation</b>
+                <p>Segment old estimates, lost leads, past customers, unresponsive opportunities, and prior campaign leads into targeted reactivation journeys.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Full sales process infrastructure</b>
+                <p>Build lead qualification, call handling, estimate follow-up, objection handling, no-show, lost-lead, and pipeline processes for the team.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Referral + reputation growth systems</b>
+                <p>Automate post-job review requests, reminders, referral asks, and future customer reactivation so completed work keeps producing leverage.</p>
+              </div>
+            </div>
+
+            <div class="feature">
+              <span class="check premium-check">+</span>
+              <div>
+                <b>Advanced owner dashboard + weekly growth review</b>
+                <p>Track acquisition, qualified leads, appointments, estimates, jobs, pipeline value, revenue attribution, missed opportunities, and review the numbers with Ignite weekly.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="positioning premium-positioning">
+            <b>Best for:</b>
+            established companies with a team, meaningful lead volume, and a need
+            for deeper marketing, sales, automation, AI, and reporting infrastructure.
+          </div>
+
+        </div>
+
+      </article>
 
     </section>
 
@@ -4254,232 +4083,135 @@ body.ignite-proof-modal-open{
 
     <!-- COMPARISON -->
 
-    <section class="compare">
+    <section class="compare offer-compare-v8">
 
       <div class="compare-head">
-
         <div>
-
-          <h3>
-            Quick comparison
-          </h3>
-
+          <div class="eyebrow">See the difference</div>
+          <h3>Core growth engine vs. full AI infrastructure</h3>
           <p>
-            Two different starting points. One goal: build a stronger
-            customer acquisition operation.
+            Both offers are designed to create revenue-producing infrastructure.
+            The $7,500 engagement includes the complete $3,500 Growth System and
+            adds a deeper website, AI, sales, reactivation, and reporting layer.
           </p>
-
         </div>
-
       </div>
-
 
       <div class="rows">
 
-
         <div class="r head">
-
-          <div>
-            Included
-          </div>
-
-          <div>
-            Foundation
-          </div>
-
-          <div>
-            90-Day System
-          </div>
-
+          <div>Capability</div>
+          <div>Growth System<br><strong>$3,500</strong></div>
+          <div class="premium-col">AI Growth Infrastructure<br><strong>$7,500</strong></div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Website / funnel infrastructure
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
-          <div class="note">
-            As needed
-          </div>
-
+          <div>90-day growth strategy + optimization</div>
+          <div class="yes">✓</div>
+          <div class="yes premium-col">✓</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            CRM + lead pipeline
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
-          <div class="note">
-            Build or optimize
-          </div>
-
+          <div>Primary conversion funnel</div>
+          <div class="yes">✓</div>
+          <div class="yes premium-col">✓</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Follow-up systems
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>Meta ads + creative strategy</div>
+          <div class="yes">✓</div>
+          <div class="yes premium-col">✓</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Paid lead generation
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>CRM, speed-to-lead + nurture</div>
+          <div class="yes">✓</div>
+          <div class="yes premium-col">✓</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Creative + offer testing
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>AI-assisted qualification + conversation support</div>
+          <div class="note">Core</div>
+          <div class="premium-value premium-col">Advanced</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Campaign optimization
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>Review + basic reactivation systems</div>
+          <div class="yes">✓</div>
+          <div class="premium-value premium-col">Expanded</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Booking + sales process optimization
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>Tracking, CAPI + reporting</div>
+          <div class="yes">✓</div>
+          <div class="premium-value premium-col">Advanced dashboard</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Tracking + attribution
-          </div>
-
-          <div class="note">
-            Core setup
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>Full website build / major redesign</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Database reactivation
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="note">
-            When applicable
-          </div>
-
+          <div>AI receptionist + voice workflows</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            90 days of active optimization
-          </div>
-
-          <div class="no">
-            —
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>AI lead concierge + priority scoring</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
         </div>
-
 
         <div class="r">
-
-          <div>
-            Client keeps the systems
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
-          <div class="yes">
-            ✓
-          </div>
-
+          <div>AI call summaries + opportunity intelligence</div>
+          <div class="note">Basic notes</div>
+          <div class="premium-value premium-col">Full system</div>
         </div>
 
+        <div class="r">
+          <div>AI sales coaching</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
+        </div>
+
+        <div class="r">
+          <div>Multiple acquisition campaigns + retargeting</div>
+          <div class="note">Core campaign</div>
+          <div class="premium-value premium-col">Multi-campaign</div>
+        </div>
+
+        <div class="r">
+          <div>Full database segmentation + reactivation</div>
+          <div class="note">Basic</div>
+          <div class="premium-value premium-col">Included</div>
+        </div>
+
+        <div class="r">
+          <div>Full sales process infrastructure</div>
+          <div class="note">Optimization</div>
+          <div class="premium-value premium-col">Built out</div>
+        </div>
+
+        <div class="r">
+          <div>Referral system</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
+        </div>
+
+        <div class="r">
+          <div>Weekly growth review</div>
+          <div class="no">—</div>
+          <div class="premium-value premium-col">Included</div>
+        </div>
+
+        <div class="r">
+          <div>Client keeps the systems</div>
+          <div class="yes">✓</div>
+          <div class="yes premium-col">✓</div>
+        </div>
 
       </div>
 
@@ -4492,58 +4224,33 @@ body.ignite-proof-modal-open{
     <section class="sales-card">
 
       <div>
-
-        <h3>
-          What does this business actually need?
-        </h3>
-
+        <h3>Which level does this business need?</h3>
         <p>
-          Choose your recommendation during the sales call.
-          The payment option selected above will automatically
-          be included in the recommendation.
+          Choose the level during the sales call. The payment option selected
+          above is automatically reflected in the recommendation.
         </p>
-
-
-        <div
-          id="ignite-selected-v7"
-          class="selected-banner"
-        ></div>
-
+        <div id="ignite-selected-v7" class="selected-banner"></div>
       </div>
-
 
       <div class="selector">
 
-
         <button
           class="sel"
-          data-plan="Foundation Build"
-          data-pricing="foundation"
-          data-note="Build the core acquisition infrastructure before aggressively pushing more demand into the business."
-        >
-          Foundation
-        </button>
-
-
-        <button
-          class="sel"
-          data-plan="90-Day Acquisition System"
+          data-plan="Ignite Growth System"
           data-pricing="growth"
-          data-note="Ignite spends 90 days building, running, and optimizing the customer acquisition system. Advertising spend is separate."
+          data-note="The core 90-day acquisition and conversion system for established local service companies."
         >
-          90-Day System
+          Growth System
         </button>
-
 
         <button
-          class="sel"
-          data-plan="Ignite Systems Care"
-          data-price="$1,250/month"
-          data-note="Optional after the initial engagement for companies that want Ignite to continue monitoring and maintaining the system."
+          class="sel premium-selector"
+          data-plan="Ignite AI Growth Infrastructure"
+          data-pricing="premium"
+          data-note="Everything in the Growth System plus the deeper website, AI, sales, reactivation, and reporting infrastructure."
         >
-          Systems Care
+          AI Growth Infrastructure
         </button>
-
 
       </div>
 
@@ -4555,22 +4262,28 @@ body.ignite-proof-modal-open{
 
     <div class="fineprint">
 
-      Foundation Build is $1,500 when paid in full.
-      The two-payment option is $850 per payment for a total investment of $1,700.
+      The Ignite Growth System is $3,500 when paid in full.
+      The two-payment option is $2,000 per payment for a total Ignite investment of $4,000.
 
-      The 90-Day Acquisition System is $3,500 when paid in full.
-      The two-payment option is $2,000 per payment for a total investment of $4,000.
+      Ignite AI Growth Infrastructure is $7,500 when paid in full.
+      The two-payment option is $4,000 per payment for a total Ignite investment of $8,000.
 
       Advertising spend is separate and paid toward the advertising platform.
-      Payment plans begin at the start of the engagement, with remaining
-      installments due according to the signed agreement.
+      Usage-based voice, SMS, AI, or third-party software costs are separate when applicable.
+      Payment plans begin at the start of the engagement, with the remaining
+      installment due according to the signed agreement.
 
-      Ignite Systems Care is optional after the initial engagement.
-      Expanded scope, additional locations, substantial custom development,
-      major creative production, and other work outside the listed scope
-      may be quoted separately.
+      Ignite Systems Care remains optional after the initial engagement.
+      Expanded locations, substantial custom development, unusually heavy creative production,
+      and work outside the listed scope may be quoted separately.
 
     </div>
+
+
+  </div>
+
+</div>
+
 
 
   </div>
@@ -4583,307 +4296,125 @@ body.ignite-proof-modal-open{
 (function(){
 
   var root = document.getElementById('ignite-offers-v7');
-
   if(!root) return;
-
 
   var pricing = {
 
-
-    foundation: {
-
-
-      upfront: {
-
-        price:'$1,500',
-
-        period:'paid in full',
-
-        total:1500,
-
-        label:'$1,500 paid in full',
-
-        meta:
-          '<span class="original">$1,700 payment-plan total</span>' +
-          ' · ' +
-          '<span class="saving">Save $200 when paid in full</span>',
-
-        badge:
-          'Pay in full and save $200'
-
-      },
-
-
-      '2pay': {
-
-        price:'$850',
-
-        period:'× 2 payments',
-
-        total:1700,
-
-        label:'2 payments of $850 ($1,700 total)',
-
-        meta:
-          '<span class="effective">$1,700 total investment</span>' +
-          ' · ' +
-          '$850 to begin + one additional $850 payment',
-
-        badge:
-          '2 payments · $1,700 total'
-
-      },
-},
-
-
-
     growth: {
-
-
       upfront: {
-
         price:'$3,500',
-
         period:'paid in full',
-
         total:3500,
-
         label:'$3,500 paid in full + ad spend',
-
         meta:
           '<span class="original">$4,000 payment-plan total</span>' +
           ' · ' +
           '<span class="saving">Save $500 when paid in full</span>',
-
-        badge:
-          'Pay in full and save $500'
-
+        badge:'Pay in full and save $500'
       },
-
-
       '2pay': {
-
         price:'$2,000',
-
         period:'× 2 payments',
-
         total:4000,
-
         label:'2 payments of $2,000 ($4,000 total) + ad spend',
-
         meta:
           '<span class="effective">$4,000 total Ignite investment</span>' +
+          ' · two payments of $2,000',
+        badge:'2 payments · $4,000 total'
+      }
+    },
+
+    premium: {
+      upfront: {
+        price:'$7,500',
+        period:'paid in full',
+        total:7500,
+        label:'$7,500 paid in full + ad spend',
+        meta:
+          '<span class="original">$8,000 payment-plan total</span>' +
           ' · ' +
-          'two payments of $2,000',
-
-        badge:
-          '2 payments · $4,000 total'
-
+          '<span class="saving">Save $500 when paid in full</span>',
+        badge:'Pay in full and save $500'
       },
-}
+      '2pay': {
+        price:'$4,000',
+        period:'× 2 payments',
+        total:8000,
+        label:'2 payments of $4,000 ($8,000 total) + ad spend',
+        meta:
+          '<span class="effective">$8,000 total Ignite investment</span>' +
+          ' · two payments of $4,000',
+        badge:'2 payments · $8,000 total'
+      }
+    }
 
   };
 
-
-
   var currentTerm = 'upfront';
 
-
-  var billButtons = [].slice.call(
-    root.querySelectorAll('.bill-btn')
-  );
-
-
-  var planButtons = [].slice.call(
-    root.querySelectorAll('.sel')
-  );
-
-
-  var banner = document.getElementById(
-    'ignite-selected-v7'
-  );
-
-
+  var billButtons = [].slice.call(root.querySelectorAll('.bill-btn'));
+  var planButtons = [].slice.call(root.querySelectorAll('.sel'));
+  var banner = document.getElementById('ignite-selected-v7');
   var activePlan = null;
 
-
-
   function setText(id,value){
-
     var el = document.getElementById(id);
-
-    if(el){
-      el.textContent = value;
-    }
-
+    if(el) el.textContent = value;
   }
-
-
 
   function setHtml(id,value){
-
     var el = document.getElementById(id);
-
-    if(el){
-      el.innerHTML = value;
-    }
-
+    if(el) el.innerHTML = value;
   }
 
-
+  function paintOffer(key,prefix){
+    var item = pricing[key][currentTerm];
+    setText(prefix+'-price',item.price);
+    setText(prefix+'-period',item.period);
+    setHtml(prefix+'-meta',item.meta);
+    setText(prefix+'-badge',item.badge);
+  }
 
   function updatePrices(){
-
-    var foundation = pricing.foundation[currentTerm];
-
-    var growth = pricing.growth[currentTerm];
-
-
-    setText(
-      'foundation-price',
-      foundation.price
-    );
-
-
-    setText(
-      'foundation-period',
-      foundation.period
-    );
-
-
-    setHtml(
-      'foundation-meta',
-      foundation.meta
-    );
-
-
-    setText(
-      'foundation-badge',
-      foundation.badge
-    );
-
-
-
-    setText(
-      'growth-price',
-      growth.price
-    );
-
-
-    setText(
-      'growth-period',
-      growth.period
-    );
-
-
-    setHtml(
-      'growth-meta',
-      growth.meta
-    );
-
-
-    setText(
-      'growth-badge',
-      growth.badge
-    );
-
-
-    if(activePlan){
-      renderRecommendation(activePlan);
-    }
-
+    paintOffer('growth','growth');
+    paintOffer('premium','premium');
+    if(activePlan) renderRecommendation(activePlan);
   }
 
-
-
   function renderRecommendation(btn){
-
-    var pricingKey = btn.getAttribute(
-      'data-pricing'
-    );
-
-
-    var price = btn.getAttribute(
-      'data-price'
-    );
-
+    var pricingKey = btn.getAttribute('data-pricing');
+    var price = btn.getAttribute('data-price');
 
     if(pricingKey){
-
-      price =
-        pricing[pricingKey][currentTerm].label;
-
+      price = pricing[pricingKey][currentTerm].label;
     }
-
 
     banner.innerHTML =
       '<b>Recommended:</b> ' +
       btn.getAttribute('data-plan') +
-      ' · <b>' +
-      price +
-      '</b><br>' +
+      ' · <b>' + price + '</b><br>' +
       btn.getAttribute('data-note');
 
-
     banner.classList.add('show');
-
   }
 
-
-
   billButtons.forEach(function(btn){
-
-    btn.addEventListener(
-      'click',
-      function(){
-
-        currentTerm =
-          btn.getAttribute('data-term') ||
-          'upfront';
-
-
-        billButtons.forEach(function(b){
-          b.classList.remove('active');
-        });
-
-
-        btn.classList.add('active');
-
-
-        updatePrices();
-
-      }
-    );
-
+    btn.addEventListener('click',function(){
+      currentTerm = btn.getAttribute('data-term') || 'upfront';
+      billButtons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      updatePrices();
+    });
   });
-
-
 
   planButtons.forEach(function(btn){
-
-    btn.addEventListener(
-      'click',
-      function(){
-
-        planButtons.forEach(function(b){
-          b.classList.remove('active');
-        });
-
-
-        btn.classList.add('active');
-
-
-        activePlan = btn;
-
-
-        renderRecommendation(btn);
-
-      }
-    );
-
+    btn.addEventListener('click',function(){
+      planButtons.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activePlan = btn;
+      renderRecommendation(btn);
+    });
   });
-
-
 
   updatePrices();
 
@@ -4908,15 +4439,12 @@ body.ignite-proof-modal-open{
   var BASE_ROAS = WRANGLIN_REVENUE / WRANGLIN_SPEND;
 
   var SCALE_FEE = 3500;
-  var FOUNDATION_FEE = 1500;
   var SYSTEM_UPLIFT = 1.20;
 
   var ticket = document.getElementById('calc-ticket');
   var closeRate = document.getElementById('calc-close');
   var margin = document.getElementById('calc-margin');
   var budget = document.getElementById('calc-budget');
-  var foundationOrganicLeads = document.getElementById('foundation-organic-leads');
-  var foundationOrganicClose = document.getElementById('foundation-organic-close');
 
   function val(el, fallback){
     var n = parseFloat(el.value);
@@ -5036,20 +4564,6 @@ body.ignite-proof-modal-open{
     setText('calc-immediate-revenue',money(r90.immediateRevenue));
     setText('calc-recovered-revenue','+'+money(r90.recoveredRevenue));
 
-    var profitPerJob = avgTicket * profitMargin;
-    var foundationJobs = profitPerJob > 0 ? Math.ceil(FOUNDATION_FEE / profitPerJob) : 0;
-    var organicLeads = foundationOrganicLeads ? Math.max(0, val(foundationOrganicLeads,12)) : 0;
-    var organicClose = foundationOrganicClose ? clamp(val(foundationOrganicClose,25)/100, .01, .95) : .25;
-    var organicJobsPerMonth = organicLeads * organicClose;
-    var organicGrossProfitPerMonth = organicJobsPerMonth * profitPerJob;
-    var foundationMonths = organicGrossProfitPerMonth > 0 ? FOUNDATION_FEE / organicGrossProfitPerMonth : null;
-    var foundationDays = foundationMonths !== null ? Math.max(1, Math.ceil(foundationMonths * 30.44)) : null;
-
-    setText('calc-foundation-jobs',foundationJobs + (foundationJobs === 1 ? ' job' : ' jobs'));
-    setText('calc-foundation-jobs-month',organicJobsPerMonth.toFixed(organicJobsPerMonth < 10 ? 1 : 0) + ' / mo');
-    setText('calc-foundation-time',foundationDays ? foundationDays + (foundationDays === 1 ? ' day' : ' days') : '-');
-    setText('calc-foundation-time-detail',foundationDays ? 'At your current organic lead pace, before assuming any lift from the new systems.' : 'Enter your current monthly organic lead flow.');
-
     var projections = document.getElementById('calc-projections');
     if(projections){
       var cards = [
@@ -5072,7 +4586,7 @@ body.ignite-proof-modal-open{
     }
   }
 
-  [ticket,closeRate,margin,budget,foundationOrganicLeads,foundationOrganicClose].filter(Boolean).forEach(function(el){
+  [ticket,closeRate,margin,budget].filter(Boolean).forEach(function(el){
     el.addEventListener('input',render);
     el.addEventListener('change',render);
   });
@@ -5115,19 +4629,6 @@ body.ignite-proof-modal-open{
   if(output&&hero&&(metrics||recovery)){
     const btn=makeToggle('See full 90-day breakdown','Hide full 90-day breakdown',[metrics,recovery]);
     hero.insertAdjacentElement('afterend',btn);
-  }
-
-  // Foundation mini calculator.
-  const foundation=root.querySelector('.foundation-mini');
-  if(foundation){
-    const head=foundation.querySelector('.foundation-mini-head');
-    const grid=foundation.querySelector('.foundation-mini-grid');
-    const stats=foundation.querySelector('.foundation-stats');
-    const sources=foundation.querySelector('.foundation-sources');
-    if(head&&(grid||stats)){
-      const btn=makeToggle('Calculate Foundation recovery','Hide Foundation breakdown',[grid,stats,sources]);
-      head.insertAdjacentElement('afterend',btn);
-    }
   }
 
   // Plan deliverables.
