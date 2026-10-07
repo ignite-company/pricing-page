@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f5f7f6" />
+  <title>Ignite Revenue OS Demo</title>
+  <style>
+    :root {
+      --bg: #f3f5f4;
+      --panel: rgba(255,255,255,.82);
+      --panel-strong: #fff;
+      --text: #101614;
+      --muted: #66706c;
+      --line: rgba(16,22,20,.09);
+      --green: #18a06a;
+      --green-dark: #0d7b50;
+      --green-soft: #eaf8f1;
+      --blue: #2d74da;
+      --blue-soft: #edf4ff;
+      --orange: #dd7b1d;
+      --orange-soft: #fff3e7;
+      --purple: #7b55d8;
+      --purple-soft: #f3efff;
+      --red: #d65252;
+      --red-soft: #fff0f0;
+      --shadow: 0 18px 55px rgba(18, 37, 30, .09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% -10%, rgba(24,160,106,.13), transparent 34rem),
+        radial-gradient(circle at 95% 15%, rgba(45,116,218,.08), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+      letter-spacing: -.012em;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 238px 1fr; }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 22px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(247,249,248,.8);
+      backdrop-filter: blur(24px);
+      z-index: 10;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 6px 9px 22px; }
+    .brandmark {
+      width: 35px; height: 35px; border-radius: 11px;
+      display: grid; place-items: center;
+      background: #101614; color: white; font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    }
+    .brand strong { font-size: 15px; display:block; }
+    .brand span { font-size: 11px; color: var(--muted); }
+    .nav { display: grid; gap: 5px; }
+    .nav a {
+      text-decoration: none; color: #4a5551;
+      padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 650;
+      display:flex; align-items:center; gap:10px;
+    }
+    .nav a:hover, .nav a.active { background: white; color: var(--text); box-shadow: 0 6px 18px rgba(18,37,30,.05); }
+    .doticon { width: 8px; height: 8px; border-radius: 50%; background: #b6bdb9; }
+    .nav a.active .doticon { background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
+    .sidebar-foot {
+      position: absolute; left:18px; right:18px; bottom:20px;
+      padding: 14px; background: #101614; color:white; border-radius:16px;
+    }
+    .sidebar-foot small { display:block; color:#b8c2be; margin-top:4px; line-height:1.35; }
+    main { min-width:0; padding: 26px 30px 80px; }
+    .topbar { display:flex; justify-content:space-between; gap:18px; align-items:center; margin-bottom:22px; }
+    .eyebrow { color: var(--green-dark); font-size: 11px; font-weight: 800; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { margin:5px 0 0; font-size: clamp(26px, 4vw, 39px); line-height:1.03; letter-spacing:-.045em; }
+    .top-actions { display:flex; align-items:center; gap:10px; }
+    .status {
+      display:flex; align-items:center; gap:7px; padding:9px 12px;
+      border:1px solid var(--line); background:rgba(255,255,255,.7); border-radius:999px;
+      font-size:12px; font-weight:700; color:#46524e;
+    }
+    .status i { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px var(--green-soft); }
+    .btn {
+      border:0; border-radius:12px; padding:10px 14px; font-weight:750; font-size:12px;
+      transition:.18s ease; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn.dark { background:#111715; color:#fff; box-shadow:0 8px 20px rgba(17,23,21,.15); }
+    .btn.light { background:#fff; color:#1b2421; border:1px solid var(--line); }
+    .hero {
+      padding: 25px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,255,255,.76)),
+        radial-gradient(circle at 85% 20%, rgba(24,160,106,.12), transparent 24rem);
+      border:1px solid var(--line); border-radius:28px; box-shadow:var(--shadow);
+      display:grid; grid-template-columns:1.35fr .65fr; gap:22px; overflow:hidden;
+    }
+    .hero h2 { font-size: clamp(28px, 4.2vw, 48px); letter-spacing:-.055em; line-height:1.02; margin:9px 0 13px; max-width:840px; }
+    .hero p { color:#5e6965; font-size:14px; line-height:1.55; max-width:720px; margin:0; }
+    .hero-right { border-left:1px solid var(--line); padding-left:22px; display:grid; align-content:center; gap:12px; }
+    .hero-stat { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:12px; border-bottom:1px solid var(--line); }
+    .hero-stat:last-child { border-bottom:0; padding-bottom:0; }
+    .hero-stat span { color:var(--muted); font-size:12px; }
+    .hero-stat strong { font-size:25px; letter-spacing:-.04em; }
+    section { margin-top:24px; }
+    .section-head { display:flex; justify-content:space-between; gap:14px; align-items:end; margin-bottom:12px; }
+    .section-head h3 { margin:0; font-size:20px; letter-spacing:-.035em; }
+    .section-head p { margin:3px 0 0; color:var(--muted); font-size:12px; }
+    .metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+    .metric {
+      background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:15px;
+      box-shadow:0 8px 24px rgba(18,37,30,.04); min-height:112px;
+    }
+    .metric small { display:block; color:var(--muted); font-size:11px; line-height:1.3; min-height:29px; }
+    .metric strong { display:block; font-size:26px; letter-spacing:-.045em; margin-top:14px; }
+    .metric .positive { color:var(--green-dark); }
+    .scenario-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .scenario {
+      text-align:left; border:1px solid var(--line); background:var(--panel-strong); border-radius:20px;
+      padding:17px; min-height:205px; position:relative; overflow:hidden; transition:.2s ease;
+      box-shadow:0 8px 24px rgba(18,37,30,.04);
+    }
+    .scenario:hover { transform: translateY(-2px); box-shadow:0 16px 34px rgba(18,37,30,.08); }
+    .scenario .chip { display:inline-flex; border-radius:999px; padding:6px 8px; font-size:10px; font-weight:800; }
+    .scenario.green .chip{background:var(--green-soft); color:var(--green-dark)}
+    .scenario.blue .chip{background:var(--blue-soft); color:var(--blue)}
+    .scenario.orange .chip{background:var(--orange-soft); color:var(--orange)}
+    .scenario.purple .chip{background:var(--purple-soft); color:var(--purple)}
+    .scenario h4 { font-size:18px; margin:16px 0 7px; letter-spacing:-.03em; }
+    .scenario p { color:var(--muted); font-size:12px; line-height:1.45; margin:0; }
+    .scenario footer { position:absolute; left:17px; right:17px; bottom:15px; display:flex; justify-content:space-between; align-items:center; }
+    .scenario footer strong { font-size:14px; }
+    .scenario footer span { font-size:11px; color:var(--muted); }
+    .split { display:grid; grid-template-columns:1.08fr .92fr; gap:14px; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:18px; box-shadow:0 8px 24px rgba(18,37,30,.04); }
+    .card h4 { margin:0; font-size:16px; letter-spacing:-.025em; }
+    .card-sub { color:var(--muted); font-size:11px; margin-top:4px; }
+    .pipeline { display:grid; grid-template-columns:repeat(5,minmax(140px,1fr)); gap:8px; overflow-x:auto; padding-bottom:4px; }
+    .stage { min-width:145px; background:#f7f9f8; border:1px solid var(--line); border-radius:15px; padding:10px; }
+    .stage-head { display:flex; justify-content:space-between; font-size:10px; font-weight:800; color:#53605b; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em; }
+    .opp { background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; margin-top:7px; }
+    .opp strong { display:block; font-size:11px; }
+    .opp span { display:block; color:var(--muted); font-size:10px; margin-top:3px; }
+    .opp b { display:block; margin-top:7px; font-size:12px; }
+    .activity { display:grid; gap:8px; max-height:330px; overflow:auto; padding-right:2px; }
+    .activity-item { display:grid; grid-template-columns:28px 1fr auto; gap:10px; align-items:start; padding:10px; background:#f8faf9; border:1px solid var(--line); border-radius:13px; }
+    .activity-icon { width:28px; height:28px; border-radius:9px; display:grid; place-items:center; background:#fff; border:1px solid var(--line); font-size:11px; }
+    .activity-item strong { font-size:11px; display:block; }
+    .activity-item span { font-size:10px; color:var(--muted); line-height:1.35; display:block; margin-top:3px; }
+    .activity-item time { font-size:9px; color:#89928f; white-space:nowrap; }
+    .roi-wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:14px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+    .field { display:grid; gap:5px; }
+    .field.full { grid-column:1/-1; }
+    .field label { color:var(--muted); font-size:10px; font-weight:750; }
+    .field input {
+      width:100%; border:1px solid var(--line); background:#fff; border-radius:11px; padding:10px 11px; outline:none; color:var(--text); font-weight:700;
+    }
+    .field input:focus { border-color:rgba(24,160,106,.4); box-shadow:0 0 0 4px var(--green-soft); }
+    .opportunity {
+      background:#101614; color:white; border-radius:20px; padding:20px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .opportunity small { color:#9eaaa5; font-size:10px; text-transform:uppercase; letter-spacing:.07em; font-weight:800; }
+    .opportunity h4 { font-size:35px; margin:7px 0 4px; letter-spacing:-.055em; }
+    .opportunity p { margin:0; color:#bac4c0; font-size:11px; line-height:1.45; }
+    .leaks { margin-top:16px; display:grid; gap:8px; }
+    .leak { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
+    .leak span { font-size:11px; color:#cad2cf; }
+    .leak b { font-size:11px; }
+    .bar { height:5px; border-radius:20px; background:#25302c; overflow:hidden; grid-column:1/-1; margin-top:-4px; }
+    .bar i { display:block; height:100%; background:#31c487; border-radius:20px; }
+    .note { color:#8f9995; font-size:9px; margin-top:12px; line-height:1.4; }
+    .system-map { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; align-items:stretch; margin-top:14px; }
+    .node { border:1px solid var(--line); background:#fff; padding:12px; border-radius:14px; min-height:84px; }
+    .node span { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-weight:800; }
+    .node strong { display:block; font-size:11px; margin-top:10px; line-height:1.25; }
+    .node.active { border-color:rgba(24,160,106,.28); background:var(--green-soft); }
+    .packages { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+    .package { border:1px solid var(--line); border-radius:18px; padding:16px; background:#fff; }
+    .package.featured { border-color:rgba(24,160,106,.35); box-shadow:0 10px 30px rgba(24,160,106,.08); }
+    .package-head { display:flex; justify-content:space-between; align-items:start; gap:12px; }
+    .package h5 { margin:0; font-size:15px; }
+    .price { font-size:23px; font-weight:850; letter-spacing:-.045em; }
+    .modules { display:flex; flex-wrap:wrap; gap:6px; margin-top:13px; }
+    .module { font-size:9px; font-weight:750; padding:6px 8px; border-radius:999px; background:#f1f3f2; color:#5d6864; }
+    .featured .module { background:var(--green-soft); color:var(--green-dark); }
+    .demo-drawer {
+      position:fixed; inset:0; background:rgba(10,14,12,.38); backdrop-filter:blur(8px);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:100;
+    }
+    .demo-drawer.show { display:flex; }
+    .demo-panel {
+      width:min(920px,100%); max-height:min(760px,92vh); overflow:auto;
+      background:#f7f9f8; border:1px solid rgba(255,255,255,.7); border-radius:28px; box-shadow:0 32px 100px rgba(0,0,0,.22);
+    }
+    .demo-panel-head { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; gap:16px; align-items:center; padding:18px 20px; border-bottom:1px solid var(--line); background:rgba(247,249,248,.9); backdrop-filter:blur(22px); }
+    .demo-panel-head h3 { margin:0; font-size:18px; }
+    .close { width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:18px; }
+    .demo-body { display:grid; grid-template-columns:.9fr 1.1fr; gap:12px; padding:14px; }
+    .lead-card { background:#111715; color:white; border-radius:20px; padding:18px; align-self:start; position:sticky; top:78px; }
+    .lead-card .label { color:#96a19d; font-size:9px; text-transform:uppercase; letter-spacing:.07em; font-weight:800; }
+    .lead-card h4 { font-size:24px; margin:7px 0 3px; }
+    .lead-card p { color:#bcc5c1; margin:0 0 16px; font-size:11px; }
+    .lead-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .lead-data { background:#1b2421; border-radius:12px; padding:10px; }
+    .lead-data span { font-size:9px; color:#8f9b96; display:block; }
+    .lead-data strong { font-size:11px; display:block; margin-top:4px; }
+    .value { margin-top:12px; padding:14px; border-radius:14px; background:linear-gradient(135deg,#164532,#1c6646); }
+    .value span { font-size:9px; color:#aad7c2; }
+    .value strong { display:block; font-size:24px; margin-top:4px; }
+    .timeline { display:grid; gap:9px; }
+    .event {
+      opacity:0; transform:translateY(8px); transition:.35s ease;
+      background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px;
+      display:grid; grid-template-columns:42px 1fr; gap:12px;
+    }
+    .event.visible { opacity:1; transform:translateY(0); }
+    .time-pill { background:#f2f5f3; border-radius:10px; padding:8px 4px; text-align:center; font-size:9px; font-weight:850; color:#4b5752; height:max-content; }
+    .event strong { display:block; font-size:12px; }
+    .event p { margin:4px 0 0; color:var(--muted); font-size:10px; line-height:1.45; }
+    .event .channel { display:inline-block; margin-top:8px; background:var(--green-soft); color:var(--green-dark); border-radius:999px; padding:4px 7px; font-size:8px; font-weight:850; text-transform:uppercase; letter-spacing:.05em; }
+    .outcome {
+      display:none; margin-top:10px; border-radius:18px; padding:16px;
+      background:var(--green-soft); border:1px solid rgba(24,160,106,.2);
+    }
+    .outcome.show { display:block; }
+    .outcome strong { font-size:14px; }
+    .outcome p { margin:5px 0 0; font-size:10px; color:#4a6258; line-height:1.4; }
+    .mobile-nav { display:none; }
+    @media (max-width: 1100px) {
+      .metrics { grid-template-columns:repeat(3,1fr); }
+      .scenario-grid { grid-template-columns:repeat(2,1fr); }
+      .system-map { grid-template-columns:repeat(3,1fr); }
+    }
+    @media (max-width: 820px) {
+      .app { display:block; }
+      .sidebar { display:none; }
+      main { padding:18px 14px 90px; }
+      .topbar { align-items:flex-start; }
+      .top-actions .status { display:none; }
+      .hero { grid-template-columns:1fr; padding:19px; }
+      .hero-right { border-left:0; border-top:1px solid var(--line); padding:16px 0 0; grid-template-columns:repeat(3,1fr); }
+      .hero-stat { display:block; border-bottom:0; padding:0; }
+      .hero-stat strong { display:block; font-size:19px; margin-top:3px; }
+      .split,.roi-wrap,.demo-body { grid-template-columns:1fr; }
+      .lead-card { position:relative; top:0; }
+      .mobile-nav {
+        display:flex; position:fixed; left:12px; right:12px; bottom:10px; z-index:40;
+        background:rgba(17,23,21,.92); backdrop-filter:blur(22px); padding:7px; border-radius:18px;
+        justify-content:space-around; box-shadow:0 14px 40px rgba(0,0,0,.2);
+      }
+      .mobile-nav a { color:#b7c2bd; text-decoration:none; font-size:9px; font-weight:700; padding:7px 5px; }
+      .mobile-nav a.active { color:white; }
+    }
+    @media (max-width: 570px) {
+      h1 { font-size:29px; }
+      .hero h2 { font-size:31px; }
+      .metrics { grid-template-columns:repeat(2,1fr); }
+      .scenario-grid { grid-template-columns:1fr; }
+      .hero-right { grid-template-columns:1fr 1fr; }
+      .form-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .packages { grid-template-columns:1fr; }
+      .system-map { grid-template-columns:1fr 1fr; }
+      .top-actions .btn.light { display:none; }
+    }
+  
+    /* Mobile-first hardening: prevent desktop canvas behavior on phones */
+    @media (max-width: 820px) {
+      html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      body { background-attachment: scroll; }
+      .app {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+      .sidebar { display: none !important; }
+      main {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 14px 12px 92px !important;
+        overflow: hidden;
+      }
+      .topbar {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: start;
+        margin-bottom: 14px;
+      }
+      .topbar > div:first-child { min-width: 0; }
+      .topbar h1 {
+        font-size: 28px !important;
+        line-height: .98;
+        max-width: 230px;
+        overflow-wrap: anywhere;
+      }
+      .topbar .eyebrow {
+        max-width: 240px;
+        font-size: 9px;
+        line-height: 1.35;
+      }
+      .top-actions {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        min-width: 0;
+      }
+      .top-actions .status,
+      .top-actions .btn.light { display: none !important; }
+      .top-actions .btn.dark {
+        white-space: normal;
+        width: 88px;
+        min-height: 48px;
+        padding: 9px 10px;
+        line-height: 1.08;
+        border-radius: 13px;
+        font-size: 10px;
+      }
+      .hero {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 18px !important;
+        border-radius: 22px;
+      }
+      .hero h2 {
+        font-size: 30px !important;
+        line-height: 1.02;
+        margin: 8px 0 12px;
+        max-width: none !important;
+      }
+      .hero p {
+        font-size: 12px;
+        line-height: 1.52;
+        max-width: none !important;
+      }
+      .hero-right {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+        gap: 8px !important;
+        width: 100% !important;
+        border-left: 0 !important;
+        border-top: 1px solid var(--line);
+        margin-top: 16px;
+        padding: 14px 0 0 !important;
+      }
+      .hero-stat {
+        display: block !important;
+        min-width: 0;
+        padding: 0 !important;
+        border: 0 !important;
+      }
+      .hero-stat span {
+        display: block;
+        font-size: 9px;
+        line-height: 1.25;
+        min-height: 24px;
+      }
+      .hero-stat strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 18px;
+      }
+      section {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin-top: 20px;
+      }
+      .section-head {
+        width: 100%;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .section-head h3 { font-size: 18px; }
+      .section-head p { font-size: 10px; line-height: 1.35; }
+      .section-head > .status {
+        flex: 0 0 auto;
+        max-width: 88px;
+        white-space: normal;
+        line-height: 1.1;
+        padding: 8px 9px;
+        font-size: 9px;
+      }
+      .metrics {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+        gap: 8px !important;
+      }
+      .metric {
+        min-width: 0;
+        min-height: 94px;
+        padding: 12px;
+        border-radius: 16px;
+      }
+      .metric small {
+        font-size: 9px;
+        min-height: 24px;
+      }
+      .metric strong {
+        font-size: 23px;
+        margin-top: 10px;
+      }
+
+      /* Mobile scenario cards become a swipeable row instead of a long vertical wall */
+      .scenario-grid {
+        display: flex !important;
+        width: calc(100% + 12px);
+        max-width: none;
+        overflow-x: auto;
+        gap: 10px !important;
+        padding: 2px 12px 8px 0;
+        margin-right: -12px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .scenario-grid::-webkit-scrollbar { display: none; }
+      .scenario {
+        flex: 0 0 min(82vw, 330px);
+        min-width: min(82vw, 330px);
+        min-height: 188px;
+        scroll-snap-align: start;
+        padding: 15px;
+      }
+      .scenario h4 { font-size: 17px; margin-top: 14px; }
+      .scenario p { font-size: 11px; }
+      .scenario footer { left: 15px; right: 15px; }
+
+      .split, .roi-wrap, .demo-body {
+        display: grid !important;
+        grid-template-columns: minmax(0,1fr) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 10px !important;
+      }
+      .card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 15px;
+        border-radius: 18px;
+      }
+      .pipeline {
+        width: 100%;
+        grid-template-columns: repeat(5, minmax(145px, 145px)) !important;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-snap-type: x proximity;
+      }
+      .stage { scroll-snap-align: start; }
+      .activity { max-height: 280px; }
+      .form-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px;
+      }
+      .field.full { grid-column: 1 / -1 !important; }
+      .field input { min-width: 0; font-size: 13px; }
+      .opportunity { border-radius: 18px; padding: 17px; }
+      .opportunity h4 { font-size: 31px; }
+      .system-map {
+        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+        gap: 8px;
+      }
+      .node { min-width: 0; min-height: 78px; padding: 10px; }
+      .packages {
+        grid-template-columns: minmax(0,1fr) !important;
+        gap: 9px;
+      }
+      .package { min-width: 0; }
+      .package-head { gap: 8px; }
+      .price { font-size: 21px; white-space: nowrap; }
+
+      .mobile-nav {
+        display: flex !important;
+        left: 10px;
+        right: 10px;
+        bottom: max(8px, env(safe-area-inset-bottom));
+        width: auto;
+        max-width: none;
+        min-width: 0;
+        padding: 6px;
+        border-radius: 16px;
+      }
+      .mobile-nav a {
+        flex: 1 1 0;
+        text-align: center;
+        font-size: 8px;
+        padding: 8px 2px;
+        min-width: 0;
+      }
+
+      .demo-drawer {
+        align-items: flex-end;
+        padding: 0;
+      }
+      .demo-panel {
+        width: 100%;
+        max-width: 100%;
+        max-height: 92dvh;
+        border-radius: 24px 24px 0 0;
+      }
+      .demo-panel-head { padding: 14px 15px; }
+      .demo-body { padding: 10px; }
+      .lead-card { position: relative !important; top: 0 !important; }
+      .lead-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+
+    @media (max-width: 430px) {
+      main { padding-left: 10px !important; padding-right: 10px !important; }
+      .topbar h1 { font-size: 26px !important; max-width: 215px; }
+      .hero { padding: 16px !important; }
+      .hero h2 { font-size: 28px !important; }
+      .metrics { gap: 7px !important; }
+      .metric { min-height: 90px; }
+      .scenario { flex-basis: 86vw; min-width: 86vw; }
+      .form-grid { grid-template-columns: 1fr !important; }
+      .field.full { grid-column: auto !important; }
+      .system-map { grid-template-columns: 1fr 1fr !important; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brandmark">I</div>
+      <div><strong>Ignite Revenue OS</strong><span>Demo Environment</span></div>
+    </div>
+    <nav class="nav">
+      <a class="active" href="#overview"><i class="doticon"></i>Overview</a>
+      <a href="#scenarios"><i class="doticon"></i>Live Scenarios</a>
+      <a href="#pipeline"><i class="doticon"></i>Pipeline</a>
+      <a href="#roi"><i class="doticon"></i>Revenue Leak Audit</a>
+      <a href="#system"><i class="doticon"></i>System Map</a>
+    </nav>
+    <div class="sidebar-foot">
+      <strong style="font-size:12px">Built by Ignite</strong>
+      <small>AI implementation and revenue systems for service businesses.</small>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">Summit Heating & Air • HVAC Demo</div>
+        <h1>Revenue Operating System</h1>
+      </div>
+      <div class="top-actions">
+        <div class="status"><i></i><span id="dataStatus">Connected to Supabase</span></div>
+        <button class="btn light" onclick="scrollToId('roi')">Personalize Demo</button>
+        <button class="btn dark" onclick="runScenario('new-lead')">Run Live Lead</button>
+      </div>
+    </div>
+
+    <section id="overview" class="hero">
+      <div>
+        <div class="eyebrow">What your business looks like when every lead has a next step</div>
+        <h2>No lead gets forgotten. No estimate disappears. No customer database sits unused.</h2>
+        <p>This is a controlled demo of the systems Ignite can install around a service business. Run a scenario below to watch response, qualification, booking, follow-up, handoff, and revenue tracking happen in one connected flow.</p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat"><span>AI handled conversations</span><strong>24</strong></div>
+        <div class="hero-stat"><span>Open revenue tracked</span><strong>$22.7K</strong></div>
+        <div class="hero-stat"><span>Manual steps removed</span><strong>14</strong></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div><h3>Today at a glance</h3><p>Live operational metrics from the demo account</p></div>
+      </div>
+      <div id="metrics" class="metrics"></div>
+    </section>
+
+    <section id="scenarios">
+      <div class="section-head">
+        <div><h3>Run a customer journey</h3><p>Each scenario is deterministic for sales calls, while using the same architecture a live implementation would use.</p></div>
+        <span class="status"><i></i>Demo mode ready</span>
+      </div>
+      <div id="scenarioGrid" class="scenario-grid"></div>
+    </section>
+
+    <section id="pipeline" class="split">
+      <div class="card">
+        <h4>Revenue pipeline</h4>
+        <div class="card-sub">The team can see exactly where every opportunity is and what needs to happen next.</div>
+        <div class="pipeline" id="pipelineBoard" style="margin-top:14px"></div>
+      </div>
+      <div class="card">
+        <h4>AI activity stream</h4>
+        <div class="card-sub">A single timeline of the actions the system is taking across the customer journey.</div>
+        <div class="activity" id="activityStream" style="margin-top:14px"></div>
+      </div>
+    </section>
+
+    <section id="roi">
+      <div class="section-head">
+        <div><h3>Show me my business</h3><p>Personalize the economics during the sales call. This is an illustrative opportunity model, not a revenue guarantee.</p></div>
+      </div>
+      <div class="roi-wrap">
+        <div class="card">
+          <h4>Company assumptions</h4>
+          <div class="card-sub">Change these numbers with the owner sitting in front of you.</div>
+          <div class="form-grid">
+            <div class="field full"><label>Company name</label><input id="companyName" value="ABC Plumbing" oninput="calculateROI()"/></div>
+            <div class="field"><label>Monthly leads</label><input id="monthlyLeads" type="number" value="180" oninput="calculateROI()"/></div>
+            <div class="field"><label>Average job value</label><input id="avgJob" type="number" value="1800" oninput="calculateROI()"/></div>
+            <div class="field"><label>Missed call rate %</label><input id="missedRate" type="number" value="20" oninput="calculateROI()"/></div>
+            <div class="field"><label>Current close rate %</label><input id="closeRate" type="number" value="35" oninput="calculateROI()"/></div>
+            <div class="field"><label>Open estimates / month</label><input id="openEstimates" type="number" value="40" oninput="calculateROI()"/></div>
+            <div class="field"><label>Customer database</label><input id="databaseSize" type="number" value="3400" oninput="calculateROI()"/></div>
+          </div>
+        </div>
+        <div class="opportunity">
+          <div>
+            <small id="roiCompany">ABC Plumbing opportunity model</small>
+            <h4 id="totalOpportunity">$31,680/mo</h4>
+            <p>Estimated recoverable or influenceable revenue across the leaks below, using conservative demo assumptions.</p>
+          </div>
+          <div id="leaks" class="leaks"></div>
+          <div class="note">Illustrative calculation only. Actual performance depends on lead quality, operations, pricing, capacity, close rate, market, integration quality, and execution.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="system">
+      <div class="card">
+        <div class="section-head" style="margin-bottom:0">
+          <div><h3>The Ignite Revenue OS</h3><p>The $3,500 sprint fixes the most valuable bottlenecks. The $7,500 implementation connects the full customer journey.</p></div>
+        </div>
+        <div class="system-map">
+          <div class="node active"><span>01 • Capture</span><strong>Ads, forms, phone calls, referrals, website</strong></div>
+          <div class="node active"><span>02 • Respond</span><strong>Instant AI SMS, voice, routing, missed-call recovery</strong></div>
+          <div class="node active"><span>03 • Qualify</span><strong>Intent, service area, urgency, job value, ownership</strong></div>
+          <div class="node active"><span>04 • Convert</span><strong>Booking, pipeline movement, sales handoff, reminders</strong></div>
+          <div class="node active"><span>05 • Recover</span><strong>Estimate follow-up, nurture, reactivation, reviews</strong></div>
+        </div>
+
+        <div class="packages">
+          <div class="package">
+            <div class="package-head"><div><h5>AI Implementation Sprint</h5><div class="card-sub">Fix the highest-value bottlenecks first.</div></div><div class="price">$3,500</div></div>
+            <div class="modules">
+              <span class="module">Lead Response</span><span class="module">Missed Calls</span><span class="module">Pipeline Automation</span><span class="module">Estimate Follow-Up</span>
+            </div>
+          </div>
+          <div class="package featured">
+            <div class="package-head"><div><h5>Revenue Operating System</h5><div class="card-sub">Connect the entire customer journey.</div></div><div class="price">$7,500</div></div>
+            <div class="modules">
+              <span class="module">Lead Capture</span><span class="module">AI Response</span><span class="module">Voice AI</span><span class="module">Qualification</span><span class="module">Booking</span><span class="module">CRM</span><span class="module">Estimates</span><span class="module">Nurture</span><span class="module">Reactivation</span><span class="module">Reviews</span><span class="module">Reporting</span><span class="module">Integrations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <a class="active" href="#overview">Overview</a>
+  <a href="#scenarios">Scenarios</a>
+  <a href="#pipeline">Pipeline</a>
+  <a href="#roi">ROI</a>
+  <a href="#system">System</a>
+</nav>
+
+<div id="drawer" class="demo-drawer" onclick="drawerBackdrop(event)">
+  <div class="demo-panel">
+    <div class="demo-panel-head">
+      <div><div class="eyebrow" id="drawerEyebrow">Live scenario</div><h3 id="drawerTitle">New Web Lead</h3></div>
+      <button class="close" onclick="closeDrawer()">×</button>
+    </div>
+    <div class="demo-body">
+      <div id="leadCard" class="lead-card"></div>
+      <div>
+        <div id="timeline" class="timeline"></div>
+        <div id="outcome" class="outcome"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ccchujdxkbcbjuyjhbez.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_yk34HOJdFoAPgLxltx_pbA_Zfo2zjg2';
+
+const fallback = {
+  organization: { name:'Summit Heating & Air', monthly_leads:180, avg_job_value:1800, close_rate:35, missed_call_rate:20, database_size:3400 },
+  metrics: [
+    {metric_key:'new_leads',label:'New leads',metric_value:17,suffix:''},
+    {metric_key:'response_time',label:'Avg. response time',metric_value:43,suffix:' sec'},
+    {metric_key:'missed_recovered',label:'Missed calls recovered',metric_value:6,suffix:''},
+    {metric_key:'appointments',label:'Appointments booked',metric_value:11,suffix:''},
+    {metric_key:'estimates_followup',label:'Estimates needing follow-up',metric_value:8,suffix:''},
+    {metric_key:'revenue_recovered',label:'Revenue recovered',metric_value:8420,suffix:'$'}
+  ],
+  scenarios: [
+    {scenario_key:'new-lead',name:'New Web Lead',eyebrow:'0 → booked',headline:'Watch a new lead turn into an appointment',description:'The system responds, qualifies, calls, books, and updates the pipeline automatically.',potential_value:7800,accent:'green'},
+    {scenario_key:'missed-call',name:'Missed Phone Call',eyebrow:'missed → recovered',headline:'Recover a missed call before the competitor does',description:'A missed inbound call triggers an immediate recovery text, qualification, and booking flow.',potential_value:4500,accent:'blue'},
+    {scenario_key:'estimate',name:'Estimate Not Closed',eyebrow:'open estimate → re-engaged',headline:'Turn forgotten estimates back into live revenue',description:'AI follows up intelligently, surfaces objections, and hands hot opportunities back to the team.',potential_value:9200,accent:'orange'},
+    {scenario_key:'reactivation',name:'Old Customer',eyebrow:'database → opportunity',headline:'Wake up revenue already sitting in the database',description:'Past customers are segmented and reactivated with personalized service reminders and offers.',potential_value:1200,accent:'purple'}
+  ],
+  contacts: [
+    {name:'Sarah Mitchell',service:'Furnace replacement',source:'Google Ads',estimated_value:7800,intent:'high',status:'Appointment Booked'},
+    {name:'Mike Torres',service:'No heat / diagnostic',source:'Missed Call',estimated_value:4500,intent:'high',status:'Qualified'},
+    {name:'David Reynolds',service:'AC replacement',source:'Estimate Follow-up',estimated_value:9200,intent:'medium',status:'Estimate Open'},
+    {name:'Ashley Brooks',service:'Heat pump maintenance',source:'Database Reactivation',estimated_value:1200,intent:'medium',status:'Reactivated'}
+  ],
+  opportunities: [
+    {title:'Furnace Replacement',stage:'Appointment Booked',value:7800,probability:70,next_action:'Technician visit tomorrow at 10:00 AM'},
+    {title:'No Heat Service',stage:'Qualified',value:4500,probability:55,next_action:'Confirm same-day slot'},
+    {title:'AC Replacement',stage:'Estimate Follow-Up',value:9200,probability:45,next_action:'AI objection follow-up today'},
+    {title:'Maintenance Reactivation',stage:'Reactivated',value:1200,probability:60,next_action:'Schedule tune-up'}
+  ],
+  events: [
+    {scenario_key:'new-lead',sort_order:1,seconds_from_start:0,title:'Lead received',detail:'Google Ads lead captured and added to the CRM.',channel:'web'},
+    {scenario_key:'new-lead',sort_order:2,seconds_from_start:8,title:'AI response sent',detail:'Hey Sarah, this is Summit Heating & Air. I just saw your request about the furnace. Are you currently without heat?',channel:'sms'},
+    {scenario_key:'new-lead',sort_order:3,seconds_from_start:18,title:'Customer replied',detail:'Yeah, it stopped working this morning.',channel:'sms'},
+    {scenario_key:'new-lead',sort_order:4,seconds_from_start:21,title:'Intent detected: HIGH',detail:'Homeowner, in service area, same-day urgency, replacement opportunity.',channel:'ai'},
+    {scenario_key:'new-lead',sort_order:5,seconds_from_start:24,title:'AI call initiated',detail:'AI confirms urgency, service need, location, and scheduling window.',channel:'call'},
+    {scenario_key:'new-lead',sort_order:6,seconds_from_start:62,title:'Appointment booked',detail:'Tomorrow at 10:00 AM. Pipeline and dispatcher updated automatically.',channel:'calendar'},
+    {scenario_key:'missed-call',sort_order:1,seconds_from_start:0,title:'Incoming call missed',detail:'No employee answered the inbound call.',channel:'call'},
+    {scenario_key:'missed-call',sort_order:2,seconds_from_start:7,title:'Recovery text sent',detail:'Hey Mike, sorry we missed your call. This is Summit Heating & Air. What can we help you with?',channel:'sms'},
+    {scenario_key:'missed-call',sort_order:3,seconds_from_start:20,title:'Customer responded',detail:'Our heat stopped working and we need someone today.',channel:'sms'},
+    {scenario_key:'missed-call',sort_order:4,seconds_from_start:28,title:'Qualified for same-day service',detail:'Urgent no-heat call, homeowner, in service area.',channel:'ai'},
+    {scenario_key:'missed-call',sort_order:5,seconds_from_start:48,title:'Same-day slot offered',detail:'Opportunity recovered instead of becoming a lost call.',channel:'calendar'},
+    {scenario_key:'estimate',sort_order:1,seconds_from_start:0,title:'$9,200 estimate still open',detail:'AC replacement estimate sent 3 days ago with no decision.',channel:'crm'},
+    {scenario_key:'estimate',sort_order:2,seconds_from_start:8,title:'Personalized follow-up sent',detail:'AI checks whether timing, price, or another quote is holding up the decision.',channel:'sms'},
+    {scenario_key:'estimate',sort_order:3,seconds_from_start:24,title:'Objection surfaced',detail:'We are getting another quote first.',channel:'sms'},
+    {scenario_key:'estimate',sort_order:4,seconds_from_start:29,title:'Sales rep alerted',detail:'High-value objection requires human takeover. Context and suggested response attached.',channel:'ai'},
+    {scenario_key:'estimate',sort_order:5,seconds_from_start:55,title:'Customer re-engaged',detail:'$9,200 opportunity moved back into active follow-up.',channel:'crm'},
+    {scenario_key:'reactivation',sort_order:1,seconds_from_start:0,title:'Customer segment identified',detail:'Past maintenance customers with no visit in 12+ months.',channel:'crm'},
+    {scenario_key:'reactivation',sort_order:2,seconds_from_start:9,title:'Personalized reactivation sent',detail:'Seasonal heat-pump tune-up message generated from customer history.',channel:'sms'},
+    {scenario_key:'reactivation',sort_order:3,seconds_from_start:31,title:'Customer raises hand',detail:'Yes, we have been meaning to get that scheduled.',channel:'sms'},
+    {scenario_key:'reactivation',sort_order:4,seconds_from_start:50,title:'Revenue reactivated',detail:'Existing customer converted without buying another lead.',channel:'calendar'}
+  ]
+};
+
+let data = structuredClone(fallback);
+let timers = [];
+
+async function sb(path) {
+  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+  });
+  if (!res.ok) throw new Error('Supabase request failed');
+  return res.json();
+}
+
+async function loadData() {
+  try {
+    const [org, metrics, scenarios, contacts, opportunities, events] = await Promise.all([
+      sb('demo_organizations?slug=eq.summit-hvac&select=*'),
+      sb('demo_metrics?select=*&order=label'),
+      sb('demo_scenarios?select=*&order=name'),
+      sb('demo_contacts?select=*&order=created_at'),
+      sb('demo_opportunities?select=*&order=updated_at'),
+      sb('demo_events?select=*&order=scenario_key,sort_order')
+    ]);
+    data = {
+      organization: org[0] || fallback.organization,
+      metrics: metrics.length ? metrics : fallback.metrics,
+      scenarios: scenarios.length ? scenarios : fallback.scenarios,
+      contacts: contacts.length ? contacts : fallback.contacts,
+      opportunities: opportunities.length ? opportunities : fallback.opportunities,
+      events: events.length ? events : fallback.events
+    };
+    document.getElementById('dataStatus').textContent = 'Connected to Supabase';
+  } catch (e) {
+    document.getElementById('dataStatus').textContent = 'Fallback demo data';
+  }
+  renderAll();
+}
+
+function money(v) {
+  return Number(v).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+}
+
+function renderMetrics() {
+  const order = ['new_leads','response_time','missed_recovered','appointments','estimates_followup','revenue_recovered'];
+  const sorted = [...data.metrics].sort((a,b)=>order.indexOf(a.metric_key)-order.indexOf(b.metric_key));
+  document.getElementById('metrics').innerHTML = sorted.map(m => {
+    let val = Number(m.metric_value);
+    let formatted = m.suffix === '$' ? money(val) : val.toLocaleString() + (m.suffix || '');
+    return '<div class="metric"><small>'+escapeHtml(m.label)+'</small><strong class="'+(m.metric_key==='revenue_recovered'?'positive':'')+'">'+formatted+'</strong></div>';
+  }).join('');
+}
+
+function renderScenarios() {
+  const order = ['new-lead','missed-call','estimate','reactivation'];
+  const sorted = [...data.scenarios].sort((a,b)=>order.indexOf(a.scenario_key)-order.indexOf(b.scenario_key));
+  document.getElementById('scenarioGrid').innerHTML = sorted.map(s =>
+    '<button class="scenario '+escapeHtml(s.accent)+'" onclick="runScenario(\''+escapeHtml(s.scenario_key)+'\')">'+
+      '<span class="chip">'+escapeHtml(s.eyebrow)+'</span>'+
+      '<h4>'+escapeHtml(s.headline)+'</h4>'+
+      '<p>'+escapeHtml(s.description)+'</p>'+
+      '<footer><strong>'+money(s.potential_value)+'</strong><span>Run scenario →</span></footer>'+
+    '</button>'
+  ).join('');
+}
+
+function renderPipeline() {
+  const stages = ['New Lead','Qualified','Appointment Booked','Estimate Follow-Up','Reactivated'];
+  let html = '';
+  stages.forEach(stage => {
+    const matches = data.opportunities.filter(o => o.stage === stage);
+    html += '<div class="stage"><div class="stage-head"><span>'+stage+'</span><b>'+matches.length+'</b></div>';
+    if (!matches.length) html += '<div style="font-size:10px;color:#9aa3a0;padding:9px 3px">No waiting opportunities</div>';
+    matches.forEach(o => html += '<div class="opp"><strong>'+escapeHtml(o.title)+'</strong><span>'+escapeHtml(o.next_action || '')+'</span><b>'+money(o.value)+'</b></div>');
+    html += '</div>';
+  });
+  document.getElementById('pipelineBoard').innerHTML = html;
+}
+
+function renderActivity() {
+  const recent = [...data.events].sort((a,b)=>Number(b.seconds_from_start)-Number(a.seconds_from_start)).slice(0,9);
+  document.getElementById('activityStream').innerHTML = recent.map((e,i) =>
+    '<div class="activity-item"><div class="activity-icon">'+channelIcon(e.channel)+'</div><div><strong>'+escapeHtml(e.title)+'</strong><span>'+escapeHtml(e.detail)+'</span></div><time>'+(i+1)+'m</time></div>'
+  ).join('');
+}
+
+function runScenario(key) {
+  timers.forEach(clearTimeout); timers = [];
+  const scenario = data.scenarios.find(s=>s.scenario_key===key) || fallback.scenarios.find(s=>s.scenario_key===key);
+  const events = data.events.filter(e=>e.scenario_key===key).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order));
+  const contactMap = {
+    'new-lead': data.contacts.find(c=>c.name==='Sarah Mitchell') || fallback.contacts[0],
+    'missed-call': data.contacts.find(c=>c.name==='Mike Torres') || fallback.contacts[1],
+    'estimate': data.contacts.find(c=>c.name==='David Reynolds') || fallback.contacts[2],
+    'reactivation': data.contacts.find(c=>c.name==='Ashley Brooks') || fallback.contacts[3]
+  };
+  const c = contactMap[key];
+  document.getElementById('drawerEyebrow').textContent = scenario.eyebrow;
+  document.getElementById('drawerTitle').textContent = scenario.name;
+  document.getElementById('leadCard').innerHTML =
+    '<div class="label">Customer profile</div><h4>'+escapeHtml(c.name)+'</h4><p>'+escapeHtml(c.service)+'</p>'+
+    '<div class="lead-grid">'+
+      '<div class="lead-data"><span>Source</span><strong>'+escapeHtml(c.source)+'</strong></div>'+
+      '<div class="lead-data"><span>Intent</span><strong>'+escapeHtml(String(c.intent).toUpperCase())+'</strong></div>'+
+      '<div class="lead-data"><span>Status</span><strong>'+escapeHtml(c.status)+'</strong></div>'+
+      '<div class="lead-data"><span>System mode</span><strong>AI + human handoff</strong></div>'+
+    '</div><div class="value"><span>Potential job value</span><strong>'+money(c.estimated_value)+'</strong></div>';
+  document.getElementById('timeline').innerHTML = events.map((e,i)=>
+    '<div class="event" id="event-'+i+'"><div class="time-pill">'+formatSeconds(e.seconds_from_start)+'</div><div><strong>'+escapeHtml(e.title)+'</strong><p>'+escapeHtml(e.detail)+'</p><span class="channel">'+escapeHtml(e.channel || 'system')+'</span></div></div>'
+  ).join('');
+  const outcome = document.getElementById('outcome');
+  outcome.classList.remove('show');
+  outcome.innerHTML = '<strong>Outcome: '+escapeHtml(outcomeTitle(key))+'</strong><p>'+escapeHtml(outcomeText(key, scenario.potential_value))+'</p>';
+  document.getElementById('drawer').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  events.forEach((_,i)=>{
+    timers.push(setTimeout(()=>{
+      const el = document.getElementById('event-'+i);
+      if (el) el.classList.add('visible');
+      if (i === events.length-1) timers.push(setTimeout(()=>outcome.classList.add('show'),420));
+    }, 260 + i*620));
+  });
+}
+
+function outcomeTitle(key) {
+  return {
+    'new-lead':'Appointment booked without manual chasing',
+    'missed-call':'Missed revenue opportunity recovered',
+    'estimate':'High-value estimate brought back to life',
+    'reactivation':'Existing customer turned back into revenue'
+  }[key] || 'Workflow completed';
+}
+function outcomeText(key,value) {
+  const prefix = money(value) + ' potential value';
+  return {
+    'new-lead':prefix+' moved from lead capture to a scheduled appointment with qualification and handoff recorded.',
+    'missed-call':prefix+' was protected even though nobody answered the original phone call.',
+    'estimate':prefix+' was surfaced for a human closer after AI identified the real objection.',
+    'reactivation':prefix+' came from the existing customer database instead of buying a new lead.'
+  }[key] || prefix;
+}
+
+function formatSeconds(s){ s=Number(s); return s<60 ? '00:'+String(s).padStart(2,'0') : '01:'+String(s-60).padStart(2,'0'); }
+function channelIcon(c){ return ({sms:'✦',call:'☎',ai:'AI',calendar:'✓',crm:'↗',web:'+'})[c] || '•'; }
+function closeDrawer(){ timers.forEach(clearTimeout); document.getElementById('drawer').classList.remove('show'); document.body.style.overflow=''; }
+function drawerBackdrop(e){ if(e.target.id==='drawer') closeDrawer(); }
+function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+function calculateROI() {
+  const company = document.getElementById('companyName').value || 'Your Company';
+  const leads = Math.max(0, Number(document.getElementById('monthlyLeads').value)||0);
+  const avg = Math.max(0, Number(document.getElementById('avgJob').value)||0);
+  const missed = Math.min(100, Math.max(0, Number(document.getElementById('missedRate').value)||0))/100;
+  const close = Math.min(100, Math.max(0, Number(document.getElementById('closeRate').value)||0))/100;
+  const estimates = Math.max(0, Number(document.getElementById('openEstimates').value)||0);
+  const db = Math.max(0, Number(document.getElementById('databaseSize').value)||0);
+
+  const missedCalls = leads * missed * avg * Math.max(.12, close) * .45;
+  const slowResponse = leads * (1-missed) * avg * .035;
+  const estimateRecovery = estimates * avg * .105;
+  const reactivation = db * .006 * avg * .18;
+  const repeat = db * .0018 * avg;
+  const items = [
+    ['Missed calls', missedCalls],
+    ['Slow lead response', slowResponse],
+    ['Unclosed estimates', estimateRecovery],
+    ['Database reactivation', reactivation],
+    ['Repeat business', repeat]
+  ];
+  const total = items.reduce((s,x)=>s+x[1],0);
+  const max = Math.max(...items.map(x=>x[1]),1);
+  document.getElementById('roiCompany').textContent = company+' opportunity model';
+  document.getElementById('totalOpportunity').textContent = money(total)+'/mo';
+  document.getElementById('leaks').innerHTML = items.map(x =>
+    '<div class="leak"><span>'+x[0]+'</span><b>'+money(x[1])+'</b><div class="bar"><i style="width:'+Math.max(6,(x[1]/max)*100)+'%"></i></div></div>'
+  ).join('');
+}
+
+function escapeHtml(v){
+  return String(v ?? '').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+function renderAll(){ renderMetrics(); renderScenarios(); renderPipeline(); renderActivity(); calculateROI(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+loadData();
+</script>
+</body>
+</html>
