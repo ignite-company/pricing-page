@@ -486,6 +486,13 @@
         grid-template-columns: minmax(0,1fr) !important;
         gap: 9px;
       }
+
+      .live-workspace { grid-template-columns:minmax(0,1fr) !important; }
+      .live-console { min-height:370px; }
+      .live-lead-strip { grid-template-columns:1fr 1fr; }
+      .connector-note { grid-template-columns:34px 1fr; }
+      .connector-note .connector-state { grid-column:2; justify-self:start; }
+
       .package { min-width: 0; }
       .package-head { gap: 8px; }
       .price { font-size: 21px; white-space: nowrap; }
@@ -538,6 +545,176 @@
       .system-map { grid-template-columns: 1fr 1fr !important; }
     }
 
+
+    .live-workspace {
+      display:grid;
+      grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);
+      gap:14px;
+    }
+    .live-config, .live-console { min-width:0; }
+    .live-kicker {
+      font-size:9px;
+      font-weight:850;
+      letter-spacing:.09em;
+      color:var(--green-dark);
+      margin-bottom:7px;
+    }
+    .live-form { margin-top:15px; }
+    .live-launch {
+      width:100%;
+      min-height:46px;
+      margin-top:12px;
+      font-size:12px;
+    }
+    .connector-note {
+      display:grid;
+      grid-template-columns:34px 1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-top:12px;
+      padding:11px;
+      border:1px solid var(--line);
+      background:#f7faf8;
+      border-radius:14px;
+    }
+    .connector-icon {
+      width:34px;height:34px;border-radius:11px;
+      display:grid;place-items:center;
+      background:#fff;border:1px solid var(--line);
+      font-size:13px;
+    }
+    .connector-note strong { display:block; font-size:10px; }
+    .connector-note span { display:block; font-size:9px; color:var(--muted); line-height:1.35; margin-top:2px; }
+    .connector-note .connector-state {
+      font-size:8px;
+      margin:0;
+      font-weight:850;
+      color:var(--green-dark);
+      background:var(--green-soft);
+      padding:6px 7px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .live-console {
+      min-height:430px;
+      display:flex;
+      flex-direction:column;
+    }
+    .live-console-head {
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .live-console-head h4 { font-size:17px; }
+    .live-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      padding:7px 9px;
+      font-size:8px;
+      font-weight:850;
+      color:#5c6662;
+      white-space:nowrap;
+    }
+    .live-badge i {
+      width:7px;height:7px;border-radius:50%;
+      background:#aeb6b2;
+    }
+    .live-badge.running { color:var(--green-dark); background:var(--green-soft); border-color:rgba(24,160,106,.18); }
+    .live-badge.running i { background:var(--green); box-shadow:0 0 0 4px rgba(24,160,106,.12); animation:livePulse 1.3s infinite; }
+    @keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.42} }
+    .live-empty {
+      flex:1;
+      min-height:300px;
+      display:grid;
+      place-items:center;
+      align-content:center;
+      text-align:center;
+      gap:6px;
+      padding:30px;
+      color:var(--muted);
+    }
+    .live-empty-icon {
+      width:52px;height:52px;border-radius:17px;
+      display:grid;place-items:center;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      font-size:24px;
+      margin-bottom:5px;
+    }
+    .live-empty strong { color:var(--text); font-size:13px; }
+    .live-empty span { max-width:390px; font-size:10px; line-height:1.5; }
+    .live-session { margin-top:14px; }
+    .live-lead-strip {
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:7px;
+      margin-bottom:10px;
+    }
+    .live-lead-strip > div {
+      background:#f6f8f7;
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:9px;
+      min-width:0;
+    }
+    .live-lead-strip span {
+      display:block;
+      font-size:8px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      font-weight:800;
+    }
+    .live-lead-strip strong {
+      display:block;
+      margin-top:4px;
+      font-size:10px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .live-stream {
+      display:grid;
+      gap:7px;
+      max-height:285px;
+      overflow:auto;
+    }
+    .live-event {
+      display:grid;
+      grid-template-columns:34px 1fr auto;
+      gap:9px;
+      align-items:start;
+      padding:10px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:13px;
+      animation:liveIn .24s ease both;
+    }
+    @keyframes liveIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:none} }
+    .live-event-icon {
+      width:34px;height:34px;border-radius:10px;
+      background:#f4f7f5;border:1px solid var(--line);
+      display:grid;place-items:center;font-size:10px;font-weight:850;
+    }
+    .live-event strong { display:block; font-size:10px; }
+    .live-event p { margin:3px 0 0; font-size:9px; color:var(--muted); line-height:1.4; }
+    .live-event time { font-size:8px; color:#929b97; white-space:nowrap; padding-top:2px; }
+    .live-session-actions {
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+    }
+    .live-session-actions span { font-size:8px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+
   </style>
 </head>
 <body>
@@ -549,7 +726,8 @@
     </div>
     <nav class="nav">
       <a class="active" href="#overview"><i class="doticon"></i>Overview</a>
-      <a href="#scenarios"><i class="doticon"></i>Live Scenarios</a>
+      <a href="#live"><i class="doticon"></i>Live Demo</a>
+      <a href="#scenarios"><i class="doticon"></i>Scenarios</a>
       <a href="#pipeline"><i class="doticon"></i>Pipeline</a>
       <a href="#roi"><i class="doticon"></i>Revenue Leak Audit</a>
       <a href="#system"><i class="doticon"></i>System Map</a>
@@ -569,7 +747,7 @@
       <div class="top-actions">
         <div class="status"><i></i><span id="dataStatus">Connected to Supabase</span></div>
         <button class="btn light" onclick="scrollToId('roi')">Personalize Demo</button>
-        <button class="btn dark" onclick="runScenario('new-lead')">Run Live Lead</button>
+        <button class="btn dark" onclick="scrollToId('live')">Start Live Demo</button>
       </div>
     </div>
 
@@ -599,6 +777,74 @@
         <span class="status"><i></i>Demo mode ready</span>
       </div>
       <div id="scenarioGrid" class="scenario-grid"></div>
+    </section>
+
+
+    <section id="live">
+      <div class="section-head">
+        <div>
+          <h3>Live Demo</h3>
+          <p>Enter a real lead during the meeting and watch a live backend session move through the Revenue OS.</p>
+        </div>
+        <span class="status" id="liveBackendStatus"><i></i>Live backend ready</span>
+      </div>
+
+      <div class="live-workspace">
+        <div class="card live-config">
+          <div class="live-kicker">LIVE SYSTEM TEST</div>
+          <h4>Drop a lead into the system</h4>
+          <div class="card-sub">Use the prospect's own company and a real example customer. The session is written to Supabase and expires automatically.</div>
+
+          <div class="form-grid live-form">
+            <div class="field full"><label>Company</label><input id="liveCompany" value="Summit Heating & Air" /></div>
+            <div class="field"><label>Customer name</label><input id="liveLeadName" value="Jordan Miller" /></div>
+            <div class="field"><label>Potential job value</label><input id="liveValue" type="number" value="6500" /></div>
+            <div class="field full"><label>What do they need?</label><input id="liveService" value="AC replacement estimate" /></div>
+            <div class="field full"><label>Lead source</label><input id="liveSource" value="Website / Google Ads" /></div>
+          </div>
+
+          <button class="btn dark live-launch" id="liveLaunchBtn" onclick="startLiveDemo()">Launch Live Lead</button>
+
+          <div class="connector-note">
+            <div class="connector-icon">☎</div>
+            <div>
+              <strong>Phone AI bridge</strong>
+              <span>The event pipeline is ready. Connecting the Retell phone agent is the last step for real calls and transcripts.</span>
+            </div>
+            <span class="connector-state">CONNECTOR READY</span>
+          </div>
+        </div>
+
+        <div class="card live-console">
+          <div class="live-console-head">
+            <div>
+              <div class="live-kicker">REVENUE OS EVENT STREAM</div>
+              <h4 id="liveConsoleTitle">Waiting for a live lead</h4>
+            </div>
+            <span class="live-badge" id="liveBadge"><i></i>STANDBY</span>
+          </div>
+
+          <div id="liveEmpty" class="live-empty">
+            <div class="live-empty-icon">+</div>
+            <strong>Nothing pre-recorded here.</strong>
+            <span>Launch a lead on the left. The live session and every event will be created in the backend as you watch.</span>
+          </div>
+
+          <div id="liveSession" class="live-session" hidden>
+            <div class="live-lead-strip">
+              <div><span>Lead</span><strong id="liveLeadDisplay">—</strong></div>
+              <div><span>Service</span><strong id="liveServiceDisplay">—</strong></div>
+              <div><span>Value</span><strong id="liveValueDisplay">—</strong></div>
+              <div><span>Status</span><strong id="liveStatusDisplay">Received</strong></div>
+            </div>
+            <div class="live-stream" id="liveStream"></div>
+            <div class="live-session-actions">
+              <button class="btn light" onclick="resetLiveDemo()">New Live Lead</button>
+              <span id="liveSessionId">Secure session</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="pipeline" class="split">
@@ -647,7 +893,10 @@
     <section id="system">
       <div class="card">
         <div class="section-head" style="margin-bottom:0">
-          <div><h3>The Ignite Revenue OS</h3><p>The $3,500 sprint fixes the most valuable bottlenecks. The $7,500 implementation connects the full customer journey.</p></div>
+          <div>
+            <h3>The Ignite Revenue OS</h3>
+            <p>One connected operating layer from first contact through follow-up, reactivation, reviews, and reporting.</p>
+          </div>
         </div>
         <div class="system-map">
           <div class="node active"><span>01 • Capture</span><strong>Ads, forms, phone calls, referrals, website</strong></div>
@@ -656,20 +905,8 @@
           <div class="node active"><span>04 • Convert</span><strong>Booking, pipeline movement, sales handoff, reminders</strong></div>
           <div class="node active"><span>05 • Recover</span><strong>Estimate follow-up, nurture, reactivation, reviews</strong></div>
         </div>
-
-        <div class="packages">
-          <div class="package">
-            <div class="package-head"><div><h5>AI Implementation Sprint</h5><div class="card-sub">Fix the highest-value bottlenecks first.</div></div><div class="price">$3,500</div></div>
-            <div class="modules">
-              <span class="module">Lead Response</span><span class="module">Missed Calls</span><span class="module">Pipeline Automation</span><span class="module">Estimate Follow-Up</span>
-            </div>
-          </div>
-          <div class="package featured">
-            <div class="package-head"><div><h5>Revenue Operating System</h5><div class="card-sub">Connect the entire customer journey.</div></div><div class="price">$7,500</div></div>
-            <div class="modules">
-              <span class="module">Lead Capture</span><span class="module">AI Response</span><span class="module">Voice AI</span><span class="module">Qualification</span><span class="module">Booking</span><span class="module">CRM</span><span class="module">Estimates</span><span class="module">Nurture</span><span class="module">Reactivation</span><span class="module">Reviews</span><span class="module">Reporting</span><span class="module">Integrations</span>
-            </div>
-          </div>
+        <div class="modules" style="margin-top:14px">
+          <span class="module">Lead Capture</span><span class="module">AI Response</span><span class="module">Voice AI</span><span class="module">Qualification</span><span class="module">Booking</span><span class="module">CRM</span><span class="module">Estimate Follow-Up</span><span class="module">Nurture</span><span class="module">Reactivation</span><span class="module">Reviews</span><span class="module">Reporting</span><span class="module">Integrations</span>
         </div>
       </div>
     </section>
@@ -678,7 +915,7 @@
 
 <nav class="mobile-nav">
   <a class="active" href="#overview">Overview</a>
-  <a href="#scenarios">Scenarios</a>
+  <a href="#live">Live</a>
   <a href="#pipeline">Pipeline</a>
   <a href="#roi">ROI</a>
   <a href="#system">System</a>
@@ -703,6 +940,9 @@
 <script>
 const SUPABASE_URL = 'https://ccchujdxkbcbjuyjhbez.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_yk34HOJdFoAPgLxltx_pbA_Zfo2zjg2';
+const LIVE_DEMO_ENDPOINT = SUPABASE_URL + '/functions/v1/live-demo-session';
+let liveDemo = null;
+let liveDemoTimers = [];
 
 const fallback = {
   organization: { name:'Summit Heating & Air', monthly_leads:180, avg_job_value:1800, close_rate:35, missed_call_rate:20, database_size:3400 },
@@ -837,6 +1077,170 @@ function renderActivity() {
   document.getElementById('activityStream').innerHTML = recent.map((e,i) =>
     '<div class="activity-item"><div class="activity-icon">'+channelIcon(e.channel)+'</div><div><strong>'+escapeHtml(e.title)+'</strong><span>'+escapeHtml(e.detail)+'</span></div><time>'+(i+1)+'m</time></div>'
   ).join('');
+}
+
+
+async function liveApi(payload) {
+  const res = await fetch(LIVE_DEMO_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type':'application/json', apikey:SUPABASE_KEY },
+    body: JSON.stringify(payload)
+  });
+  const body = await res.json().catch(()=>({}));
+  if (!res.ok) throw new Error(body.error || 'Live demo request failed');
+  return body;
+}
+
+async function startLiveDemo() {
+  liveDemoTimers.forEach(clearTimeout);
+  liveDemoTimers = [];
+  const company = document.getElementById('liveCompany').value.trim() || 'Live Demo Company';
+  const lead = document.getElementById('liveLeadName').value.trim() || 'Live Lead';
+  const service = document.getElementById('liveService').value.trim() || 'Service request';
+  const source = document.getElementById('liveSource').value.trim() || 'Live Demo';
+  const value = Math.max(0, Number(document.getElementById('liveValue').value) || 0);
+  const btn = document.getElementById('liveLaunchBtn');
+
+  btn.disabled = true;
+  btn.textContent = 'Creating live session...';
+  setLiveBadge('CONNECTING');
+
+  try {
+    const created = await liveApi({
+      action:'create',
+      company_name:company,
+      lead_name:lead,
+      service,
+      estimated_value:value,
+      source
+    });
+
+    liveDemo = {
+      id: created.session.id,
+      token: created.token,
+      lead,
+      company,
+      service,
+      value
+    };
+
+    document.getElementById('liveEmpty').hidden = true;
+    document.getElementById('liveSession').hidden = false;
+    document.getElementById('liveConsoleTitle').textContent = company + ' • live lead';
+    document.getElementById('liveLeadDisplay').textContent = lead;
+    document.getElementById('liveServiceDisplay').textContent = service;
+    document.getElementById('liveValueDisplay').textContent = money(value);
+    document.getElementById('liveSessionId').textContent = 'Session ' + liveDemo.id.slice(0,8);
+    setLiveBadge('LIVE');
+    await pollLiveDemo();
+
+    const sequence = [
+      {
+        delay:900,
+        event_type:'ai.response.prepared',
+        title:'AI response prepared',
+        detail:'The system recognized the service request and created the immediate response path for ' + lead + '.',
+        channel:'ai',
+        status:'contacted'
+      },
+      {
+        delay:2100,
+        event_type:'lead.qualified',
+        title:'Lead qualified and routed',
+        detail:'Intent, service type, potential value, and routing rules were evaluated. This lead is now prioritized for follow-up.',
+        channel:'ai',
+        status:'qualified'
+      },
+      {
+        delay:3500,
+        event_type:'next_action.selected',
+        title:'Next best action selected',
+        detail:'The Revenue OS selected immediate human or voice-AI contact instead of letting the opportunity sit untouched.',
+        channel:'system',
+        status:'action_ready'
+      },
+      {
+        delay:5000,
+        event_type:'pipeline.updated',
+        title:'Pipeline and handoff updated',
+        detail:'The opportunity is now visible with context, value, source, and the recommended next action attached.',
+        channel:'crm',
+        status:'handoff_ready'
+      }
+    ];
+
+    sequence.forEach(item => {
+      liveDemoTimers.push(setTimeout(async ()=>{
+        if (!liveDemo) return;
+        try {
+          await liveApi({
+            action:'append',
+            session_id:liveDemo.id,
+            token:liveDemo.token,
+            event_type:item.event_type,
+            title:item.title,
+            detail:item.detail,
+            channel:item.channel,
+            status:item.status
+          });
+          await pollLiveDemo();
+        } catch(e) {
+          console.error(e);
+        }
+      }, item.delay));
+    });
+  } catch (e) {
+    setLiveBadge('ERROR');
+    document.getElementById('liveBackendStatus').innerHTML = '<i style="background:#d65252"></i>Live backend unavailable';
+    alert('The live demo backend could not start. The controlled scenarios below are still available.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Launch Live Lead';
+  }
+}
+
+async function pollLiveDemo() {
+  if (!liveDemo) return;
+  const result = await liveApi({ action:'poll', session_id:liveDemo.id, token:liveDemo.token });
+  const session = result.session;
+  document.getElementById('liveStatusDisplay').textContent = humanStatus(session.status);
+  const events = result.events || [];
+  document.getElementById('liveStream').innerHTML = events.map(e =>
+    '<div class="live-event">'+
+      '<div class="live-event-icon">'+channelIcon(e.channel)+'</div>'+
+      '<div><strong>'+escapeHtml(e.title)+'</strong><p>'+escapeHtml(e.detail)+'</p></div>'+
+      '<time>'+new Date(e.created_at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'})+'</time>'+
+    '</div>'
+  ).join('');
+  const stream = document.getElementById('liveStream');
+  stream.scrollTop = stream.scrollHeight;
+}
+
+function humanStatus(status) {
+  return ({
+    received:'Received',
+    contacted:'Contacted',
+    qualified:'Qualified',
+    action_ready:'Action Ready',
+    handoff_ready:'Handoff Ready'
+  })[status] || String(status || 'Live');
+}
+
+function setLiveBadge(label) {
+  const badge = document.getElementById('liveBadge');
+  badge.classList.toggle('running', label === 'LIVE' || label === 'CONNECTING');
+  badge.innerHTML = '<i></i>'+label;
+}
+
+function resetLiveDemo() {
+  liveDemoTimers.forEach(clearTimeout);
+  liveDemoTimers = [];
+  liveDemo = null;
+  document.getElementById('liveEmpty').hidden = false;
+  document.getElementById('liveSession').hidden = true;
+  document.getElementById('liveStream').innerHTML = '';
+  document.getElementById('liveConsoleTitle').textContent = 'Waiting for a live lead';
+  setLiveBadge('STANDBY');
 }
 
 function runScenario(key) {
