@@ -2,719 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f5f7f6" />
-  <title>Ignite Revenue OS Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f6f5" />
+  <title>Ignite Client Acquisition System</title>
   <style>
-    :root {
-      --bg: #f3f5f4;
-      --panel: rgba(255,255,255,.82);
-      --panel-strong: #fff;
-      --text: #101614;
-      --muted: #66706c;
-      --line: rgba(16,22,20,.09);
-      --green: #18a06a;
-      --green-dark: #0d7b50;
-      --green-soft: #eaf8f1;
-      --blue: #2d74da;
-      --blue-soft: #edf4ff;
-      --orange: #dd7b1d;
-      --orange-soft: #fff3e7;
-      --purple: #7b55d8;
-      --purple-soft: #f3efff;
-      --red: #d65252;
-      --red-soft: #fff0f0;
-      --shadow: 0 18px 55px rgba(18, 37, 30, .09);
-      --radius: 22px;
+    :root{
+      --bg:#f3f5f4;--panel:#fff;--panel2:#f8faf9;--text:#111715;--muted:#66706c;
+      --line:rgba(17,23,21,.09);--green:#18a06a;--green2:#0d7b50;--greenSoft:#eaf8f1;
+      --blue:#3478df;--blueSoft:#edf4ff;--orange:#d67a22;--orangeSoft:#fff3e8;
+      --red:#cf5252;--redSoft:#fff0f0;--shadow:0 18px 55px rgba(18,37,30,.08);
+      --radius:22px;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+      letter-spacing:-.012em;
       background:
-        radial-gradient(circle at 15% -10%, rgba(24,160,106,.13), transparent 34rem),
-        radial-gradient(circle at 95% 15%, rgba(45,116,218,.08), transparent 28rem),
+        radial-gradient(circle at 10% -10%,rgba(24,160,106,.12),transparent 34rem),
+        radial-gradient(circle at 95% 14%,rgba(52,120,223,.08),transparent 28rem),
         var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
-      letter-spacing: -.012em;
+      overflow-x:hidden;
     }
-    button, input { font: inherit; }
-    button { cursor: pointer; }
-    .app { min-height: 100vh; display: grid; grid-template-columns: 238px 1fr; }
-    .sidebar {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      padding: 22px 18px;
-      border-right: 1px solid var(--line);
-      background: rgba(247,249,248,.8);
-      backdrop-filter: blur(24px);
-      z-index: 10;
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .app{display:grid;grid-template-columns:238px minmax(0,1fr);min-height:100vh}
+    .sidebar{
+      position:sticky;top:0;height:100vh;padding:22px 18px;border-right:1px solid var(--line);
+      background:rgba(247,249,248,.86);backdrop-filter:blur(24px);z-index:20;
     }
-    .brand { display: flex; align-items: center; gap: 11px; padding: 6px 9px 22px; }
-    .brandmark {
-      width: 35px; height: 35px; border-radius: 11px;
-      display: grid; place-items: center;
-      background: #101614; color: white; font-weight: 800;
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
-    }
-    .brand strong { font-size: 15px; display:block; }
-    .brand span { font-size: 11px; color: var(--muted); }
-    .nav { display: grid; gap: 5px; }
-    .nav a {
-      text-decoration: none; color: #4a5551;
-      padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 650;
-      display:flex; align-items:center; gap:10px;
-    }
-    .nav a:hover, .nav a.active { background: white; color: var(--text); box-shadow: 0 6px 18px rgba(18,37,30,.05); }
-    .doticon { width: 8px; height: 8px; border-radius: 50%; background: #b6bdb9; }
-    .nav a.active .doticon { background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
-    .sidebar-foot {
-      position: absolute; left:18px; right:18px; bottom:20px;
-      padding: 14px; background: #101614; color:white; border-radius:16px;
-    }
-    .sidebar-foot small { display:block; color:#b8c2be; margin-top:4px; line-height:1.35; }
-    main { min-width:0; padding: 26px 30px 80px; }
-    .topbar { display:flex; justify-content:space-between; gap:18px; align-items:center; margin-bottom:22px; }
-    .eyebrow { color: var(--green-dark); font-size: 11px; font-weight: 800; letter-spacing:.08em; text-transform:uppercase; }
-    h1 { margin:5px 0 0; font-size: clamp(26px, 4vw, 39px); line-height:1.03; letter-spacing:-.045em; }
-    .top-actions { display:flex; align-items:center; gap:10px; }
-    .status {
-      display:flex; align-items:center; gap:7px; padding:9px 12px;
-      border:1px solid var(--line); background:rgba(255,255,255,.7); border-radius:999px;
-      font-size:12px; font-weight:700; color:#46524e;
-    }
-    .status i { width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px var(--green-soft); }
-    .btn {
-      border:0; border-radius:12px; padding:10px 14px; font-weight:750; font-size:12px;
-      transition:.18s ease; display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    }
-    .btn:active { transform: scale(.98); }
-    .btn.dark { background:#111715; color:#fff; box-shadow:0 8px 20px rgba(17,23,21,.15); }
-    .btn.light { background:#fff; color:#1b2421; border:1px solid var(--line); }
-    .hero {
-      padding: 25px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,255,255,.76)),
-        radial-gradient(circle at 85% 20%, rgba(24,160,106,.12), transparent 24rem);
-      border:1px solid var(--line); border-radius:28px; box-shadow:var(--shadow);
-      display:grid; grid-template-columns:1.35fr .65fr; gap:22px; overflow:hidden;
-    }
-    .hero h2 { font-size: clamp(28px, 4.2vw, 48px); letter-spacing:-.055em; line-height:1.02; margin:9px 0 13px; max-width:840px; }
-    .hero p { color:#5e6965; font-size:14px; line-height:1.55; max-width:720px; margin:0; }
-    .hero-right { border-left:1px solid var(--line); padding-left:22px; display:grid; align-content:center; gap:12px; }
-    .hero-stat { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:12px; border-bottom:1px solid var(--line); }
-    .hero-stat:last-child { border-bottom:0; padding-bottom:0; }
-    .hero-stat span { color:var(--muted); font-size:12px; }
-    .hero-stat strong { font-size:25px; letter-spacing:-.04em; }
-    section { margin-top:24px; }
-    .section-head { display:flex; justify-content:space-between; gap:14px; align-items:end; margin-bottom:12px; }
-    .section-head h3 { margin:0; font-size:20px; letter-spacing:-.035em; }
-    .section-head p { margin:3px 0 0; color:var(--muted); font-size:12px; }
-    .metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
-    .metric {
-      background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:15px;
-      box-shadow:0 8px 24px rgba(18,37,30,.04); min-height:112px;
-    }
-    .metric small { display:block; color:var(--muted); font-size:11px; line-height:1.3; min-height:29px; }
-    .metric strong { display:block; font-size:26px; letter-spacing:-.045em; margin-top:14px; }
-    .metric .positive { color:var(--green-dark); }
-    .scenario-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
-    .scenario {
-      text-align:left; border:1px solid var(--line); background:var(--panel-strong); border-radius:20px;
-      padding:17px; min-height:205px; position:relative; overflow:hidden; transition:.2s ease;
-      box-shadow:0 8px 24px rgba(18,37,30,.04);
-    }
-    .scenario:hover { transform: translateY(-2px); box-shadow:0 16px 34px rgba(18,37,30,.08); }
-    .scenario .chip { display:inline-flex; border-radius:999px; padding:6px 8px; font-size:10px; font-weight:800; }
-    .scenario.green .chip{background:var(--green-soft); color:var(--green-dark)}
-    .scenario.blue .chip{background:var(--blue-soft); color:var(--blue)}
-    .scenario.orange .chip{background:var(--orange-soft); color:var(--orange)}
-    .scenario.purple .chip{background:var(--purple-soft); color:var(--purple)}
-    .scenario h4 { font-size:18px; margin:16px 0 7px; letter-spacing:-.03em; }
-    .scenario p { color:var(--muted); font-size:12px; line-height:1.45; margin:0; }
-    .scenario footer { position:absolute; left:17px; right:17px; bottom:15px; display:flex; justify-content:space-between; align-items:center; }
-    .scenario footer strong { font-size:14px; }
-    .scenario footer span { font-size:11px; color:var(--muted); }
-    .split { display:grid; grid-template-columns:1.08fr .92fr; gap:14px; }
-    .card { background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:18px; box-shadow:0 8px 24px rgba(18,37,30,.04); }
-    .card h4 { margin:0; font-size:16px; letter-spacing:-.025em; }
-    .card-sub { color:var(--muted); font-size:11px; margin-top:4px; }
-    .pipeline { display:grid; grid-template-columns:repeat(5,minmax(140px,1fr)); gap:8px; overflow-x:auto; padding-bottom:4px; }
-    .stage { min-width:145px; background:#f7f9f8; border:1px solid var(--line); border-radius:15px; padding:10px; }
-    .stage-head { display:flex; justify-content:space-between; font-size:10px; font-weight:800; color:#53605b; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em; }
-    .opp { background:#fff; border:1px solid var(--line); border-radius:12px; padding:10px; margin-top:7px; }
-    .opp strong { display:block; font-size:11px; }
-    .opp span { display:block; color:var(--muted); font-size:10px; margin-top:3px; }
-    .opp b { display:block; margin-top:7px; font-size:12px; }
-    .activity { display:grid; gap:8px; max-height:330px; overflow:auto; padding-right:2px; }
-    .activity-item { display:grid; grid-template-columns:28px 1fr auto; gap:10px; align-items:start; padding:10px; background:#f8faf9; border:1px solid var(--line); border-radius:13px; }
-    .activity-icon { width:28px; height:28px; border-radius:9px; display:grid; place-items:center; background:#fff; border:1px solid var(--line); font-size:11px; }
-    .activity-item strong { font-size:11px; display:block; }
-    .activity-item span { font-size:10px; color:var(--muted); line-height:1.35; display:block; margin-top:3px; }
-    .activity-item time { font-size:9px; color:#89928f; white-space:nowrap; }
-    .roi-wrap { display:grid; grid-template-columns:.9fr 1.1fr; gap:14px; }
-    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
-    .field { display:grid; gap:5px; }
-    .field.full { grid-column:1/-1; }
-    .field label { color:var(--muted); font-size:10px; font-weight:750; }
-    .field input {
-      width:100%; border:1px solid var(--line); background:#fff; border-radius:11px; padding:10px 11px; outline:none; color:var(--text); font-weight:700;
-    }
-    .field input:focus { border-color:rgba(24,160,106,.4); box-shadow:0 0 0 4px var(--green-soft); }
-    .opportunity {
-      background:#101614; color:white; border-radius:20px; padding:20px;
-      display:flex; flex-direction:column; justify-content:space-between;
-    }
-    .opportunity small { color:#9eaaa5; font-size:10px; text-transform:uppercase; letter-spacing:.07em; font-weight:800; }
-    .opportunity h4 { font-size:35px; margin:7px 0 4px; letter-spacing:-.055em; }
-    .opportunity p { margin:0; color:#bac4c0; font-size:11px; line-height:1.45; }
-    .leaks { margin-top:16px; display:grid; gap:8px; }
-    .leak { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
-    .leak span { font-size:11px; color:#cad2cf; }
-    .leak b { font-size:11px; }
-    .bar { height:5px; border-radius:20px; background:#25302c; overflow:hidden; grid-column:1/-1; margin-top:-4px; }
-    .bar i { display:block; height:100%; background:#31c487; border-radius:20px; }
-    .note { color:#8f9995; font-size:9px; margin-top:12px; line-height:1.4; }
-    .system-map { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; align-items:stretch; margin-top:14px; }
-    .node { border:1px solid var(--line); background:#fff; padding:12px; border-radius:14px; min-height:84px; }
-    .node span { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; font-weight:800; }
-    .node strong { display:block; font-size:11px; margin-top:10px; line-height:1.25; }
-    .node.active { border-color:rgba(24,160,106,.28); background:var(--green-soft); }
-    .packages { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
-    .package { border:1px solid var(--line); border-radius:18px; padding:16px; background:#fff; }
-    .package.featured { border-color:rgba(24,160,106,.35); box-shadow:0 10px 30px rgba(24,160,106,.08); }
-    .package-head { display:flex; justify-content:space-between; align-items:start; gap:12px; }
-    .package h5 { margin:0; font-size:15px; }
-    .price { font-size:23px; font-weight:850; letter-spacing:-.045em; }
-    .modules { display:flex; flex-wrap:wrap; gap:6px; margin-top:13px; }
-    .module { font-size:9px; font-weight:750; padding:6px 8px; border-radius:999px; background:#f1f3f2; color:#5d6864; }
-    .featured .module { background:var(--green-soft); color:var(--green-dark); }
-    .demo-drawer {
-      position:fixed; inset:0; background:rgba(10,14,12,.38); backdrop-filter:blur(8px);
-      display:none; align-items:center; justify-content:center; padding:20px; z-index:100;
-    }
-    .demo-drawer.show { display:flex; }
-    .demo-panel {
-      width:min(920px,100%); max-height:min(760px,92vh); overflow:auto;
-      background:#f7f9f8; border:1px solid rgba(255,255,255,.7); border-radius:28px; box-shadow:0 32px 100px rgba(0,0,0,.22);
-    }
-    .demo-panel-head { position:sticky; top:0; z-index:2; display:flex; justify-content:space-between; gap:16px; align-items:center; padding:18px 20px; border-bottom:1px solid var(--line); background:rgba(247,249,248,.9); backdrop-filter:blur(22px); }
-    .demo-panel-head h3 { margin:0; font-size:18px; }
-    .close { width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:18px; }
-    .demo-body { display:grid; grid-template-columns:.9fr 1.1fr; gap:12px; padding:14px; }
-    .lead-card { background:#111715; color:white; border-radius:20px; padding:18px; align-self:start; position:sticky; top:78px; }
-    .lead-card .label { color:#96a19d; font-size:9px; text-transform:uppercase; letter-spacing:.07em; font-weight:800; }
-    .lead-card h4 { font-size:24px; margin:7px 0 3px; }
-    .lead-card p { color:#bcc5c1; margin:0 0 16px; font-size:11px; }
-    .lead-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .lead-data { background:#1b2421; border-radius:12px; padding:10px; }
-    .lead-data span { font-size:9px; color:#8f9b96; display:block; }
-    .lead-data strong { font-size:11px; display:block; margin-top:4px; }
-    .value { margin-top:12px; padding:14px; border-radius:14px; background:linear-gradient(135deg,#164532,#1c6646); }
-    .value span { font-size:9px; color:#aad7c2; }
-    .value strong { display:block; font-size:24px; margin-top:4px; }
-    .timeline { display:grid; gap:9px; }
-    .event {
-      opacity:0; transform:translateY(8px); transition:.35s ease;
-      background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px;
-      display:grid; grid-template-columns:42px 1fr; gap:12px;
-    }
-    .event.visible { opacity:1; transform:translateY(0); }
-    .time-pill { background:#f2f5f3; border-radius:10px; padding:8px 4px; text-align:center; font-size:9px; font-weight:850; color:#4b5752; height:max-content; }
-    .event strong { display:block; font-size:12px; }
-    .event p { margin:4px 0 0; color:var(--muted); font-size:10px; line-height:1.45; }
-    .event .channel { display:inline-block; margin-top:8px; background:var(--green-soft); color:var(--green-dark); border-radius:999px; padding:4px 7px; font-size:8px; font-weight:850; text-transform:uppercase; letter-spacing:.05em; }
-    .outcome {
-      display:none; margin-top:10px; border-radius:18px; padding:16px;
-      background:var(--green-soft); border:1px solid rgba(24,160,106,.2);
-    }
-    .outcome.show { display:block; }
-    .outcome strong { font-size:14px; }
-    .outcome p { margin:5px 0 0; font-size:10px; color:#4a6258; line-height:1.4; }
-    .mobile-nav { display:none; }
-    @media (max-width: 1100px) {
-      .metrics { grid-template-columns:repeat(3,1fr); }
-      .scenario-grid { grid-template-columns:repeat(2,1fr); }
-      .system-map { grid-template-columns:repeat(3,1fr); }
-    }
-    @media (max-width: 820px) {
-      .app { display:block; }
-      .sidebar { display:none; }
-      main { padding:18px 14px 90px; }
-      .topbar { align-items:flex-start; }
-      .top-actions .status { display:none; }
-      .hero { grid-template-columns:1fr; padding:19px; }
-      .hero-right { border-left:0; border-top:1px solid var(--line); padding:16px 0 0; grid-template-columns:repeat(3,1fr); }
-      .hero-stat { display:block; border-bottom:0; padding:0; }
-      .hero-stat strong { display:block; font-size:19px; margin-top:3px; }
-      .split,.roi-wrap,.demo-body { grid-template-columns:1fr; }
-      .lead-card { position:relative; top:0; }
-      .mobile-nav {
-        display:flex; position:fixed; left:12px; right:12px; bottom:10px; z-index:40;
-        background:rgba(17,23,21,.92); backdrop-filter:blur(22px); padding:7px; border-radius:18px;
-        justify-content:space-around; box-shadow:0 14px 40px rgba(0,0,0,.2);
-      }
-      .mobile-nav a { color:#b7c2bd; text-decoration:none; font-size:9px; font-weight:700; padding:7px 5px; }
-      .mobile-nav a.active { color:white; }
-    }
-    @media (max-width: 570px) {
-      h1 { font-size:29px; }
-      .hero h2 { font-size:31px; }
-      .metrics { grid-template-columns:repeat(2,1fr); }
-      .scenario-grid { grid-template-columns:1fr; }
-      .hero-right { grid-template-columns:1fr 1fr; }
-      .form-grid { grid-template-columns:1fr; }
-      .field.full { grid-column:auto; }
-      .packages { grid-template-columns:1fr; }
-      .system-map { grid-template-columns:1fr 1fr; }
-      .top-actions .btn.light { display:none; }
-    }
-  
-    /* Mobile-first hardening: prevent desktop canvas behavior on phones */
-    @media (max-width: 820px) {
-      html, body {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-      body { background-attachment: scroll; }
-      .app {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-      }
-      .sidebar { display: none !important; }
-      main {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-        margin: 0 !important;
-        padding: 14px 12px 92px !important;
-        overflow: hidden;
-      }
-      .topbar {
-        width: 100%;
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 10px;
-        align-items: start;
-        margin-bottom: 14px;
-      }
-      .topbar > div:first-child { min-width: 0; }
-      .topbar h1 {
-        font-size: 28px !important;
-        line-height: .98;
-        max-width: 230px;
-        overflow-wrap: anywhere;
-      }
-      .topbar .eyebrow {
-        max-width: 240px;
-        font-size: 9px;
-        line-height: 1.35;
-      }
-      .top-actions {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        min-width: 0;
-      }
-      .top-actions .status,
-      .top-actions .btn.light { display: none !important; }
-      .top-actions .btn.dark {
-        white-space: normal;
-        width: 88px;
-        min-height: 48px;
-        padding: 9px 10px;
-        line-height: 1.08;
-        border-radius: 13px;
-        font-size: 10px;
-      }
-      .hero {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important;
-        padding: 18px !important;
-        border-radius: 22px;
-      }
-      .hero h2 {
-        font-size: 30px !important;
-        line-height: 1.02;
-        margin: 8px 0 12px;
-        max-width: none !important;
-      }
-      .hero p {
-        font-size: 12px;
-        line-height: 1.52;
-        max-width: none !important;
-      }
-      .hero-right {
-        display: grid !important;
-        grid-template-columns: repeat(3, minmax(0,1fr)) !important;
-        gap: 8px !important;
-        width: 100% !important;
-        border-left: 0 !important;
-        border-top: 1px solid var(--line);
-        margin-top: 16px;
-        padding: 14px 0 0 !important;
-      }
-      .hero-stat {
-        display: block !important;
-        min-width: 0;
-        padding: 0 !important;
-        border: 0 !important;
-      }
-      .hero-stat span {
-        display: block;
-        font-size: 9px;
-        line-height: 1.25;
-        min-height: 24px;
-      }
-      .hero-stat strong {
-        display: block;
-        margin-top: 4px;
-        font-size: 18px;
-      }
-      section {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        margin-top: 20px;
-      }
-      .section-head {
-        width: 100%;
-        align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 10px;
-      }
-      .section-head h3 { font-size: 18px; }
-      .section-head p { font-size: 10px; line-height: 1.35; }
-      .section-head > .status {
-        flex: 0 0 auto;
-        max-width: 88px;
-        white-space: normal;
-        line-height: 1.1;
-        padding: 8px 9px;
-        font-size: 9px;
-      }
-      .metrics {
-        width: 100%;
-        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-        gap: 8px !important;
-      }
-      .metric {
-        min-width: 0;
-        min-height: 94px;
-        padding: 12px;
-        border-radius: 16px;
-      }
-      .metric small {
-        font-size: 9px;
-        min-height: 24px;
-      }
-      .metric strong {
-        font-size: 23px;
-        margin-top: 10px;
-      }
+    .brand{display:flex;align-items:center;gap:11px;padding:6px 9px 22px}
+    .brandmark{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:#111715;color:#fff;font-weight:850;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+    .brand strong{display:block;font-size:14px}.brand span{font-size:10px;color:var(--muted)}
+    .nav{display:grid;gap:5px}
+    .nav a{display:flex;align-items:center;gap:10px;text-decoration:none;color:#505b57;padding:10px 12px;border-radius:12px;font-size:12px;font-weight:700}
+    .nav a:hover,.nav a.active{background:#fff;color:var(--text);box-shadow:0 6px 18px rgba(18,37,30,.05)}
+    .dot{width:8px;height:8px;border-radius:50%;background:#b4bcb8}.nav a.active .dot{background:var(--green);box-shadow:0 0 0 4px var(--greenSoft)}
+    .side-card{position:absolute;left:18px;right:18px;bottom:18px;background:#111715;color:#fff;border-radius:17px;padding:14px}
+    .side-card strong{font-size:11px}.side-card p{margin:5px 0 0;color:#b8c1bd;font-size:9px;line-height:1.4}
+    main{min-width:0;padding:26px 30px 90px}
+    .topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:18px}
+    .eyebrow{font-size:9px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:var(--green2)}
+    h1{margin:5px 0 0;font-size:clamp(28px,4vw,40px);line-height:1;letter-spacing:-.05em}
+    h2,h3,h4,h5,p{margin-top:0}
+    .actions{display:flex;align-items:center;gap:9px}
+    .btn{border:0;border-radius:12px;padding:10px 14px;font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.18s ease}
+    .btn:active{transform:scale(.985)}
+    .btn.dark{background:#111715;color:#fff;box-shadow:0 8px 20px rgba(17,23,21,.14)}
+    .btn.light{background:#fff;border:1px solid var(--line);color:var(--text)}
+    .btn.green{background:var(--green);color:#fff;box-shadow:0 8px 20px rgba(24,160,106,.18)}
+    .status{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:rgba(255,255,255,.78);border-radius:999px;padding:8px 10px;font-size:9px;font-weight:800;color:#55615d}
+    .status i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--greenSoft)}
 
-      /* Mobile scenario cards become a swipeable row instead of a long vertical wall */
-      .scenario-grid {
-        display: flex !important;
-        width: calc(100% + 12px);
-        max-width: none;
-        overflow-x: auto;
-        gap: 10px !important;
-        padding: 2px 12px 8px 0;
-        margin-right: -12px;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .scenario-grid::-webkit-scrollbar { display: none; }
-      .scenario {
-        flex: 0 0 min(82vw, 330px);
-        min-width: min(82vw, 330px);
-        min-height: 188px;
-        scroll-snap-align: start;
-        padding: 15px;
-      }
-      .scenario h4 { font-size: 17px; margin-top: 14px; }
-      .scenario p { font-size: 11px; }
-      .scenario footer { left: 15px; right: 15px; }
+    .hero{
+      border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.97),rgba(255,255,255,.8));
+      box-shadow:var(--shadow);padding:25px;display:grid;grid-template-columns:minmax(0,1.32fr) minmax(260px,.68fr);gap:22px;overflow:hidden;
+    }
+    .hero h2{font-size:clamp(30px,4.3vw,50px);letter-spacing:-.055em;line-height:1.02;margin:9px 0 13px;max-width:830px}
+    .hero p{font-size:13px;line-height:1.55;color:#5f6a66;max-width:740px;margin:0}
+    .hero-right{border-left:1px solid var(--line);padding-left:22px;display:grid;align-content:center;gap:10px}
+    .hero-point{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+    .hero-point:last-child{border-bottom:0}
+    .hero-point i{width:32px;height:32px;border-radius:10px;background:var(--greenSoft);display:grid;place-items:center;font-style:normal;font-size:12px;color:var(--green2);font-weight:850}
+    .hero-point strong{display:block;font-size:11px}.hero-point span{display:block;font-size:9px;color:var(--muted);margin-top:2px;line-height:1.35}
 
-      .split, .roi-wrap, .demo-body {
-        display: grid !important;
-        grid-template-columns: minmax(0,1fr) !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        gap: 10px !important;
-      }
-      .card {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        padding: 15px;
-        border-radius: 18px;
-      }
-      .pipeline {
-        width: 100%;
-        grid-template-columns: repeat(5, minmax(145px, 145px)) !important;
-        overflow-x: auto;
-        overscroll-behavior-inline: contain;
-        scroll-snap-type: x proximity;
-      }
-      .stage { scroll-snap-align: start; }
-      .activity { max-height: 280px; }
-      .form-grid {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px;
-      }
-      .field.full { grid-column: 1 / -1 !important; }
-      .field input { min-width: 0; font-size: 13px; }
-      .opportunity { border-radius: 18px; padding: 17px; }
-      .opportunity h4 { font-size: 31px; }
-      .system-map {
-        grid-template-columns: repeat(2, minmax(0,1fr)) !important;
-        gap: 8px;
-      }
-      .node { min-width: 0; min-height: 78px; padding: 10px; }
-      .packages {
-        grid-template-columns: minmax(0,1fr) !important;
-        gap: 9px;
-      }
+    section{margin-top:22px;scroll-margin-top:18px}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:11px}
+    .section-head h3{margin:0;font-size:20px;letter-spacing:-.035em}.section-head p{margin:3px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
+    .card{background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 8px 24px rgba(18,37,30,.04)}
+    .card h4{margin:0;font-size:16px;letter-spacing:-.03em}.sub{font-size:10px;color:var(--muted);line-height:1.45;margin-top:4px}
 
-      .live-workspace { grid-template-columns:minmax(0,1fr) !important; }
-      .live-console { min-height:370px; }
-      .live-lead-strip { grid-template-columns:1fr 1fr; }
-      .connector-note { grid-template-columns:34px 1fr; }
-      .connector-note .connector-state { grid-column:2; justify-self:start; }
+    .setup-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:12px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+    .field{display:grid;gap:5px}.field.full{grid-column:1/-1}
+    .field label{font-size:9px;color:var(--muted);font-weight:800}.field input,.field select{width:100%;min-width:0;background:#fff;border:1px solid var(--line);border-radius:11px;padding:10px 11px;outline:0;color:var(--text);font-size:12px;font-weight:700}
+    .field input:focus,.field select:focus{border-color:rgba(24,160,106,.4);box-shadow:0 0 0 4px var(--greenSoft)}
+    .setup-summary{background:#111715;color:#fff;border-radius:19px;padding:18px;display:grid;align-content:space-between;min-height:100%}
+    .setup-summary small{font-size:8px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#99a49f}
+    .setup-summary h4{font-size:30px;letter-spacing:-.05em;margin:6px 0 7px}
+    .setup-summary p{color:#bac4c0;font-size:10px;line-height:1.45;margin:0}
+    .summary-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px}
+    .summary-metric{background:#1b2421;border-radius:12px;padding:10px}
+    .summary-metric span{display:block;font-size:8px;color:#8f9a96}.summary-metric strong{display:block;font-size:15px;margin-top:4px}
 
-      .package { min-width: 0; }
-      .package-head { gap: 8px; }
-      .price { font-size: 21px; white-space: nowrap; }
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .flow-card{overflow:hidden}
+    .flow-title{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .flow-title span{font-size:8px;font-weight:850;border-radius:999px;padding:6px 8px}
+    .before .flow-title span{background:var(--redSoft);color:var(--red)}.after .flow-title span{background:var(--greenSoft);color:var(--green2)}
+    .journey{display:grid;gap:7px;margin-top:14px}
+    .journey-row{display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;border:1px solid var(--line);border-radius:13px;padding:9px;background:#fff}
+    .journey-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:10px;font-weight:850;background:#f3f5f4}
+    .journey-row strong{display:block;font-size:10px}.journey-row p{margin:2px 0 0;font-size:9px;color:var(--muted);line-height:1.35}
+    .journey-loss{font-size:9px;font-weight:850;white-space:nowrap}.before .journey-loss{color:var(--red)}.after .journey-loss{color:var(--green2)}
+    .compare-footer{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .compare-footer span{font-size:9px;color:var(--muted)}.compare-footer strong{font-size:15px}
 
-      .mobile-nav {
-        display: flex !important;
-        left: 10px;
-        right: 10px;
-        bottom: max(8px, env(safe-area-inset-bottom));
-        width: auto;
-        max-width: none;
-        min-width: 0;
-        padding: 6px;
-        border-radius: 16px;
-      }
-      .mobile-nav a {
-        flex: 1 1 0;
-        text-align: center;
-        font-size: 8px;
-        padding: 8px 2px;
-        min-width: 0;
-      }
+    .sim-wrap{display:grid;grid-template-columns:minmax(270px,.72fr) minmax(0,1.28fr);gap:12px}
+    .lead-card{background:#111715;color:#fff;border-radius:18px;padding:17px;position:sticky;top:18px;align-self:start}
+    .lead-card .label{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#98a39f;font-weight:850}
+    .lead-card h4{font-size:24px;margin:7px 0 3px}.lead-card p{font-size:10px;color:#bbc4c0;margin:0 0 14px}
+    .lead-data{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .lead-data div{background:#1c2522;border-radius:11px;padding:9px}
+    .lead-data span{display:block;color:#8e9994;font-size:8px}.lead-data strong{display:block;font-size:10px;margin-top:4px}
+    .lead-value{margin-top:9px;background:linear-gradient(135deg,#164532,#1d6647);border-radius:12px;padding:11px}
+    .lead-value span{font-size:8px;color:#acd8c4}.lead-value strong{display:block;font-size:22px;margin-top:3px}
+    .sim-actions{display:grid;gap:8px;margin-top:11px}
+    .sim-actions .btn{width:100%;min-height:42px}
+    .sim-console{min-height:420px}
+    .console-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+    .console-badge{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:7px 9px;font-size:8px;font-weight:850;background:#fff;color:#65706c}
+    .console-badge i{width:7px;height:7px;border-radius:50%;background:#aeb6b2}
+    .console-badge.running{background:var(--greenSoft);color:var(--green2);border-color:rgba(24,160,106,.16)}
+    .console-badge.running i{background:var(--green);box-shadow:0 0 0 4px rgba(24,160,106,.12);animation:pulse 1.2s infinite}
+    @keyframes pulse{50%{opacity:.4}}
+    .timeline{display:grid;gap:7px;margin-top:13px}
+    .event{opacity:.35;display:grid;grid-template-columns:38px 1fr auto;gap:9px;align-items:start;border:1px solid var(--line);border-radius:13px;padding:10px;background:#fff;transition:.28s ease}
+    .event.active{opacity:1;border-color:rgba(24,160,106,.2);box-shadow:0 8px 20px rgba(24,160,106,.06);transform:translateY(-1px)}
+    .event.done{opacity:1}
+    .event-icon{width:38px;height:38px;border-radius:11px;background:#f3f5f4;display:grid;place-items:center;font-size:10px;font-weight:850}
+    .event.active .event-icon,.event.done .event-icon{background:var(--greenSoft);color:var(--green2)}
+    .event strong{font-size:10px;display:block}.event p{font-size:9px;color:var(--muted);line-height:1.4;margin:3px 0 0}
+    .event-tag{font-size:8px;font-weight:850;color:#8d9793;padding-top:2px;white-space:nowrap}
+    .event.active .event-tag,.event.done .event-tag{color:var(--green2)}
+    .outcome{display:none;margin-top:10px;padding:13px;border:1px solid rgba(24,160,106,.18);background:var(--greenSoft);border-radius:14px}
+    .outcome.show{display:block}.outcome strong{font-size:11px}.outcome p{font-size:9px;color:#4f665c;line-height:1.4;margin:4px 0 0}
 
-      .demo-drawer {
-        align-items: flex-end;
-        padding: 0;
-      }
-      .demo-panel {
-        width: 100%;
-        max-width: 100%;
-        max-height: 92dvh;
-        border-radius: 24px 24px 0 0;
-      }
-      .demo-panel-head { padding: 14px 15px; }
-      .demo-body { padding: 10px; }
-      .lead-card { position: relative !important; top: 0 !important; }
-      .lead-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
-    }
+    .scenario-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .scenario{border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;text-align:left;min-height:180px;position:relative;transition:.18s ease;box-shadow:0 8px 20px rgba(18,37,30,.03)}
+    .scenario:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(18,37,30,.07)}
+    .scenario .chip{display:inline-flex;font-size:8px;font-weight:850;padding:5px 7px;border-radius:999px;background:#f1f3f2;color:#66706c}
+    .scenario h4{font-size:15px;margin:13px 0 6px}.scenario p{font-size:9px;line-height:1.4;color:var(--muted);margin:0}
+    .scenario footer{position:absolute;left:15px;right:15px;bottom:13px;display:flex;justify-content:space-between;gap:8px;font-size:9px}.scenario footer strong{color:var(--green2)}
 
-    @media (max-width: 430px) {
-      main { padding-left: 10px !important; padding-right: 10px !important; }
-      .topbar h1 { font-size: 26px !important; max-width: 215px; }
-      .hero { padding: 16px !important; }
-      .hero h2 { font-size: 28px !important; }
-      .metrics { gap: 7px !important; }
-      .metric { min-height: 90px; }
-      .scenario { flex-basis: 86vw; min-width: 86vw; }
-      .form-grid { grid-template-columns: 1fr !important; }
-      .field.full { grid-column: auto !important; }
-      .system-map { grid-template-columns: 1fr 1fr !important; }
-    }
+    .economics{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px}
+    .econ-form{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:13px}
+    .econ-results{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .econ-box{border:1px solid var(--line);border-radius:17px;padding:15px;background:#fff}
+    .econ-box.system{background:#111715;color:#fff;border-color:#111715}
+    .econ-box small{font-size:8px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:#8d9894}.econ-box.system small{color:#9eaaa5}
+    .econ-box h4{font-size:28px;margin:6px 0 2px;letter-spacing:-.05em}.econ-box p{font-size:9px;color:var(--muted);line-height:1.4;margin:0}.econ-box.system p{color:#b8c2be}
+    .econ-lines{display:grid;gap:7px;margin-top:13px}.econ-line{display:flex;justify-content:space-between;gap:10px;font-size:9px;padding-top:7px;border-top:1px solid var(--line)}.econ-box.system .econ-line{border-color:#2a3430}
+    .econ-line span{color:var(--muted)}.econ-box.system .econ-line span{color:#9eaaa5}
+    .econ-callout{grid-column:1/-1;background:var(--greenSoft);border:1px solid rgba(24,160,106,.18);border-radius:15px;padding:13px}
+    .econ-callout strong{display:block;font-size:13px;color:var(--green2)}.econ-callout span{display:block;font-size:9px;color:#50675d;margin-top:3px;line-height:1.4}
 
+    .system-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:13px}
+    .module-card{border:1px solid var(--line);background:#fff;border-radius:15px;padding:12px;min-height:104px}
+    .module-card span{font-size:8px;color:var(--green2);font-weight:850;letter-spacing:.06em;text-transform:uppercase}.module-card strong{display:block;font-size:11px;margin-top:8px}.module-card p{font-size:8.5px;line-height:1.4;color:var(--muted);margin:5px 0 0}
+    .system-bottom{margin-top:12px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;background:#111715;color:#fff;border-radius:17px;padding:16px}
+    .system-bottom h4{font-size:18px;margin:0}.system-bottom p{font-size:9px;color:#b8c2be;line-height:1.4;margin:4px 0 0}
+    .system-bottom strong{font-size:11px;color:#9ff0c8;white-space:nowrap}
 
-    .live-workspace {
-      display:grid;
-      grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr);
-      gap:14px;
+    .presenter{
+      position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:50;
+      display:flex;align-items:center;gap:5px;background:rgba(17,23,21,.94);backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 40px rgba(0,0,0,.22);border-radius:17px;padding:6px;
     }
-    .live-config, .live-console { min-width:0; }
-    .live-kicker {
-      font-size:9px;
-      font-weight:850;
-      letter-spacing:.09em;
-      color:var(--green-dark);
-      margin-bottom:7px;
-    }
-    .live-form { margin-top:15px; }
-    .live-launch {
-      width:100%;
-      min-height:46px;
-      margin-top:12px;
-      font-size:12px;
-    }
-    .connector-note {
-      display:grid;
-      grid-template-columns:34px 1fr auto;
-      gap:10px;
-      align-items:center;
-      margin-top:12px;
-      padding:11px;
-      border:1px solid var(--line);
-      background:#f7faf8;
-      border-radius:14px;
-    }
-    .connector-icon {
-      width:34px;height:34px;border-radius:11px;
-      display:grid;place-items:center;
-      background:#fff;border:1px solid var(--line);
-      font-size:13px;
-    }
-    .connector-note strong { display:block; font-size:10px; }
-    .connector-note span { display:block; font-size:9px; color:var(--muted); line-height:1.35; margin-top:2px; }
-    .connector-note .connector-state {
-      font-size:8px;
-      margin:0;
-      font-weight:850;
-      color:var(--green-dark);
-      background:var(--green-soft);
-      padding:6px 7px;
-      border-radius:999px;
-      white-space:nowrap;
-    }
-    .live-console {
-      min-height:430px;
-      display:flex;
-      flex-direction:column;
-    }
-    .live-console-head {
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      align-items:flex-start;
-    }
-    .live-console-head h4 { font-size:17px; }
-    .live-badge {
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:999px;
-      padding:7px 9px;
-      font-size:8px;
-      font-weight:850;
-      color:#5c6662;
-      white-space:nowrap;
-    }
-    .live-badge i {
-      width:7px;height:7px;border-radius:50%;
-      background:#aeb6b2;
-    }
-    .live-badge.running { color:var(--green-dark); background:var(--green-soft); border-color:rgba(24,160,106,.18); }
-    .live-badge.running i { background:var(--green); box-shadow:0 0 0 4px rgba(24,160,106,.12); animation:livePulse 1.3s infinite; }
-    @keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.42} }
-    .live-empty {
-      flex:1;
-      min-height:300px;
-      display:grid;
-      place-items:center;
-      align-content:center;
-      text-align:center;
-      gap:6px;
-      padding:30px;
-      color:var(--muted);
-    }
-    .live-empty-icon {
-      width:52px;height:52px;border-radius:17px;
-      display:grid;place-items:center;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      font-size:24px;
-      margin-bottom:5px;
-    }
-    .live-empty strong { color:var(--text); font-size:13px; }
-    .live-empty span { max-width:390px; font-size:10px; line-height:1.5; }
-    .live-session { margin-top:14px; }
-    .live-lead-strip {
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:7px;
-      margin-bottom:10px;
-    }
-    .live-lead-strip > div {
-      background:#f6f8f7;
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:9px;
-      min-width:0;
-    }
-    .live-lead-strip span {
-      display:block;
-      font-size:8px;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.05em;
-      font-weight:800;
-    }
-    .live-lead-strip strong {
-      display:block;
-      margin-top:4px;
-      font-size:10px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .live-stream {
-      display:grid;
-      gap:7px;
-      max-height:285px;
-      overflow:auto;
-    }
-    .live-event {
-      display:grid;
-      grid-template-columns:34px 1fr auto;
-      gap:9px;
-      align-items:start;
-      padding:10px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:13px;
-      animation:liveIn .24s ease both;
-    }
-    @keyframes liveIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:none} }
-    .live-event-icon {
-      width:34px;height:34px;border-radius:10px;
-      background:#f4f7f5;border:1px solid var(--line);
-      display:grid;place-items:center;font-size:10px;font-weight:850;
-    }
-    .live-event strong { display:block; font-size:10px; }
-    .live-event p { margin:3px 0 0; font-size:9px; color:var(--muted); line-height:1.4; }
-    .live-event time { font-size:8px; color:#929b97; white-space:nowrap; padding-top:2px; }
-    .live-session-actions {
-      margin-top:10px;
-      padding-top:10px;
-      border-top:1px solid var(--line);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-    }
-    .live-session-actions span { font-size:8px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .presenter button{border:0;background:transparent;color:#aeb9b4;border-radius:11px;padding:8px 10px;font-size:8px;font-weight:800;white-space:nowrap}
+    .presenter button.active{background:#fff;color:#111715}.presenter .next{background:var(--green);color:#fff}
+    .mobile-nav{display:none}
 
+    .modal{position:fixed;inset:0;background:rgba(10,14,12,.42);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}
+    .modal.show{display:flex}.modal-card{width:min(720px,100%);max-height:88vh;overflow:auto;background:#f8faf9;border:1px solid rgba(255,255,255,.8);border-radius:25px;box-shadow:0 30px 100px rgba(0,0,0,.2)}
+    .modal-head{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 17px;background:rgba(248,250,249,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .modal-head h4{margin:0;font-size:17px}.close{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:17px}
+    .modal-body{padding:14px}.nurture{display:grid;gap:7px}.nurture-row{display:grid;grid-template-columns:55px 1fr;gap:10px;border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px}.nurture-row b{font-size:9px;color:var(--green2)}.nurture-row strong{font-size:10px;display:block}.nurture-row p{font-size:9px;color:var(--muted);line-height:1.4;margin:3px 0 0}
+
+    @media(max-width:1100px){
+      .scenario-grid{grid-template-columns:repeat(2,1fr)}
+      .system-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:820px){
+      html,body{width:100%;max-width:100%;overflow-x:hidden}
+      .app{display:block;width:100%;max-width:100%}.sidebar{display:none}
+      main{width:100%;max-width:100%;padding:14px 11px 96px}
+      .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;margin-bottom:13px}
+      h1{font-size:28px;max-width:245px}.actions .status,.actions .btn.light{display:none}.actions .btn.dark{width:88px;white-space:normal;line-height:1.1;min-height:48px;padding:9px}
+      .hero{grid-template-columns:1fr;padding:17px;border-radius:22px;gap:16px}.hero h2{font-size:30px}.hero p{font-size:11px}
+      .hero-right{border-left:0;border-top:1px solid var(--line);padding:13px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+      .hero-point{display:block;border-bottom:0;padding:5px}.hero-point i{width:29px;height:29px;margin-bottom:7px}.hero-point span{font-size:8px}.hero-point strong{font-size:9px}
+      section{margin-top:19px}.section-head{align-items:flex-start}.section-head h3{font-size:18px}.section-head p{font-size:9px}
+      .setup-grid,.compare,.sim-wrap,.economics{grid-template-columns:1fr}.setup-summary{min-height:auto}
+      .summary-metrics{grid-template-columns:repeat(3,1fr)}
+      .lead-card{position:relative;top:0}.sim-console{min-height:auto}
+      .scenario-grid{display:flex;width:calc(100% + 11px);overflow-x:auto;gap:9px;padding:1px 11px 7px 0;margin-right:-11px;scroll-snap-type:x mandatory;scrollbar-width:none}.scenario-grid::-webkit-scrollbar{display:none}.scenario{flex:0 0 min(84vw,330px);scroll-snap-align:start}
+      .econ-results{grid-template-columns:1fr 1fr}.system-grid{grid-template-columns:1fr 1fr}
+      .system-bottom{grid-template-columns:1fr}.system-bottom strong{white-space:normal}
+      .presenter{display:none}
+      .mobile-nav{display:flex;position:fixed;left:9px;right:9px;bottom:max(8px,env(safe-area-inset-bottom));z-index:60;background:rgba(17,23,21,.94);backdrop-filter:blur(18px);border-radius:17px;padding:6px;box-shadow:0 14px 40px rgba(0,0,0,.2)}
+      .mobile-nav a{flex:1;text-align:center;text-decoration:none;color:#b7c2bd;font-size:8px;font-weight:800;padding:8px 2px}.mobile-nav a.active{color:#fff}
+      .modal{align-items:flex-end;padding:0}.modal-card{width:100%;max-height:91dvh;border-radius:24px 24px 0 0}
+    }
+    @media(max-width:480px){
+      main{padding-left:10px;padding-right:10px}.topbar h1{font-size:26px}.hero h2{font-size:27px}
+      .hero-right{grid-template-columns:1fr}.hero-point{display:grid;grid-template-columns:29px 1fr}.hero-point i{margin:0}
+      .form-grid,.econ-form{grid-template-columns:1fr}.field.full{grid-column:auto}
+      .summary-metrics{grid-template-columns:1fr 1fr}.summary-metric:last-child{grid-column:1/-1}
+      .econ-results{grid-template-columns:1fr}.econ-callout{grid-column:auto}.system-grid{grid-template-columns:1fr 1fr}
+      .event{grid-template-columns:34px 1fr}.event-tag{grid-column:2;padding:0}
+    }
   </style>
 </head>
 <body>
@@ -722,191 +210,228 @@
   <aside class="sidebar">
     <div class="brand">
       <div class="brandmark">I</div>
-      <div><strong>Ignite Revenue OS</strong><span>Demo Environment</span></div>
+      <div><strong>Ignite Acquisition OS</strong><span>Client acquisition system demo</span></div>
     </div>
     <nav class="nav">
-      <a class="active" href="#overview"><i class="doticon"></i>Overview</a>
-      <a href="#live"><i class="doticon"></i>Live Demo</a>
-      <a href="#scenarios"><i class="doticon"></i>Scenarios</a>
-      <a href="#pipeline"><i class="doticon"></i>Pipeline</a>
-      <a href="#roi"><i class="doticon"></i>Revenue Leak Audit</a>
-      <a href="#system"><i class="doticon"></i>System Map</a>
+      <a class="active" href="#overview"><i class="dot"></i>Overview</a>
+      <a href="#personalize"><i class="dot"></i>Personalize</a>
+      <a href="#leaks"><i class="dot"></i>Before vs After</a>
+      <a href="#journey"><i class="dot"></i>Lead Journey</a>
+      <a href="#recovery"><i class="dot"></i>Follow-Up</a>
+      <a href="#economics"><i class="dot"></i>Economics</a>
+      <a href="#system"><i class="dot"></i>System Map</a>
     </nav>
-    <div class="sidebar-foot">
-      <strong style="font-size:12px">Built by Ignite</strong>
-      <small>AI implementation and revenue systems for service businesses.</small>
+    <div class="side-card">
+      <strong>Built for service businesses</strong>
+      <p>One visual system for acquisition, conversion, follow-up, reactivation and tracking.</p>
     </div>
   </aside>
 
   <main>
     <div class="topbar">
       <div>
-        <div class="eyebrow">Summit Heating & Air • HVAC Demo</div>
-        <h1>Revenue Operating System</h1>
+        <div class="eyebrow" id="topCompany">Service Business Demo</div>
+        <h1>Client Acquisition System</h1>
       </div>
-      <div class="top-actions">
-        <div class="status"><i></i><span id="dataStatus">Connected to Supabase</span></div>
-        <button class="btn light" onclick="scrollToId('roi')">Personalize Demo</button>
-        <button class="btn dark" onclick="scrollToId('live')">Start Live Demo</button>
+      <div class="actions">
+        <span class="status"><i></i>Interactive demo ready</span>
+        <button class="btn light" onclick="go('personalize')">Personalize</button>
+        <button class="btn dark" onclick="startPresentation()">Start Walkthrough</button>
       </div>
     </div>
 
     <section id="overview" class="hero">
       <div>
-        <div class="eyebrow">What your business looks like when every lead has a next step</div>
-        <h2>No lead gets forgotten. No estimate disappears. No customer database sits unused.</h2>
-        <p>This is a controlled demo of the systems Ignite can install around a service business. Run a scenario below to watch response, qualification, booking, follow-up, handoff, and revenue tracking happen in one connected flow.</p>
+        <div class="eyebrow">From attention to booked revenue</div>
+        <h2>See what happens to every lead after they click.</h2>
+        <p>More leads are only valuable when the system behind them can capture, respond, qualify, book, follow up and learn from the outcome. This demo shows the full acquisition engine from first click through the long-term follow-up most businesses never build.</p>
       </div>
       <div class="hero-right">
-        <div class="hero-stat"><span>AI handled conversations</span><strong>24</strong></div>
-        <div class="hero-stat"><span>Open revenue tracked</span><strong>$22.7K</strong></div>
-        <div class="hero-stat"><span>Manual steps removed</span><strong>14</strong></div>
+        <div class="hero-point"><i>01</i><div><strong>Generate demand</strong><span>Ads and offers built around the right customer.</span></div></div>
+        <div class="hero-point"><i>02</i><div><strong>Convert demand</strong><span>Mobile funnel, qualification and booking.</span></div></div>
+        <div class="hero-point"><i>03</i><div><strong>Recover demand</strong><span>No-answer, no-show and long-term follow-up.</span></div></div>
       </div>
     </section>
 
-    <section>
+    <section id="personalize">
       <div class="section-head">
-        <div><h3>Today at a glance</h3><p>Live operational metrics from the demo account</p></div>
+        <div><h3>Make this their business</h3><p>Change the inputs while the owner is watching. The rest of the demo updates around their economics.</p></div>
       </div>
-      <div id="metrics" class="metrics"></div>
-    </section>
-
-    <section id="scenarios">
-      <div class="section-head">
-        <div><h3>Run a customer journey</h3><p>Each scenario is deterministic for sales calls, while using the same architecture a live implementation would use.</p></div>
-        <span class="status"><i></i>Demo mode ready</span>
-      </div>
-      <div id="scenarioGrid" class="scenario-grid"></div>
-    </section>
-
-
-    <section id="live">
-      <div class="section-head">
-        <div>
-          <h3>Live Demo</h3>
-          <p>Enter a real lead during the meeting and watch a live backend session move through the Revenue OS.</p>
-        </div>
-        <span class="status" id="liveBackendStatus"><i></i>Live backend ready</span>
-      </div>
-
-      <div class="live-workspace">
-        <div class="card live-config">
-          <div class="live-kicker">LIVE SYSTEM TEST</div>
-          <h4>Drop a lead into the system</h4>
-          <div class="card-sub">Use the prospect's own company and a real example customer. The session is written to Supabase and expires automatically.</div>
-
-          <div class="form-grid live-form">
-            <div class="field full"><label>Company</label><input id="liveCompany" value="Summit Heating & Air" /></div>
-            <div class="field"><label>Customer name</label><input id="liveLeadName" value="Jordan Miller" /></div>
-            <div class="field"><label>Potential job value</label><input id="liveValue" type="number" value="6500" /></div>
-            <div class="field full"><label>What do they need?</label><input id="liveService" value="AC replacement estimate" /></div>
-            <div class="field full"><label>Lead source</label><input id="liveSource" value="Website / Google Ads" /></div>
-          </div>
-
-          <button class="btn dark live-launch" id="liveLaunchBtn" onclick="startLiveDemo()">Launch Live Lead</button>
-
-          <div class="connector-note">
-            <div class="connector-icon">☎</div>
-            <div>
-              <strong>Phone AI bridge</strong>
-              <span>The event pipeline is ready. Connecting the Retell phone agent is the last step for real calls and transcripts.</span>
-            </div>
-            <span class="connector-state">CONNECTOR READY</span>
-          </div>
-        </div>
-
-        <div class="card live-console">
-          <div class="live-console-head">
-            <div>
-              <div class="live-kicker">REVENUE OS EVENT STREAM</div>
-              <h4 id="liveConsoleTitle">Waiting for a live lead</h4>
-            </div>
-            <span class="live-badge" id="liveBadge"><i></i>STANDBY</span>
-          </div>
-
-          <div id="liveEmpty" class="live-empty">
-            <div class="live-empty-icon">+</div>
-            <strong>Nothing pre-recorded here.</strong>
-            <span>Launch a lead on the left. The live session and every event will be created in the backend as you watch.</span>
-          </div>
-
-          <div id="liveSession" class="live-session" hidden>
-            <div class="live-lead-strip">
-              <div><span>Lead</span><strong id="liveLeadDisplay">—</strong></div>
-              <div><span>Service</span><strong id="liveServiceDisplay">—</strong></div>
-              <div><span>Value</span><strong id="liveValueDisplay">—</strong></div>
-              <div><span>Status</span><strong id="liveStatusDisplay">Received</strong></div>
-            </div>
-            <div class="live-stream" id="liveStream"></div>
-            <div class="live-session-actions">
-              <button class="btn light" onclick="resetLiveDemo()">New Live Lead</button>
-              <span id="liveSessionId">Secure session</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="pipeline" class="split">
-      <div class="card">
-        <h4>Revenue pipeline</h4>
-        <div class="card-sub">The team can see exactly where every opportunity is and what needs to happen next.</div>
-        <div class="pipeline" id="pipelineBoard" style="margin-top:14px"></div>
-      </div>
-      <div class="card">
-        <h4>AI activity stream</h4>
-        <div class="card-sub">A single timeline of the actions the system is taking across the customer journey.</div>
-        <div class="activity" id="activityStream" style="margin-top:14px"></div>
-      </div>
-    </section>
-
-    <section id="roi">
-      <div class="section-head">
-        <div><h3>Show me my business</h3><p>Personalize the economics during the sales call. This is an illustrative opportunity model, not a revenue guarantee.</p></div>
-      </div>
-      <div class="roi-wrap">
+      <div class="setup-grid">
         <div class="card">
-          <h4>Company assumptions</h4>
-          <div class="card-sub">Change these numbers with the owner sitting in front of you.</div>
+          <h4>Prospect snapshot</h4>
+          <div class="sub">Use estimates if the owner does not know every number. The model is illustrative, not a promise of results.</div>
           <div class="form-grid">
-            <div class="field full"><label>Company name</label><input id="companyName" value="ABC Plumbing" oninput="calculateROI()"/></div>
-            <div class="field"><label>Monthly leads</label><input id="monthlyLeads" type="number" value="180" oninput="calculateROI()"/></div>
-            <div class="field"><label>Average job value</label><input id="avgJob" type="number" value="1800" oninput="calculateROI()"/></div>
-            <div class="field"><label>Missed call rate %</label><input id="missedRate" type="number" value="20" oninput="calculateROI()"/></div>
-            <div class="field"><label>Current close rate %</label><input id="closeRate" type="number" value="35" oninput="calculateROI()"/></div>
-            <div class="field"><label>Open estimates / month</label><input id="openEstimates" type="number" value="40" oninput="calculateROI()"/></div>
-            <div class="field"><label>Customer database</label><input id="databaseSize" type="number" value="3400" oninput="calculateROI()"/></div>
+            <div class="field full"><label>Company name</label><input id="company" value="Summit Home Services" oninput="updateDemo()"></div>
+            <div class="field"><label>Monthly leads</label><input id="monthlyLeads" type="number" value="120" oninput="updateDemo()"></div>
+            <div class="field"><label>Average job value</label><input id="avgJob" type="number" value="2200" oninput="updateDemo()"></div>
+            <div class="field"><label>Current booking rate %</label><input id="bookRate" type="number" value="24" oninput="updateDemo()"></div>
+            <div class="field"><label>Current show rate %</label><input id="showRate" type="number" value="68" oninput="updateDemo()"></div>
+            <div class="field"><label>Current close rate %</label><input id="closeRate" type="number" value="38" oninput="updateDemo()"></div>
+            <div class="field"><label>Old leads / customers</label><input id="database" type="number" value="2400" oninput="updateDemo()"></div>
           </div>
         </div>
-        <div class="opportunity">
+        <div class="setup-summary">
           <div>
-            <small id="roiCompany">ABC Plumbing opportunity model</small>
-            <h4 id="totalOpportunity">$31,680/mo</h4>
-            <p>Estimated recoverable or influenceable revenue across the leaks below, using conservative demo assumptions.</p>
+            <small id="summaryCompany">Summit Home Services</small>
+            <h4 id="summaryRevenue">$16,174/mo</h4>
+            <p>Estimated revenue produced by the current acquisition flow using the inputs on the left.</p>
           </div>
-          <div id="leaks" class="leaks"></div>
-          <div class="note">Illustrative calculation only. Actual performance depends on lead quality, operations, pricing, capacity, close rate, market, integration quality, and execution.</div>
+          <div class="summary-metrics">
+            <div class="summary-metric"><span>Leads</span><strong id="mLeads">120</strong></div>
+            <div class="summary-metric"><span>Appointments</span><strong id="mBooked">29</strong></div>
+            <div class="summary-metric"><span>Closed jobs</span><strong id="mClosed">7</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="leaks">
+      <div class="section-head">
+        <div><h3>Where acquisition usually breaks</h3><p>Same market. Same demand. Different system behind the lead.</p></div>
+      </div>
+      <div class="compare">
+        <div class="card flow-card before">
+          <div class="flow-title"><div><h4>Without a connected system</h4><div class="sub">Good leads disappear between disconnected steps.</div></div><span>LEAKING</span></div>
+          <div class="journey">
+            <div class="journey-row"><div class="journey-icon">AD</div><div><strong>Ad creates interest</strong><p>Customer clicks because the problem feels urgent.</p></div><div class="journey-loss">120 leads</div></div>
+            <div class="journey-row"><div class="journey-icon">↘</div><div><strong>Generic landing experience</strong><p>Weak message match creates unnecessary drop-off.</p></div><div class="journey-loss">-18%</div></div>
+            <div class="journey-row"><div class="journey-icon">⌛</div><div><strong>Slow or inconsistent response</strong><p>The owner or office team gets to leads when they can.</p></div><div class="journey-loss">-21%</div></div>
+            <div class="journey-row"><div class="journey-icon">?</div><div><strong>No qualification logic</strong><p>High-intent prospects look the same as low-intent inquiries.</p></div><div class="journey-loss">-14%</div></div>
+            <div class="journey-row"><div class="journey-icon">×</div><div><strong>No systematic recovery</strong><p>No-answer and not-ready leads quietly disappear.</p></div><div class="journey-loss">lost later</div></div>
+          </div>
+          <div class="compare-footer"><span>Most businesses try to fix this by buying more traffic.</span><strong>More spend ≠ better system</strong></div>
+        </div>
+
+        <div class="card flow-card after">
+          <div class="flow-title"><div><h4>With Ignite Acquisition OS</h4><div class="sub">Every lead has a defined next action.</div></div><span>CONNECTED</span></div>
+          <div class="journey">
+            <div class="journey-row"><div class="journey-icon">AD</div><div><strong>Campaign + offer alignment</strong><p>Creative, offer and landing experience tell one story.</p></div><div class="journey-loss">tracked</div></div>
+            <div class="journey-row"><div class="journey-icon">✓</div><div><strong>Conversion-focused funnel</strong><p>Fast mobile experience with qualification built in.</p></div><div class="journey-loss">captured</div></div>
+            <div class="journey-row"><div class="journey-icon">⚡</div><div><strong>Immediate response path</strong><p>New leads get acknowledgement and a clear next step.</p></div><div class="journey-loss">routed</div></div>
+            <div class="journey-row"><div class="journey-icon">◎</div><div><strong>Qualified booking</strong><p>High-value opportunities get pushed toward the calendar.</p></div><div class="journey-loss">prioritized</div></div>
+            <div class="journey-row"><div class="journey-icon">↻</div><div><strong>Recovery + nurture</strong><p>Leads that do not buy today keep moving through follow-up.</p></div><div class="journey-loss">retained</div></div>
+          </div>
+          <div class="compare-footer"><span>The goal is not more activity. It is fewer wasted opportunities.</span><strong>One connected journey</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="section-head">
+        <div><h3>Run a new lead through the system</h3><p>This is the part to screen-share. Click the button and walk them through what happens behind the scenes.</p></div>
+        <span class="status"><i></i>Visual simulation</span>
+      </div>
+      <div class="sim-wrap">
+        <div class="lead-card">
+          <div class="label">Example opportunity</div>
+          <h4 id="leadName">Sarah Mitchell</h4>
+          <p id="leadNeed">Needs a high-value service estimate</p>
+          <div class="lead-data">
+            <div><span>Source</span><strong>Meta / Google</strong></div>
+            <div><span>Intent</span><strong id="leadIntent">HIGH</strong></div>
+            <div><span>Company</span><strong id="leadCompany">Summit Home Services</strong></div>
+            <div><span>Status</span><strong id="leadStatus">Ready</strong></div>
+          </div>
+          <div class="lead-value"><span>Potential job value</span><strong id="leadValue">$2,200</strong></div>
+          <div class="sim-actions">
+            <button class="btn green" id="runLeadBtn" onclick="runLead()">Run Lead Journey</button>
+            <button class="btn light" onclick="resetLead()">Reset</button>
+          </div>
+        </div>
+
+        <div class="card sim-console">
+          <div class="console-head">
+            <div><div class="eyebrow">Customer journey</div><h4 id="consoleTitle">Waiting for a new lead</h4></div>
+            <span class="console-badge" id="consoleBadge"><i></i>STANDBY</span>
+          </div>
+          <div class="timeline" id="timeline">
+            <div class="event" data-step="0"><div class="event-icon">AD</div><div><strong>Ad earns the click</strong><p>The customer sees an offer built around the problem they already want solved.</p></div><span class="event-tag">TRAFFIC</span></div>
+            <div class="event" data-step="1"><div class="event-icon">LP</div><div><strong>Landing page keeps message match</strong><p>Mobile-first page explains the value, proof and next step without distracting navigation.</p></div><span class="event-tag">FUNNEL</span></div>
+            <div class="event" data-step="2"><div class="event-icon">+</div><div><strong>Lead captured with source context</strong><p>Name, contact info, service intent and attribution enter the system together.</p></div><span class="event-tag">CAPTURE</span></div>
+            <div class="event" data-step="3"><div class="event-icon">⚡</div><div><strong>Immediate response + routing</strong><p>The customer gets confirmation while the team gets the information needed to act quickly.</p></div><span class="event-tag">SPEED</span></div>
+            <div class="event" data-step="4"><div class="event-icon">◎</div><div><strong>Qualification decides the next path</strong><p>High-intent leads go toward booking. Lower-intent leads enter the right nurture path instead of clogging the calendar.</p></div><span class="event-tag">QUALIFY</span></div>
+            <div class="event" data-step="5"><div class="event-icon">✓</div><div><strong>Appointment booked</strong><p>The opportunity moves into the pipeline with context, source and value attached.</p></div><span class="event-tag">BOOK</span></div>
+            <div class="event" data-step="6"><div class="event-icon">↻</div><div><strong>Follow-up starts automatically if needed</strong><p>No answer, no-show, not-ready and unclosed opportunities each get their own recovery path.</p></div><span class="event-tag">RECOVER</span></div>
+          </div>
+          <div class="outcome" id="leadOutcome"><strong>One lead. One connected journey.</strong><p>The point is not that every lead closes. The point is that every lead gets a deliberate next action, attribution and follow-up path.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="recovery">
+      <div class="section-head">
+        <div><h3>What happens when they do not buy today?</h3><p>This is where most of the hidden value lives. Open a scenario and show the owner the follow-up they are currently missing.</p></div>
+      </div>
+      <div class="scenario-grid">
+        <button class="scenario" onclick="openRecovery('no-answer')"><span class="chip">NO ANSWER</span><h4>Lead never answers the first call</h4><p>Immediate acknowledgement, short-term retry logic and long-term nurture keep the opportunity alive.</p><footer><strong>Open recovery path</strong><span>→</span></footer></button>
+        <button class="scenario" onclick="openRecovery('no-show')"><span class="chip">NO SHOW</span><h4>Appointment gets missed</h4><p>The system moves straight into rescheduling instead of treating the opportunity as dead.</p><footer><strong>Open recovery path</strong><span>→</span></footer></button>
+        <button class="scenario" onclick="openRecovery('not-ready')"><span class="chip">NOT READY</span><h4>Good fit, wrong timing</h4><p>Helpful follow-up continues over weeks so the company stays top of mind when timing changes.</p><footer><strong>Open nurture path</strong><span>→</span></footer></button>
+        <button class="scenario" onclick="openRecovery('estimate')"><span class="chip">OPEN ESTIMATE</span><h4>Customer is still deciding</h4><p>Structured estimate follow-up keeps high-value opportunities from disappearing after the quote.</p><footer><strong>Open follow-up path</strong><span>→</span></footer></button>
+      </div>
+    </section>
+
+    <section id="economics">
+      <div class="section-head">
+        <div><h3>Model the economics</h3><p>Use their real numbers. The “with system” side is an adjustable scenario, not a guarantee.</p></div>
+      </div>
+      <div class="economics">
+        <div class="card">
+          <h4>30-day acquisition model</h4>
+          <div class="sub">Edit the right-side performance assumptions with the owner instead of presenting them as promises.</div>
+          <div class="econ-form">
+            <div class="field"><label>Monthly leads</label><input id="eLeads" type="number" value="120" oninput="calcEconomics()"></div>
+            <div class="field"><label>Average job value</label><input id="eAvg" type="number" value="2200" oninput="calcEconomics()"></div>
+            <div class="field"><label>Current booking %</label><input id="eBook1" type="number" value="24" oninput="calcEconomics()"></div>
+            <div class="field"><label>System scenario booking %</label><input id="eBook2" type="number" value="34" oninput="calcEconomics()"></div>
+            <div class="field"><label>Current show %</label><input id="eShow1" type="number" value="68" oninput="calcEconomics()"></div>
+            <div class="field"><label>System scenario show %</label><input id="eShow2" type="number" value="78" oninput="calcEconomics()"></div>
+            <div class="field"><label>Current close %</label><input id="eClose1" type="number" value="38" oninput="calcEconomics()"></div>
+            <div class="field"><label>System scenario close %</label><input id="eClose2" type="number" value="41" oninput="calcEconomics()"></div>
+          </div>
+        </div>
+        <div class="econ-results">
+          <div class="econ-box">
+            <small>Current flow</small>
+            <h4 id="revCurrent">$16,174</h4>
+            <p>Illustrative monthly revenue from the current funnel assumptions.</p>
+            <div class="econ-lines">
+              <div class="econ-line"><span>Booked</span><strong id="bookCurrent">29</strong></div>
+              <div class="econ-line"><span>Showed</span><strong id="showCurrent">20</strong></div>
+              <div class="econ-line"><span>Closed</span><strong id="closeCurrent">7.4</strong></div>
+            </div>
+          </div>
+          <div class="econ-box system">
+            <small>Connected-system scenario</small>
+            <h4 id="revSystem">$28,997</h4>
+            <p>Illustrative result if the adjustable conversion assumptions improve.</p>
+            <div class="econ-lines">
+              <div class="econ-line"><span>Booked</span><strong id="bookSystem">41</strong></div>
+              <div class="econ-line"><span>Showed</span><strong id="showSystem">32</strong></div>
+              <div class="econ-line"><span>Closed</span><strong id="closeSystem">13.2</strong></div>
+            </div>
+          </div>
+          <div class="econ-callout"><strong id="deltaRevenue">+$12,823 modeled monthly difference</strong><span>This is not a forecast. It shows why small improvements in conversion, attendance and close rate matter when multiplied across the same lead volume.</span></div>
         </div>
       </div>
     </section>
 
     <section id="system">
       <div class="card">
-        <div class="section-head" style="margin-bottom:0">
-          <div>
-            <h3>The Ignite Revenue OS</h3>
-            <p>One connected operating layer from first contact through follow-up, reactivation, reviews, and reporting.</p>
-          </div>
+        <div class="section-head" style="margin-bottom:0"><div><h3>The full client acquisition system</h3><p>What the prospect is really buying is the connection between these pieces.</p></div></div>
+        <div class="system-grid">
+          <div class="module-card"><span>01 • Demand</span><strong>Campaigns + Creative</strong><p>Clear offers and ads designed around the problems the market already wants solved.</p></div>
+          <div class="module-card"><span>02 • Conversion</span><strong>Landing Experience</strong><p>Fast mobile funnels that preserve message match and move attention toward one action.</p></div>
+          <div class="module-card"><span>03 • Capture</span><strong>Lead + Attribution</strong><p>Contact information, intent and source arrive together instead of being scattered across tools.</p></div>
+          <div class="module-card"><span>04 • Speed</span><strong>Immediate Response</strong><p>New opportunities get acknowledgement and the team gets a clear next step fast.</p></div>
+          <div class="module-card"><span>05 • Quality</span><strong>Qualification Logic</strong><p>High-value opportunities are prioritized while lower-intent leads go into nurture.</p></div>
+          <div class="module-card"><span>06 • Conversion</span><strong>Booking + Pipeline</strong><p>Appointments, status and next actions stay visible instead of living in someone's head.</p></div>
+          <div class="module-card"><span>07 • Recovery</span><strong>Follow-Up + Reactivation</strong><p>No-answer, no-show, not-ready and old leads keep receiving deliberate touches.</p></div>
+          <div class="module-card"><span>08 • Learning</span><strong>Tracking + Feedback</strong><p>Closed outcomes feed the system so acquisition decisions are based on customers, not vanity metrics.</p></div>
         </div>
-        <div class="system-map">
-          <div class="node active"><span>01 • Capture</span><strong>Ads, forms, phone calls, referrals, website</strong></div>
-          <div class="node active"><span>02 • Respond</span><strong>Instant AI SMS, voice, routing, missed-call recovery</strong></div>
-          <div class="node active"><span>03 • Qualify</span><strong>Intent, service area, urgency, job value, ownership</strong></div>
-          <div class="node active"><span>04 • Convert</span><strong>Booking, pipeline movement, sales handoff, reminders</strong></div>
-          <div class="node active"><span>05 • Recover</span><strong>Estimate follow-up, nurture, reactivation, reviews</strong></div>
-        </div>
-        <div class="modules" style="margin-top:14px">
-          <span class="module">Lead Capture</span><span class="module">AI Response</span><span class="module">Voice AI</span><span class="module">Qualification</span><span class="module">Booking</span><span class="module">CRM</span><span class="module">Estimate Follow-Up</span><span class="module">Nurture</span><span class="module">Reactivation</span><span class="module">Reviews</span><span class="module">Reporting</span><span class="module">Integrations</span>
+        <div class="system-bottom">
+          <div><h4>More leads are not the system.</h4><p>The acquisition system is everything required to turn attention into booked opportunities, recover the opportunities that need more time, and understand what actually becomes revenue.</p></div>
+          <strong>TRAFFIC → CONVERSION → FOLLOW-UP → REVENUE</strong>
         </div>
       </div>
     </section>
@@ -915,432 +440,220 @@
 
 <nav class="mobile-nav">
   <a class="active" href="#overview">Overview</a>
-  <a href="#live">Live</a>
-  <a href="#pipeline">Pipeline</a>
-  <a href="#roi">ROI</a>
+  <a href="#leaks">Leaks</a>
+  <a href="#journey">Journey</a>
+  <a href="#economics">Math</a>
   <a href="#system">System</a>
 </nav>
 
-<div id="drawer" class="demo-drawer" onclick="drawerBackdrop(event)">
-  <div class="demo-panel">
-    <div class="demo-panel-head">
-      <div><div class="eyebrow" id="drawerEyebrow">Live scenario</div><h3 id="drawerTitle">New Web Lead</h3></div>
-      <button class="close" onclick="closeDrawer()">×</button>
-    </div>
-    <div class="demo-body">
-      <div id="leadCard" class="lead-card"></div>
-      <div>
-        <div id="timeline" class="timeline"></div>
-        <div id="outcome" class="outcome"></div>
-      </div>
+<div class="presenter" id="presenter">
+  <button data-target="overview" class="active" onclick="presentStep(0)">1. Why</button>
+  <button data-target="leaks" onclick="presentStep(1)">2. Leaks</button>
+  <button data-target="journey" onclick="presentStep(2)">3. Lead</button>
+  <button data-target="recovery" onclick="presentStep(3)">4. Recovery</button>
+  <button data-target="economics" onclick="presentStep(4)">5. Math</button>
+  <button data-target="system" onclick="presentStep(5)">6. System</button>
+  <button class="next" onclick="nextPresent()">Next →</button>
+</div>
+
+<div class="modal" id="recoveryModal" onclick="backdropClose(event)">
+  <div class="modal-card">
+    <div class="modal-head"><div><div class="eyebrow" id="recoveryEyebrow">Recovery path</div><h4 id="recoveryTitle">Lead did not answer</h4></div><button class="close" onclick="closeRecovery()">×</button></div>
+    <div class="modal-body">
+      <div class="sub" id="recoveryIntro" style="margin:0 0 12px"></div>
+      <div class="nurture" id="recoverySteps"></div>
     </div>
   </div>
 </div>
 
 <script>
-const SUPABASE_URL = 'https://ccchujdxkbcbjuyjhbez.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_yk34HOJdFoAPgLxltx_pbA_Zfo2zjg2';
-const LIVE_DEMO_ENDPOINT = SUPABASE_URL + '/functions/v1/live-demo-session';
-let liveDemo = null;
-let liveDemoTimers = [];
+const $ = id => document.getElementById(id);
+const clampPct = v => Math.min(100,Math.max(0,Number(v)||0))/100;
+const money = v => Number(v||0).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+const num = v => Number(v||0).toLocaleString('en-US',{maximumFractionDigits:1});
+let leadTimers=[];
+let presentIndex=0;
 
-const fallback = {
-  organization: { name:'Summit Heating & Air', monthly_leads:180, avg_job_value:1800, close_rate:35, missed_call_rate:20, database_size:3400 },
-  metrics: [
-    {metric_key:'new_leads',label:'New leads',metric_value:17,suffix:''},
-    {metric_key:'response_time',label:'Avg. response time',metric_value:43,suffix:' sec'},
-    {metric_key:'missed_recovered',label:'Missed calls recovered',metric_value:6,suffix:''},
-    {metric_key:'appointments',label:'Appointments booked',metric_value:11,suffix:''},
-    {metric_key:'estimates_followup',label:'Estimates needing follow-up',metric_value:8,suffix:''},
-    {metric_key:'revenue_recovered',label:'Revenue recovered',metric_value:8420,suffix:'$'}
-  ],
-  scenarios: [
-    {scenario_key:'new-lead',name:'New Web Lead',eyebrow:'0 → booked',headline:'Watch a new lead turn into an appointment',description:'The system responds, qualifies, calls, books, and updates the pipeline automatically.',potential_value:7800,accent:'green'},
-    {scenario_key:'missed-call',name:'Missed Phone Call',eyebrow:'missed → recovered',headline:'Recover a missed call before the competitor does',description:'A missed inbound call triggers an immediate recovery text, qualification, and booking flow.',potential_value:4500,accent:'blue'},
-    {scenario_key:'estimate',name:'Estimate Not Closed',eyebrow:'open estimate → re-engaged',headline:'Turn forgotten estimates back into live revenue',description:'AI follows up intelligently, surfaces objections, and hands hot opportunities back to the team.',potential_value:9200,accent:'orange'},
-    {scenario_key:'reactivation',name:'Old Customer',eyebrow:'database → opportunity',headline:'Wake up revenue already sitting in the database',description:'Past customers are segmented and reactivated with personalized service reminders and offers.',potential_value:1200,accent:'purple'}
-  ],
-  contacts: [
-    {name:'Sarah Mitchell',service:'Furnace replacement',source:'Google Ads',estimated_value:7800,intent:'high',status:'Appointment Booked'},
-    {name:'Mike Torres',service:'No heat / diagnostic',source:'Missed Call',estimated_value:4500,intent:'high',status:'Qualified'},
-    {name:'David Reynolds',service:'AC replacement',source:'Estimate Follow-up',estimated_value:9200,intent:'medium',status:'Estimate Open'},
-    {name:'Ashley Brooks',service:'Heat pump maintenance',source:'Database Reactivation',estimated_value:1200,intent:'medium',status:'Reactivated'}
-  ],
-  opportunities: [
-    {title:'Furnace Replacement',stage:'Appointment Booked',value:7800,probability:70,next_action:'Technician visit tomorrow at 10:00 AM'},
-    {title:'No Heat Service',stage:'Qualified',value:4500,probability:55,next_action:'Confirm same-day slot'},
-    {title:'AC Replacement',stage:'Estimate Follow-Up',value:9200,probability:45,next_action:'AI objection follow-up today'},
-    {title:'Maintenance Reactivation',stage:'Reactivated',value:1200,probability:60,next_action:'Schedule tune-up'}
-  ],
-  events: [
-    {scenario_key:'new-lead',sort_order:1,seconds_from_start:0,title:'Lead received',detail:'Google Ads lead captured and added to the CRM.',channel:'web'},
-    {scenario_key:'new-lead',sort_order:2,seconds_from_start:8,title:'AI response sent',detail:'Hey Sarah, this is Summit Heating & Air. I just saw your request about the furnace. Are you currently without heat?',channel:'sms'},
-    {scenario_key:'new-lead',sort_order:3,seconds_from_start:18,title:'Customer replied',detail:'Yeah, it stopped working this morning.',channel:'sms'},
-    {scenario_key:'new-lead',sort_order:4,seconds_from_start:21,title:'Intent detected: HIGH',detail:'Homeowner, in service area, same-day urgency, replacement opportunity.',channel:'ai'},
-    {scenario_key:'new-lead',sort_order:5,seconds_from_start:24,title:'AI call initiated',detail:'AI confirms urgency, service need, location, and scheduling window.',channel:'call'},
-    {scenario_key:'new-lead',sort_order:6,seconds_from_start:62,title:'Appointment booked',detail:'Tomorrow at 10:00 AM. Pipeline and dispatcher updated automatically.',channel:'calendar'},
-    {scenario_key:'missed-call',sort_order:1,seconds_from_start:0,title:'Incoming call missed',detail:'No employee answered the inbound call.',channel:'call'},
-    {scenario_key:'missed-call',sort_order:2,seconds_from_start:7,title:'Recovery text sent',detail:'Hey Mike, sorry we missed your call. This is Summit Heating & Air. What can we help you with?',channel:'sms'},
-    {scenario_key:'missed-call',sort_order:3,seconds_from_start:20,title:'Customer responded',detail:'Our heat stopped working and we need someone today.',channel:'sms'},
-    {scenario_key:'missed-call',sort_order:4,seconds_from_start:28,title:'Qualified for same-day service',detail:'Urgent no-heat call, homeowner, in service area.',channel:'ai'},
-    {scenario_key:'missed-call',sort_order:5,seconds_from_start:48,title:'Same-day slot offered',detail:'Opportunity recovered instead of becoming a lost call.',channel:'calendar'},
-    {scenario_key:'estimate',sort_order:1,seconds_from_start:0,title:'$9,200 estimate still open',detail:'AC replacement estimate sent 3 days ago with no decision.',channel:'crm'},
-    {scenario_key:'estimate',sort_order:2,seconds_from_start:8,title:'Personalized follow-up sent',detail:'AI checks whether timing, price, or another quote is holding up the decision.',channel:'sms'},
-    {scenario_key:'estimate',sort_order:3,seconds_from_start:24,title:'Objection surfaced',detail:'We are getting another quote first.',channel:'sms'},
-    {scenario_key:'estimate',sort_order:4,seconds_from_start:29,title:'Sales rep alerted',detail:'High-value objection requires human takeover. Context and suggested response attached.',channel:'ai'},
-    {scenario_key:'estimate',sort_order:5,seconds_from_start:55,title:'Customer re-engaged',detail:'$9,200 opportunity moved back into active follow-up.',channel:'crm'},
-    {scenario_key:'reactivation',sort_order:1,seconds_from_start:0,title:'Customer segment identified',detail:'Past maintenance customers with no visit in 12+ months.',channel:'crm'},
-    {scenario_key:'reactivation',sort_order:2,seconds_from_start:9,title:'Personalized reactivation sent',detail:'Seasonal heat-pump tune-up message generated from customer history.',channel:'sms'},
-    {scenario_key:'reactivation',sort_order:3,seconds_from_start:31,title:'Customer raises hand',detail:'Yes, we have been meaning to get that scheduled.',channel:'sms'},
-    {scenario_key:'reactivation',sort_order:4,seconds_from_start:50,title:'Revenue reactivated',detail:'Existing customer converted without buying another lead.',channel:'calendar'}
-  ]
+function updateDemo(){
+  const company=($('company').value||'Service Business').trim();
+  const leads=Math.max(0,Number($('monthlyLeads').value)||0);
+  const avg=Math.max(0,Number($('avgJob').value)||0);
+  const book=clampPct($('bookRate').value);
+  const show=clampPct($('showRate').value);
+  const close=clampPct($('closeRate').value);
+  const booked=leads*book, showed=booked*show, closed=showed*close, revenue=closed*avg;
+
+  $('topCompany').textContent=company+' • Acquisition Demo';
+  $('summaryCompany').textContent=company;
+  $('summaryRevenue').textContent=money(revenue)+'/mo';
+  $('mLeads').textContent=num(leads);
+  $('mBooked').textContent=num(booked);
+  $('mClosed').textContent=num(closed);
+  $('leadCompany').textContent=company;
+  $('leadValue').textContent=money(avg);
+
+  $('eLeads').value=leads;
+  $('eAvg').value=avg;
+  $('eBook1').value=Math.round(book*100);
+  $('eShow1').value=Math.round(show*100);
+  $('eClose1').value=Math.round(close*100);
+  calcEconomics();
+}
+
+function calcEconomics(){
+  const leads=Math.max(0,Number($('eLeads').value)||0);
+  const avg=Math.max(0,Number($('eAvg').value)||0);
+  const b1=clampPct($('eBook1').value), b2=clampPct($('eBook2').value);
+  const s1=clampPct($('eShow1').value), s2=clampPct($('eShow2').value);
+  const c1=clampPct($('eClose1').value), c2=clampPct($('eClose2').value);
+  const book1=leads*b1, book2=leads*b2;
+  const show1=book1*s1, show2=book2*s2;
+  const close1=show1*c1, close2=show2*c2;
+  const rev1=close1*avg, rev2=close2*avg;
+
+  $('bookCurrent').textContent=num(book1);
+  $('showCurrent').textContent=num(show1);
+  $('closeCurrent').textContent=num(close1);
+  $('revCurrent').textContent=money(rev1);
+  $('bookSystem').textContent=num(book2);
+  $('showSystem').textContent=num(show2);
+  $('closeSystem').textContent=num(close2);
+  $('revSystem').textContent=money(rev2);
+  $('deltaRevenue').textContent=(rev2>=rev1?'+':'')+money(rev2-rev1)+' modeled monthly difference';
+}
+
+function runLead(){
+  leadTimers.forEach(clearTimeout);leadTimers=[];
+  resetLead(false);
+  const events=[...document.querySelectorAll('.event')];
+  $('runLeadBtn').disabled=true;
+  $('runLeadBtn').textContent='Journey Running...';
+  $('consoleTitle').textContent='New opportunity moving through the system';
+  $('consoleBadge').classList.add('running');
+  $('consoleBadge').innerHTML='<i></i>LIVE SIMULATION';
+  $('leadStatus').textContent='Processing';
+
+  events.forEach((el,i)=>{
+    leadTimers.push(setTimeout(()=>{
+      if(i>0) events[i-1].classList.remove('active');
+      if(i>0) events[i-1].classList.add('done');
+      el.classList.add('active');
+      $('leadStatus').textContent=['Clicked','On Funnel','Captured','Contacted','Qualified','Booked','Nurture Ready'][i];
+      if(i===events.length-1){
+        leadTimers.push(setTimeout(()=>{
+          el.classList.remove('active');el.classList.add('done');
+          $('leadOutcome').classList.add('show');
+          $('consoleBadge').classList.remove('running');
+          $('consoleBadge').innerHTML='<i style="background:var(--green)"></i>COMPLETE';
+          $('consoleTitle').textContent='Lead journey complete';
+          $('leadStatus').textContent='Tracked';
+          $('runLeadBtn').disabled=false;
+          $('runLeadBtn').textContent='Run Again';
+        },650));
+      }
+    },300+i*760));
+  });
+}
+
+function resetLead(resetTitle=true){
+  leadTimers.forEach(clearTimeout);leadTimers=[];
+  document.querySelectorAll('.event').forEach(el=>el.classList.remove('active','done'));
+  $('leadOutcome').classList.remove('show');
+  $('leadStatus').textContent='Ready';
+  $('consoleBadge').classList.remove('running');
+  $('consoleBadge').innerHTML='<i></i>STANDBY';
+  if(resetTitle)$('consoleTitle').textContent='Waiting for a new lead';
+  $('runLeadBtn').disabled=false;
+  $('runLeadBtn').textContent='Run Lead Journey';
+}
+
+const recoveryData={
+  'no-answer':{
+    eyebrow:'NO ANSWER RECOVERY',
+    title:'The lead never answers the first call',
+    intro:'The system does not assume silence means “not interested.” It creates multiple chances to reconnect without forcing the owner to remember.',
+    steps:[
+      ['Immediately','Confirm the request','Acknowledge the inquiry and make the next step obvious while intent is still fresh.'],
+      ['20 minutes','Second contact attempt','Try again while the lead is still likely thinking about the problem.'],
+      ['Next day','Helpful follow-up','Re-open the conversation with context instead of a generic “just checking in.”'],
+      ['3-7 days','Proof + reminder','Use proof, FAQs or a useful reason to respond.'],
+      ['Long term','Nurture instead of delete','Keep the lead reachable for the moment timing changes.']
+    ]
+  },
+  'no-show':{
+    eyebrow:'NO-SHOW RECOVERY',
+    title:'The appointment gets missed',
+    intro:'A no-show is not automatically a dead lead. The system moves immediately into rescheduling while the original reason for booking is still relevant.',
+    steps:[
+      ['5 minutes','Missed meeting acknowledgement','Make it easy to recover without guilt or friction.'],
+      ['Same day','Reschedule path','Send a direct path back to the calendar or a simple reply option.'],
+      ['24 hours','Personal follow-up','Reference what they originally wanted help with.'],
+      ['3 days','Last short-term attempt','Create one more low-friction chance to restart.'],
+      ['Long term','Move to nurture','Keep the relationship alive without clogging the active calendar pipeline.']
+    ]
+  },
+  'not-ready':{
+    eyebrow:'LONG-TERM NURTURE',
+    title:'They are qualified but timing is wrong',
+    intro:'Many good prospects need more time, trust or cash flow. The system should remember them even when the sales rep is focused on today.',
+    steps:[
+      ['Week 1','Useful follow-up','Answer the most common concern or misconception about the service.'],
+      ['Week 2','Relevant proof','Show a real outcome or customer story related to their situation.'],
+      ['Week 4','Re-open timing','Ask whether the project is still on their radar.'],
+      ['30-60 days','Stay top of mind','Send occasional value without turning the nurture into spam.'],
+      ['Future','Return to active pipeline','The moment they engage, the opportunity becomes visible again.']
+    ]
+  },
+  'estimate':{
+    eyebrow:'ESTIMATE FOLLOW-UP',
+    title:'The customer has the quote and is still deciding',
+    intro:'High-value jobs often do not close the same day. A structured estimate path protects the revenue already sitting in the pipeline.',
+    steps:[
+      ['Day 1','Confirm receipt','Make sure the customer received the estimate and knows how to ask questions.'],
+      ['Day 3','Surface the objection','Give them an easy way to say whether price, timing or another quote is holding them back.'],
+      ['Day 7','Add clarity or proof','Address the most likely hesitation with something useful.'],
+      ['Day 14','Decision follow-up','Ask directly whether the project is still moving forward.'],
+      ['Day 30+','Nurture or reactivate','Do not permanently discard a qualified customer because they needed more time.']
+    ]
+  }
 };
 
-let data = structuredClone(fallback);
-let timers = [];
-
-async function sb(path) {
-  const res = await fetch(SUPABASE_URL + '/rest/v1/' + path, {
-    headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
-  });
-  if (!res.ok) throw new Error('Supabase request failed');
-  return res.json();
+function openRecovery(key){
+  const d=recoveryData[key];if(!d)return;
+  $('recoveryEyebrow').textContent=d.eyebrow;
+  $('recoveryTitle').textContent=d.title;
+  $('recoveryIntro').textContent=d.intro;
+  $('recoverySteps').innerHTML=d.steps.map(x=>'<div class="nurture-row"><b>'+x[0]+'</b><div><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div></div>').join('');
+  $('recoveryModal').classList.add('show');document.body.style.overflow='hidden';
 }
+function closeRecovery(){$('recoveryModal').classList.remove('show');document.body.style.overflow=''}
+function backdropClose(e){if(e.target.id==='recoveryModal')closeRecovery()}
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
 
-async function loadData() {
-  try {
-    const [org, metrics, scenarios, contacts, opportunities, events] = await Promise.all([
-      sb('demo_organizations?slug=eq.summit-hvac&select=*'),
-      sb('demo_metrics?select=*&order=label'),
-      sb('demo_scenarios?select=*&order=name'),
-      sb('demo_contacts?select=*&order=created_at'),
-      sb('demo_opportunities?select=*&order=updated_at'),
-      sb('demo_events?select=*&order=scenario_key,sort_order')
-    ]);
-    data = {
-      organization: org[0] || fallback.organization,
-      metrics: metrics.length ? metrics : fallback.metrics,
-      scenarios: scenarios.length ? scenarios : fallback.scenarios,
-      contacts: contacts.length ? contacts : fallback.contacts,
-      opportunities: opportunities.length ? opportunities : fallback.opportunities,
-      events: events.length ? events : fallback.events
-    };
-    document.getElementById('dataStatus').textContent = 'Connected to Supabase';
-  } catch (e) {
-    document.getElementById('dataStatus').textContent = 'Fallback demo data';
-  }
-  renderAll();
+const presentTargets=['overview','leaks','journey','recovery','economics','system'];
+function startPresentation(){presentIndex=0;presentStep(0)}
+function presentStep(i){
+  presentIndex=Math.max(0,Math.min(presentTargets.length-1,i));
+  go(presentTargets[presentIndex]);
+  document.querySelectorAll('.presenter button[data-target]').forEach((b,j)=>b.classList.toggle('active',j===presentIndex));
 }
+function nextPresent(){presentStep((presentIndex+1)%presentTargets.length)}
 
-function money(v) {
-  return Number(v).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
-}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeRecovery();
+  if(e.key==='ArrowRight')nextPresent();
+  if(e.key==='ArrowLeft')presentStep(Math.max(0,presentIndex-1));
+});
 
-function renderMetrics() {
-  const order = ['new_leads','response_time','missed_recovered','appointments','estimates_followup','revenue_recovered'];
-  const sorted = [...data.metrics].sort((a,b)=>order.indexOf(a.metric_key)-order.indexOf(b.metric_key));
-  document.getElementById('metrics').innerHTML = sorted.map(m => {
-    let val = Number(m.metric_value);
-    let formatted = m.suffix === '$' ? money(val) : val.toLocaleString() + (m.suffix || '');
-    return '<div class="metric"><small>'+escapeHtml(m.label)+'</small><strong class="'+(m.metric_key==='revenue_recovered'?'positive':'')+'">'+formatted+'</strong></div>';
-  }).join('');
-}
+const sectionIds=['overview','personalize','leaks','journey','recovery','economics','system'];
+const observer=new IntersectionObserver(entries=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!visible)return;
+  document.querySelectorAll('.nav a,.mobile-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+visible.target.id));
+},{threshold:[.25,.5,.75]});
+sectionIds.forEach(id=>{const el=$(id);if(el)observer.observe(el)});
 
-function renderScenarios() {
-  const order = ['new-lead','missed-call','estimate','reactivation'];
-  const sorted = [...data.scenarios].sort((a,b)=>order.indexOf(a.scenario_key)-order.indexOf(b.scenario_key));
-  document.getElementById('scenarioGrid').innerHTML = sorted.map(s =>
-    '<button class="scenario '+escapeHtml(s.accent)+'" onclick="runScenario(\''+escapeHtml(s.scenario_key)+'\')">'+
-      '<span class="chip">'+escapeHtml(s.eyebrow)+'</span>'+
-      '<h4>'+escapeHtml(s.headline)+'</h4>'+
-      '<p>'+escapeHtml(s.description)+'</p>'+
-      '<footer><strong>'+money(s.potential_value)+'</strong><span>Run scenario →</span></footer>'+
-    '</button>'
-  ).join('');
-}
-
-function renderPipeline() {
-  const stages = ['New Lead','Qualified','Appointment Booked','Estimate Follow-Up','Reactivated'];
-  let html = '';
-  stages.forEach(stage => {
-    const matches = data.opportunities.filter(o => o.stage === stage);
-    html += '<div class="stage"><div class="stage-head"><span>'+stage+'</span><b>'+matches.length+'</b></div>';
-    if (!matches.length) html += '<div style="font-size:10px;color:#9aa3a0;padding:9px 3px">No waiting opportunities</div>';
-    matches.forEach(o => html += '<div class="opp"><strong>'+escapeHtml(o.title)+'</strong><span>'+escapeHtml(o.next_action || '')+'</span><b>'+money(o.value)+'</b></div>');
-    html += '</div>';
-  });
-  document.getElementById('pipelineBoard').innerHTML = html;
-}
-
-function renderActivity() {
-  const recent = [...data.events].sort((a,b)=>Number(b.seconds_from_start)-Number(a.seconds_from_start)).slice(0,9);
-  document.getElementById('activityStream').innerHTML = recent.map((e,i) =>
-    '<div class="activity-item"><div class="activity-icon">'+channelIcon(e.channel)+'</div><div><strong>'+escapeHtml(e.title)+'</strong><span>'+escapeHtml(e.detail)+'</span></div><time>'+(i+1)+'m</time></div>'
-  ).join('');
-}
-
-
-async function liveApi(payload) {
-  const res = await fetch(LIVE_DEMO_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type':'application/json', apikey:SUPABASE_KEY },
-    body: JSON.stringify(payload)
-  });
-  const body = await res.json().catch(()=>({}));
-  if (!res.ok) throw new Error(body.error || 'Live demo request failed');
-  return body;
-}
-
-async function startLiveDemo() {
-  liveDemoTimers.forEach(clearTimeout);
-  liveDemoTimers = [];
-  const company = document.getElementById('liveCompany').value.trim() || 'Live Demo Company';
-  const lead = document.getElementById('liveLeadName').value.trim() || 'Live Lead';
-  const service = document.getElementById('liveService').value.trim() || 'Service request';
-  const source = document.getElementById('liveSource').value.trim() || 'Live Demo';
-  const value = Math.max(0, Number(document.getElementById('liveValue').value) || 0);
-  const btn = document.getElementById('liveLaunchBtn');
-
-  btn.disabled = true;
-  btn.textContent = 'Creating live session...';
-  setLiveBadge('CONNECTING');
-
-  try {
-    const created = await liveApi({
-      action:'create',
-      company_name:company,
-      lead_name:lead,
-      service,
-      estimated_value:value,
-      source
-    });
-
-    liveDemo = {
-      id: created.session.id,
-      token: created.token,
-      lead,
-      company,
-      service,
-      value
-    };
-
-    document.getElementById('liveEmpty').hidden = true;
-    document.getElementById('liveSession').hidden = false;
-    document.getElementById('liveConsoleTitle').textContent = company + ' • live lead';
-    document.getElementById('liveLeadDisplay').textContent = lead;
-    document.getElementById('liveServiceDisplay').textContent = service;
-    document.getElementById('liveValueDisplay').textContent = money(value);
-    document.getElementById('liveSessionId').textContent = 'Session ' + liveDemo.id.slice(0,8);
-    setLiveBadge('LIVE');
-    await pollLiveDemo();
-
-    const sequence = [
-      {
-        delay:900,
-        event_type:'ai.response.prepared',
-        title:'AI response prepared',
-        detail:'The system recognized the service request and created the immediate response path for ' + lead + '.',
-        channel:'ai',
-        status:'contacted'
-      },
-      {
-        delay:2100,
-        event_type:'lead.qualified',
-        title:'Lead qualified and routed',
-        detail:'Intent, service type, potential value, and routing rules were evaluated. This lead is now prioritized for follow-up.',
-        channel:'ai',
-        status:'qualified'
-      },
-      {
-        delay:3500,
-        event_type:'next_action.selected',
-        title:'Next best action selected',
-        detail:'The Revenue OS selected immediate human or voice-AI contact instead of letting the opportunity sit untouched.',
-        channel:'system',
-        status:'action_ready'
-      },
-      {
-        delay:5000,
-        event_type:'pipeline.updated',
-        title:'Pipeline and handoff updated',
-        detail:'The opportunity is now visible with context, value, source, and the recommended next action attached.',
-        channel:'crm',
-        status:'handoff_ready'
-      }
-    ];
-
-    sequence.forEach(item => {
-      liveDemoTimers.push(setTimeout(async ()=>{
-        if (!liveDemo) return;
-        try {
-          await liveApi({
-            action:'append',
-            session_id:liveDemo.id,
-            token:liveDemo.token,
-            event_type:item.event_type,
-            title:item.title,
-            detail:item.detail,
-            channel:item.channel,
-            status:item.status
-          });
-          await pollLiveDemo();
-        } catch(e) {
-          console.error(e);
-        }
-      }, item.delay));
-    });
-  } catch (e) {
-    setLiveBadge('ERROR');
-    document.getElementById('liveBackendStatus').innerHTML = '<i style="background:#d65252"></i>Live backend unavailable';
-    alert('The live demo backend could not start. The controlled scenarios below are still available.');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Launch Live Lead';
-  }
-}
-
-async function pollLiveDemo() {
-  if (!liveDemo) return;
-  const result = await liveApi({ action:'poll', session_id:liveDemo.id, token:liveDemo.token });
-  const session = result.session;
-  document.getElementById('liveStatusDisplay').textContent = humanStatus(session.status);
-  const events = result.events || [];
-  document.getElementById('liveStream').innerHTML = events.map(e =>
-    '<div class="live-event">'+
-      '<div class="live-event-icon">'+channelIcon(e.channel)+'</div>'+
-      '<div><strong>'+escapeHtml(e.title)+'</strong><p>'+escapeHtml(e.detail)+'</p></div>'+
-      '<time>'+new Date(e.created_at).toLocaleTimeString([], {hour:'numeric',minute:'2-digit',second:'2-digit'})+'</time>'+
-    '</div>'
-  ).join('');
-  const stream = document.getElementById('liveStream');
-  stream.scrollTop = stream.scrollHeight;
-}
-
-function humanStatus(status) {
-  return ({
-    received:'Received',
-    contacted:'Contacted',
-    qualified:'Qualified',
-    action_ready:'Action Ready',
-    handoff_ready:'Handoff Ready'
-  })[status] || String(status || 'Live');
-}
-
-function setLiveBadge(label) {
-  const badge = document.getElementById('liveBadge');
-  badge.classList.toggle('running', label === 'LIVE' || label === 'CONNECTING');
-  badge.innerHTML = '<i></i>'+label;
-}
-
-function resetLiveDemo() {
-  liveDemoTimers.forEach(clearTimeout);
-  liveDemoTimers = [];
-  liveDemo = null;
-  document.getElementById('liveEmpty').hidden = false;
-  document.getElementById('liveSession').hidden = true;
-  document.getElementById('liveStream').innerHTML = '';
-  document.getElementById('liveConsoleTitle').textContent = 'Waiting for a live lead';
-  setLiveBadge('STANDBY');
-}
-
-function runScenario(key) {
-  timers.forEach(clearTimeout); timers = [];
-  const scenario = data.scenarios.find(s=>s.scenario_key===key) || fallback.scenarios.find(s=>s.scenario_key===key);
-  const events = data.events.filter(e=>e.scenario_key===key).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order));
-  const contactMap = {
-    'new-lead': data.contacts.find(c=>c.name==='Sarah Mitchell') || fallback.contacts[0],
-    'missed-call': data.contacts.find(c=>c.name==='Mike Torres') || fallback.contacts[1],
-    'estimate': data.contacts.find(c=>c.name==='David Reynolds') || fallback.contacts[2],
-    'reactivation': data.contacts.find(c=>c.name==='Ashley Brooks') || fallback.contacts[3]
-  };
-  const c = contactMap[key];
-  document.getElementById('drawerEyebrow').textContent = scenario.eyebrow;
-  document.getElementById('drawerTitle').textContent = scenario.name;
-  document.getElementById('leadCard').innerHTML =
-    '<div class="label">Customer profile</div><h4>'+escapeHtml(c.name)+'</h4><p>'+escapeHtml(c.service)+'</p>'+
-    '<div class="lead-grid">'+
-      '<div class="lead-data"><span>Source</span><strong>'+escapeHtml(c.source)+'</strong></div>'+
-      '<div class="lead-data"><span>Intent</span><strong>'+escapeHtml(String(c.intent).toUpperCase())+'</strong></div>'+
-      '<div class="lead-data"><span>Status</span><strong>'+escapeHtml(c.status)+'</strong></div>'+
-      '<div class="lead-data"><span>System mode</span><strong>AI + human handoff</strong></div>'+
-    '</div><div class="value"><span>Potential job value</span><strong>'+money(c.estimated_value)+'</strong></div>';
-  document.getElementById('timeline').innerHTML = events.map((e,i)=>
-    '<div class="event" id="event-'+i+'"><div class="time-pill">'+formatSeconds(e.seconds_from_start)+'</div><div><strong>'+escapeHtml(e.title)+'</strong><p>'+escapeHtml(e.detail)+'</p><span class="channel">'+escapeHtml(e.channel || 'system')+'</span></div></div>'
-  ).join('');
-  const outcome = document.getElementById('outcome');
-  outcome.classList.remove('show');
-  outcome.innerHTML = '<strong>Outcome: '+escapeHtml(outcomeTitle(key))+'</strong><p>'+escapeHtml(outcomeText(key, scenario.potential_value))+'</p>';
-  document.getElementById('drawer').classList.add('show');
-  document.body.style.overflow = 'hidden';
-  events.forEach((_,i)=>{
-    timers.push(setTimeout(()=>{
-      const el = document.getElementById('event-'+i);
-      if (el) el.classList.add('visible');
-      if (i === events.length-1) timers.push(setTimeout(()=>outcome.classList.add('show'),420));
-    }, 260 + i*620));
-  });
-}
-
-function outcomeTitle(key) {
-  return {
-    'new-lead':'Appointment booked without manual chasing',
-    'missed-call':'Missed revenue opportunity recovered',
-    'estimate':'High-value estimate brought back to life',
-    'reactivation':'Existing customer turned back into revenue'
-  }[key] || 'Workflow completed';
-}
-function outcomeText(key,value) {
-  const prefix = money(value) + ' potential value';
-  return {
-    'new-lead':prefix+' moved from lead capture to a scheduled appointment with qualification and handoff recorded.',
-    'missed-call':prefix+' was protected even though nobody answered the original phone call.',
-    'estimate':prefix+' was surfaced for a human closer after AI identified the real objection.',
-    'reactivation':prefix+' came from the existing customer database instead of buying a new lead.'
-  }[key] || prefix;
-}
-
-function formatSeconds(s){ s=Number(s); return s<60 ? '00:'+String(s).padStart(2,'0') : '01:'+String(s-60).padStart(2,'0'); }
-function channelIcon(c){ return ({sms:'✦',call:'☎',ai:'AI',calendar:'✓',crm:'↗',web:'+'})[c] || '•'; }
-function closeDrawer(){ timers.forEach(clearTimeout); document.getElementById('drawer').classList.remove('show'); document.body.style.overflow=''; }
-function drawerBackdrop(e){ if(e.target.id==='drawer') closeDrawer(); }
-function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
-
-function calculateROI() {
-  const company = document.getElementById('companyName').value || 'Your Company';
-  const leads = Math.max(0, Number(document.getElementById('monthlyLeads').value)||0);
-  const avg = Math.max(0, Number(document.getElementById('avgJob').value)||0);
-  const missed = Math.min(100, Math.max(0, Number(document.getElementById('missedRate').value)||0))/100;
-  const close = Math.min(100, Math.max(0, Number(document.getElementById('closeRate').value)||0))/100;
-  const estimates = Math.max(0, Number(document.getElementById('openEstimates').value)||0);
-  const db = Math.max(0, Number(document.getElementById('databaseSize').value)||0);
-
-  const missedCalls = leads * missed * avg * Math.max(.12, close) * .45;
-  const slowResponse = leads * (1-missed) * avg * .035;
-  const estimateRecovery = estimates * avg * .105;
-  const reactivation = db * .006 * avg * .18;
-  const repeat = db * .0018 * avg;
-  const items = [
-    ['Missed calls', missedCalls],
-    ['Slow lead response', slowResponse],
-    ['Unclosed estimates', estimateRecovery],
-    ['Database reactivation', reactivation],
-    ['Repeat business', repeat]
-  ];
-  const total = items.reduce((s,x)=>s+x[1],0);
-  const max = Math.max(...items.map(x=>x[1]),1);
-  document.getElementById('roiCompany').textContent = company+' opportunity model';
-  document.getElementById('totalOpportunity').textContent = money(total)+'/mo';
-  document.getElementById('leaks').innerHTML = items.map(x =>
-    '<div class="leak"><span>'+x[0]+'</span><b>'+money(x[1])+'</b><div class="bar"><i style="width:'+Math.max(6,(x[1]/max)*100)+'%"></i></div></div>'
-  ).join('');
-}
-
-function escapeHtml(v){
-  return String(v ?? '').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-}
-function renderAll(){ renderMetrics(); renderScenarios(); renderPipeline(); renderActivity(); calculateROI(); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
-loadData();
+updateDemo();
 </script>
 </body>
 </html>
